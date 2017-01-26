@@ -25,7 +25,8 @@
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^3.0"
+        "symfony/phpunit-bridge": "^3.0",
+        "laravel/homestead": "^4.0"
     },
     "scripts": {
         "symfony-scripts": [
@@ -36,8 +37,12 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
         ],
+        "homestead-make": [
+          "php vendor/bin/homestead make"
+        ],
         "post-install-cmd": [
-            "@symfony-scripts"
+            "@symfony-scripts",
+            "@homestead-make"
         ],
         "post-update-cmd": [
             "@symfony-scripts"
