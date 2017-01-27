@@ -19,9 +19,9 @@ class AppKernel extends Kernel
             // Auth feature
             new FOS\UserBundle\FOSUserBundle(),
             // CMF FOSUserBundle
-            new \UserBundle\UserBundle(),
+            new UserBundle\UserBundle(),
             // Nix Mailer Bundle
-            new \NixMailerBundle\NixMailerBundle()
+            new NixMailerBundle\NixMailerBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
