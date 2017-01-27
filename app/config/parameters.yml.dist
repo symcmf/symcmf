@@ -17,3 +17,7 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
+
+    # Configuration for fos_user bundle
+    fos_user_address: super@mail.com
+    fos_user_sender_name: Admin
