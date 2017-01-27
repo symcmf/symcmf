@@ -3,6 +3,7 @@
 namespace NixMailerBundle\Services;
 
 use FOS\UserBundle\Mailer\Mailer;
+use Swift_Message;
 
 /**
  * Class NixMailerService
@@ -10,13 +11,6 @@ use FOS\UserBundle\Mailer\Mailer;
  */
 class NixMailerService extends Mailer
 {
-    /**
-     * Configuration for nix server
-     */
-    const MAIL_HEADER_PROJECT = 'symfony-cmf';
-    const MAIL_HEADER_EMAILS = 'anastasiya.duchkina@nixsolutions.com, troyan.dmitriy@nixsolutions.com,';
-    const MAIL_HEADER_EXTERNAL = '{true}';
-
     /**
      * @param string $renderedTemplate
      * @param string $fromEmail
@@ -29,7 +23,7 @@ class NixMailerService extends Mailer
         $subject = array_shift($renderedLines);
         $body = implode("\n", $renderedLines);
 
-        $message = \Swift_Message::newInstance()
+        $message = Swift_Message::newInstance()
             ->setSubject($subject)
             ->setFrom($fromEmail)
             ->setTo($toEmail)
@@ -37,9 +31,9 @@ class NixMailerService extends Mailer
 
         $headers = $message->getHeaders();
 
-        $headers->addTextHeader('PROJECT', self::MAIL_HEADER_PROJECT);
-        $headers->addTextHeader('EMAILS', self::MAIL_HEADER_EMAILS);
-        $headers->addTextHeader('EXTERNAL', self::MAIL_HEADER_EXTERNAL);
+        $headers->addTextHeader('PROJECT', $this->parameters['header_project']);
+        $headers->addTextHeader('EMAILS', $this->parameters['header_emails']);
+        $headers->addTextHeader('EXTERNAL', $this->parameters['header_external']);
 
         $this->mailer->send($message);
     }
