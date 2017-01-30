@@ -1,6 +1,6 @@
 <?php
 
-namespace NixMailerBundle\Services;
+namespace UserBundle\Services;
 
 use FOS\UserBundle\Mailer\Mailer;
 use Swift_Message;

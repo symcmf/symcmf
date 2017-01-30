@@ -8,7 +8,7 @@ services:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
     nix_mailer_service:
-        class: NixMailerBundle\Services\NixMailerService
+        class: UserBundle\Services\NixMailerService
         arguments:
                 - '@mailer'
                 - '@router'

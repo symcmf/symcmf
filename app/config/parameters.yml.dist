@@ -12,6 +12,7 @@ parameters:
 
     mailer_transport:  smtp
     mailer_host:       127.0.0.1
+    mailer_port:       ~
     mailer_user:       ~
     mailer_password:   ~
 
@@ -21,3 +22,8 @@ parameters:
     # Configuration for fos_user bundle
     fos_user_address: super@mail.com
     fos_user_sender_name: Admin
+
+    # Configuration for nix-mailer
+    nix_header_project: 'name-project'
+    nix_header_emails: 'emails'
+    nix_header_external: '{true}'
