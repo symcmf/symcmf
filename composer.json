@@ -38,7 +38,15 @@
         "laravel/homestead": "^4.0"
     },
     "scripts": {
-        "symfony-scripts": [
+        "default-symfony-scripts": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+        ],
+        "after-install-cmf": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap"
         ],
@@ -46,11 +54,11 @@
             "php vendor/bin/homestead make"
         ],
         "post-install-cmd": [
-            "@symfony-scripts",
+            "@after-install-cmf",
             "@homestead-make"
         ],
         "post-update-cmd": [
-            "@symfony-scripts"
+            "@default-symfony-scripts"
         ]
     },
     "config": {
