@@ -1,13 +1,33 @@
+<!-- /app/Resources/views/base.html.twig -->
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" href="favicon.ico">
+    {% block stylesheets %}
+        {{ include('/blocks/css_block.html.twig') }}
+    {% endblock %}
+
+    <title>{% block title %} Symfony CMF {% endblock %}</title>
+
+    {% block javascript_top %}
+        {{ include('/blocks/javascript_top_block.html.twig') }}
+    {% endblock %}
+</head>
+
+<body>
+
+{% block navbar %}
+    {{ include('/blocks/navbar_block.html.twig') }}
+{% endblock %}
+
+<div class="container">
+    {% block body %}{% endblock %}
+</div>
+
+{% block javascripts %}
+    {{ include('/blocks/javascript_bottom_block.html.twig') }}
+{% endblock %}
+
+</body>
 </html>

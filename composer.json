@@ -18,7 +18,7 @@
         }
     },
     "require": {
-        "php": ">=5.5.9",
+        "php": "^7.0",
         "symfony/symfony": "3.2.*",
         "doctrine/orm": "^2.5",
         "doctrine/doctrine-bundle": "^1.6",
@@ -28,7 +28,9 @@
         "symfony/polyfill-apcu": "^1.0",
         "sensio/distribution-bundle": "^5.0",
         "sensio/framework-extra-bundle": "^3.0.2",
-        "incenteev/composer-parameter-handler": "^2.0"
+        "incenteev/composer-parameter-handler": "^2.0",
+        "friendsofsymfony/user-bundle": "~2.0@dev",
+        "twbs/bootstrap": "^3.3"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
@@ -36,7 +38,7 @@
         "laravel/homestead": "^4.0"
     },
     "scripts": {
-        "symfony-scripts": [
+        "default-symfony-scripts": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
@@ -44,20 +46,24 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
         ],
+        "after-install-cmf": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap"
+        ],
         "homestead-make": [
             "php vendor/bin/homestead make"
         ],
         "post-install-cmd": [
-            "@symfony-scripts",
+            "@after-install-cmf",
             "@homestead-make"
         ],
         "post-update-cmd": [
-            "@symfony-scripts"
+            "@default-symfony-scripts"
         ]
     },
     "config": {
         "platform": {
-            "php": "5.5.9"
+            "php": "^7.0"
         }
     },
     "extra": {
