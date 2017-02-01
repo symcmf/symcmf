@@ -12,3 +12,5 @@
 /composer.phar
 /.vagrant/
 /Homestead.yaml
+/.idea/
+/.project
