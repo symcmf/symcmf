@@ -33,7 +33,7 @@ class EmailService
      *
      * @param EntityManager $entityManager
      * @param $container
-     * @param $mailerService
+     * @param MailerService $mailerService
      */
     public function __construct(EntityManager $entityManager, $container, MailerService $mailerService)
     {

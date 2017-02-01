@@ -6,10 +6,8 @@ use FOS\UserBundle\Mailer\Mailer;
 use Swift_Message;
 
 /**
- * Created by PhpStorm.
- * User: shiz
- * Date: 2/1/17
- * Time: 11:35 AM
+ * Class FOSNixMailerService
+ * @package Application\Sonata\UserBundle\Services
  */
 class FOSNixMailerService extends Mailer
 {
