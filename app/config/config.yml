@@ -81,7 +81,7 @@ fos_user:
     firewall_name:      main
     user_class:         Application\Sonata\UserBundle\Entity\User
     service:
-        mailer: nix_mailer_fosbundle_service
+        mailer: nix_mailer_service
     from_email:
         address:      "%fos_user_address%"
         sender_name:  "%fos_user_sender_name%"

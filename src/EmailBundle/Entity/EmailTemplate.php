@@ -2,9 +2,9 @@
 
 namespace EmailBundle\Entity;
 
+use AppBundle\Entity\Traits\IdTrait;
+use AppBundle\Entity\Traits\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
-use EmailBundle\Entity\Traits\IdTrait;
-use EmailBundle\Entity\Traits\TimestampableTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**

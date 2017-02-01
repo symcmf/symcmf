@@ -2,6 +2,7 @@
 
 namespace EmailBundle\Services\Mailers;
 
+use Swift_Mailer;
 use Swift_Message;
 use Swift_Mime_Message;
 
@@ -12,7 +13,7 @@ use Swift_Mime_Message;
 class MailerService
 {
     /**
-     * @var \Swift_Mailer
+     * @var Swift_Mailer
      */
     protected $mailer;
 

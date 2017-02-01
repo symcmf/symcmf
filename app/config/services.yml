@@ -8,40 +8,35 @@ services:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
-    # custom mailer for FOSUserMailer
-    nix_mailer_fosbundle_service:
-        class:  Application\Sonata\UserBundle\Services\FOSNixMailerService
+    # custom NixMailer for FOSUserMailer
+    nix_mailer:
+        class: EmailBundle\Services\Mailers\NixMailer
         arguments:
-            - '@mailer'
+            - '@swiftmailer.transport.real'
+            - '%nix_header_project%'
+            - '%nix_header_emails%'
+            - '%nix_header_external%'
+
+    # custom NixMailerService for FOSUserMailer
+    nix_mailer_service:
+        class:  Application\Sonata\UserBundle\Services\NixMailerService
+        arguments:
+            - '@nix_mailer'
             - '@router'
             - '@templating'
             -
                 confirmation.template: '%fos_user.registration.confirmation.template%'
                 resetting.template:    '%fos_user.resetting.email.template%'
                 from_email:
-                  confirmation:      '%fos_user.registration.confirmation.from_email%'
-                  resetting:         '%fos_user.resetting.email.from_email%'
-                header_project:        '%nix_header_project%'
-                header_emails:         '%nix_header_emails%'
-                header_external:       '%nix_header_external%'
+                    confirmation:      '%fos_user.registration.confirmation.from_email%'
+                    resetting:         '%fos_user.resetting.email.from_email%'
 
-    # Nix mailer for EmailBundle (with headers)
-    nix_mailer_emailbundle_service:
-        class: EmailBundle\Services\Mailers\NixMailerService
-        arguments:
-            - '@mailer'
-            - '%fos_user_address%'
-            -
-              header_project:  '%nix_header_project%'
-              header_emails:   '%nix_header_emails%'
-              header_external: '%nix_header_external%'
-
-    # simple mailer for EmailBundle
+    # simple mailer service for EmailBundle
     mailer_emailbundle_service:
         class: EmailBundle\Services\Mailers\MailerService
-        arguments: ['@mailer', '%fos_user_address%']
+        arguments: ['@nix_mailer', '%fos_user_address%']
 
     # service for EmailBundle
     email_service:
         class: EmailBundle\Services\EmailService
-        arguments: ['@doctrine.orm.default_entity_manager','@service_container', '@nix_mailer_emailbundle_service']
+        arguments: ['@doctrine.orm.default_entity_manager','@service_container', '@mailer_emailbundle_service']
