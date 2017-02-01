@@ -1,9 +1,9 @@
 <?php
 
-namespace EmailBundle;
+namespace MessageBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class EmailBundle extends Bundle
+class MessageBundle extends Bundle
 {
 }

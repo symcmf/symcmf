@@ -1,6 +1,6 @@
 <?php
 
-namespace EmailBundle\Entity;
+namespace MessageBundle\Entity;
 
 use AppBundle\Entity\Traits\IdTrait;
 use AppBundle\Entity\Traits\TimestampableTrait;
@@ -9,29 +9,29 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity()
- * @ORM\Table(name="email_template")
+ * @ORM\Table(name="message_template")
  */
-class EmailTemplate
+class MessageTemplate
 {
     use IdTrait, TimestampableTrait;
 
     /**
-     * @ORM\OneToMany(targetEntity="EmailUser", mappedBy="user", cascade={"remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="MessageUser", mappedBy="user", cascade={"remove"}, orphanRemoval=true)
      */
     private $users;
 
     /**
-     * @param EmailUser $user
+     * @param MessageUser $user
      */
-    public function addUser(EmailUser $user)
+    public function addUser(MessageUser $user)
     {
         $this->users->add($user);
     }
 
     /**
-     * @param EmailUser $user
+     * @param MessageUser $user
      */
-    public function removeUser(EmailUser $user)
+    public function removeUser(MessageUser $user)
     {
         $this->users->removeElement($user);
     }

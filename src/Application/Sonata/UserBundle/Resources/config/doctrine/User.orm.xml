@@ -10,6 +10,20 @@
             <generator strategy="AUTO" />
         </id>
 
+        <field name="facebookId" column="facebook_id" type="string"  length="255" nullable="true"/>
+
+        <field name="facebookAccessToken" column="facebook_access_token" type="string" length="255" nullable="true"/>
+
+        <field name="googleId" column="google_id" type="string" length="255" nullable="true"/>
+
+        <field name="googleAccessToken" column="google_access_token" type="string" length="255" nullable="true"/>
+
+        <one-to-many field="messages" target-entity="MessageBundle\Entity\MessageUser" mapped-by="user">
+            <cascade>
+                <cascade-remove/>
+            </cascade>
+        </one-to-many>
+
     </entity>
 
 </doctrine-mapping>

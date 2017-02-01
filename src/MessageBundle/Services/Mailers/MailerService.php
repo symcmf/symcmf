@@ -1,6 +1,6 @@
 <?php
 
-namespace EmailBundle\Services\Mailers;
+namespace MessageBundle\Services\Mailers;
 
 use Swift_Mailer;
 use Swift_Message;
@@ -73,6 +73,7 @@ class MailerService
      */
     public function send()
     {
-        $this->mailer->send($this->getMessage());
+        $message = $this->getMessage();
+        return $this->mailer->send($message);
     }
 }

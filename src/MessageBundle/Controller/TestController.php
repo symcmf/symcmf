@@ -1,12 +1,12 @@
 <?php
 
-namespace EmailBundle\Controller;
+namespace MessageBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
  * Class TestController
- * @package EmailBundle\Controller
+ * @package MessageBundle\Controller
  */
 class TestController extends Controller
 {
@@ -16,11 +16,11 @@ class TestController extends Controller
      */
     public function testAction()
     {
-        $idUser = 1;
+        $idUser = 2;
         $idTemplate = 1;
 
-        $emailService = $this->get('email_service');
-        $emailService->sendMessage($idUser, $idTemplate);
+        $messageService = $this->get('message_service');
+        $messageService->sendMessage($idTemplate, $idUser);
 
         return $this->redirect('/');
     }

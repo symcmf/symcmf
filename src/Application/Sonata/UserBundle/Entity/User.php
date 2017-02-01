@@ -2,7 +2,7 @@
 
 namespace Application\Sonata\UserBundle\Entity;
 
-use EmailBundle\Entity\EmailUser;
+use MessageBundle\Entity\MessageUser;
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class User extends BaseUser
 {
     /**
-     * @var int $id
+     * @var integer $id
      */
     protected $id;
 
@@ -28,31 +28,126 @@ class User extends BaseUser
     }
 
     /**
-     * @ORM\OneToMany(targetEntity="EmailBundle\Entity\EmailUser", mappedBy="user", cascade={"remove"}, orphanRemoval=true)
+     * @var array
      */
-    private $emails;
+    protected $messages;
 
     /**
-     * @param EmailUser $email
+     * @param MessageUser $message
      */
-    public function addEmail(EmailUser $email)
+    public function addMessages(MessageUser $message)
     {
-        $this->emails->add($email);
+        $this->messages->add($message);
     }
 
     /**
-     * @param EmailUser $email
+     * @param MessageUser $message
      */
-    public function removeEmail(EmailUser $email)
+    public function removeMessage(MessageUser $message)
     {
-        $this->emails->removeElement($email);
+        $this->messages->removeElement($message);
     }
 
     /**
      * @return array
      */
-    public function getEmails()
+    public function getMessages()
     {
-        return $this->emails->toArray();
+        return $this->messages->toArray();
+    }
+
+    /**
+     * @var string $facebookId
+     */
+    protected $facebookId;
+
+    /**
+     * @param string $facebookId
+     * @return void
+     */
+    public function setFacebookId($facebookId)
+    {
+        $this->facebookId = $facebookId;
+        $this->setUsername($facebookId);
+        $this->salt = '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getFacebookId()
+    {
+        return $this->facebookId;
+    }
+
+    /**
+     * @var string $facebookAccessToken
+     */
+    protected $facebookAccessToken;
+
+    /**
+     * @param $facebookAccessToken
+     *
+     * @return void
+     */
+    public function setFacebookAccessToken($facebookAccessToken)
+    {
+        $this->facebookAccessToken = $facebookAccessToken;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFacebookAccessToken()
+    {
+        return $this->facebookAccessToken;
+    }
+
+    /**
+     * @var string $googleId
+     */
+    protected $googleId;
+
+    /**
+     * @param $googleId
+     *
+     * @return void
+     */
+    public function setGoogleId($googleId)
+    {
+        $this->googleId = $googleId;
+        $this->setUsername($googleId);
+        $this->salt = '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getGoogleId()
+    {
+        return $this->googleId;
+    }
+
+    /**
+     * @var string $googleAccessToken
+     */
+    protected $googleAccessToken;
+
+    /**
+     * @param $googleAccessToken
+     *
+     * @return void
+     */
+    public function setGoogleAccessToken($googleAccessToken)
+    {
+        $this->googleAccessToken = $googleAccessToken;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGoogleAccessToken()
+    {
+        return $this->googleAccessToken;
     }
 }

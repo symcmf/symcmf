@@ -10,7 +10,7 @@ services:
 
     # custom NixMailer for FOSUserMailer
     nix_mailer:
-        class: EmailBundle\Services\Mailers\NixMailer
+        class: MessageBundle\Services\Mailers\NixMailer
         arguments:
             - '@swiftmailer.transport.real'
             - '%nix_header_project%'
@@ -33,10 +33,16 @@ services:
 
     # simple mailer service for EmailBundle
     mailer_emailbundle_service:
-        class: EmailBundle\Services\Mailers\MailerService
+        class: MessageBundle\Services\Mailers\MailerService
         arguments: ['@nix_mailer', '%fos_user_address%']
 
     # service for EmailBundle
-    email_service:
-        class: EmailBundle\Services\EmailService
+    message_service:
+        class: MessageBundle\Services\MessageService
         arguments: ['@doctrine.orm.default_entity_manager','@service_container', '@mailer_emailbundle_service']
+
+     # provider for social auth
+    fos_user_provider:
+        class: Application\Sonata\UserBundle\Security\Core\User\FOSUBUserProvider
+        #this is the place where the properties are passed to the UserProvider - see config.yml
+        arguments: ['@fos_user.user_manager', { facebook: facebookId, google: googleId }]

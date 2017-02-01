@@ -1,17 +1,17 @@
 <?php
 
-namespace EmailBundle\Services;
+namespace MessageBundle\Services;
 
 use Application\Sonata\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
-use EmailBundle\Entity\EmailTemplate;
-use EmailBundle\Services\Mailers\MailerService;
+use MessageBundle\Entity\MessageTemplate;
+use MessageBundle\Services\Mailers\MailerService;
 
 /**
- * Class EmailService
- * @package EmailBundle\Services
+ * Class MessageService
+ * @package MessageBundle\Services
  */
-class EmailService
+class MessageService
 {
     /**
      * @var EntityManager
@@ -58,12 +58,12 @@ class EmailService
     }
 
     /**
-     * @param EmailTemplate $message
+     * @param MessageTemplate $message
      * @param User $user
      *
      * @return string - message with replaced variables
      */
-    public function getMessage(EmailTemplate $message, User $user)
+    public function getMessage(MessageTemplate $message, User $user)
     {
         $template = $message->getTemplate();
         // get all variables from template
@@ -83,7 +83,7 @@ class EmailService
      */
     public function sendMessage($idTemplate, $idUser)
     {
-        $message = $this->entityManager->getRepository(EmailTemplate::class)->find($idTemplate);
+        $message = $this->entityManager->getRepository(MessageTemplate::class)->find($idTemplate);
         $user = $this->entityManager->getRepository(User::class)->find($idUser);
         if (!$user || !$message) {
             return false;

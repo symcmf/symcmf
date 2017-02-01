@@ -1,6 +1,6 @@
 <?php
 
-namespace EmailBundle\Services\Mailers;
+namespace MessageBundle\Services\Mailers;
 
 use Swift_Mailer;
 use Swift_Mime_Message;

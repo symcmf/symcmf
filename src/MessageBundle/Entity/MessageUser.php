@@ -1,6 +1,6 @@
 <?php
 
-namespace EmailBundle\Entity;
+namespace MessageBundle\Entity;
 
 use Application\Sonata\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
@@ -8,39 +8,39 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="email_user")
+ * @ORM\Table(name="message_user")
  */
-class EmailUser
+class MessageUser
 {
     /**
      * @ORM\Id()
-     * @ORM\ManyToOne(targetEntity="EmailTemplate", inversedBy="EmailUser")
-     * @ORM\JoinColumn(name="email_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="MessageTemplate", inversedBy="EmailUser")
+     * @ORM\JoinColumn(name="message_id", referencedColumnName="id", nullable=false)
      */
-    protected $email;
+    protected $message;
 
     /**
-     * @return EmailTemplate
+     * @return MessageTemplate,
      */
-    public function getEmail()
+    public function getMessage()
     {
-        return $this->email;
+        return $this->message;
     }
 
     /**
-     * @param EmailTemplate|null $email
+     * @param MessageTemplate|null $message
      *
      * @return $this
      */
-    public function addEmail(EmailTemplate $email = null)
+    public function addMessage(MessageTemplate $message = null)
     {
-        if ($this->email !== null) {
-            $this->email->removeUser($this);
+        if ($this->message !== null) {
+            $this->message->removeUser($this);
         }
-        if ($email !== null) {
-            $email->addUser($this);
+        if ($message !== null) {
+            $message->addUser($this);
         }
-        $this->email = $email;
+        $this->message = $message;
         return $this;
     }
 

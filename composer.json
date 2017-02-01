@@ -22,7 +22,8 @@
         "sonata-project/user-bundle": "^3.2",
         "laravel/homestead": "^4.0",
         "sonata-project/core-bundle": "^3.2",
-        "gedmo/doctrine-extensions": "^2.4"
+        "gedmo/doctrine-extensions": "^2.4",
+        "hwi/oauth-bundle": "^0.5.3"
     },
     "require-dev": {
         "sensio/generator-bundle": "~3.0",

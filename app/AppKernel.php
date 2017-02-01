@@ -28,8 +28,11 @@ class AppKernel extends Kernel
             //userBundle
             new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
 
-            // CMF Symfony emailBundle
-            new EmailBundle\EmailBundle(),
+            // CMF Symfony MessageBundle
+            new MessageBundle\MessageBundle(),
+
+            // CMF Symfony SocialAuthBundle
+            new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
