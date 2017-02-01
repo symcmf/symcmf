@@ -27,6 +27,9 @@ class AppKernel extends Kernel
             new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
             //userBundle
             new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
+
+            // CMF Symfony emailBundle
+            new EmailBundle\EmailBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

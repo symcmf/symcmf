@@ -12,3 +12,7 @@ _errors:
 
 _main:
     resource: routing.yml
+
+test:
+    path: /test
+    defaults: { _controller : EmailBundle:Test:test}
