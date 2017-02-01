@@ -55,12 +55,22 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    port:      "%mailer_port%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
-    spool:     { type: memory }
+    default_mailer: nix_mailer
+    mailers:
+        mailer:
+            transport: "%mailer_transport%"
+            host:      "%mailer_host%"
+            port:      "%mailer_port%"
+            username:  "%mailer_user%"
+            password:  "%mailer_password%"
+            spool:     { type: memory }
+        nix_mailer:
+            transport: "%mailer_transport%"
+            host:      "%mailer_host%"
+            port:      "%mailer_port%"
+            username:  "%mailer_user%"
+            password:  "%mailer_password%"
+            spool:     { type: memory }
 
 sonata_block:
     default_contexts: [cms]
