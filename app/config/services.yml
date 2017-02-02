@@ -7,3 +7,42 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+    # custom NixMailer for FOSUserMailer
+    nix_mailer:
+        class: MessageBundle\Services\Mailers\NixMailer
+        arguments:
+            - '@swiftmailer.transport.real'
+            - '%nix_header_project%'
+            - '%nix_header_emails%'
+            - '%nix_header_external%'
+
+    # custom NixMailerService for FOSUserMailer
+    nix_mailer_service:
+        class:  Application\Sonata\UserBundle\Services\NixMailerService
+        arguments:
+            - '@nix_mailer'
+            - '@router'
+            - '@templating'
+            -
+                confirmation.template: '%fos_user.registration.confirmation.template%'
+                resetting.template:    '%fos_user.resetting.email.template%'
+                from_email:
+                    confirmation:      '%fos_user.registration.confirmation.from_email%'
+                    resetting:         '%fos_user.resetting.email.from_email%'
+
+    # simple mailer service for EmailBundle
+    mailer_emailbundle_service:
+        class: MessageBundle\Services\Mailers\MailerService
+        arguments: ['@nix_mailer', '%fos_user_address%']
+
+    # service for EmailBundle
+    message_service:
+        class: MessageBundle\Services\MessageService
+        arguments: ['@doctrine.orm.default_entity_manager','@service_container', '@mailer_emailbundle_service']
+
+     # provider for social auth
+    fos_user_provider:
+        class: Application\Sonata\UserBundle\Security\Core\User\FOSUBUserProvider
+        #this is the place where the properties are passed to the UserProvider - see config.yml
+        arguments: ['@fos_user.user_manager', { facebook: facebookId, google: googleId }]
