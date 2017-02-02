@@ -93,7 +93,6 @@ class MessageService
             $user->getEmail(),
             $this->getMessage($message, $user)
         );
-        $this->mailerService->send();
-        return true;
+        return $this->mailerService->send();
     }
 }
