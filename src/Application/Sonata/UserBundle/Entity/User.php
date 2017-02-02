@@ -30,30 +30,30 @@ class User extends BaseUser
     /**
      * @var array
      */
-    protected $messages;
+    protected $messageUser;
 
     /**
-     * @param MessageUser $message
+     * @param MessageUser $messageUser
      */
-    public function addMessages(MessageUser $message)
+    public function addMessagesUser(MessageUser $messageUser)
     {
-        $this->messages->add($message);
+        $this->messageUser->add($messageUser);
     }
 
     /**
-     * @param MessageUser $message
+     * @param MessageUser $messageUser
      */
-    public function removeMessage(MessageUser $message)
+    public function removeMessagesUser(MessageUser $messageUser)
     {
-        $this->messages->removeElement($message);
+        $this->messageUser->removeElement($messageUser);
     }
 
     /**
      * @return array
      */
-    public function getMessages()
+    public function getMessageUsers()
     {
-        return $this->messages->toArray();
+        return $this->messageUser->toArray();
     }
 
     /**
@@ -149,5 +149,13 @@ class User extends BaseUser
     public function getGoogleAccessToken()
     {
         return $this->googleAccessToken;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->username . ' (' . $this->email . ') ';
     }
 }

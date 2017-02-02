@@ -63,7 +63,7 @@ class MessageService
      *
      * @return string - message with replaced variables
      */
-    public function getMessage(MessageTemplate $message, User $user)
+    protected function getMessage(MessageTemplate $message, User $user)
     {
         $template = $message->getTemplate();
         // get all variables from template
@@ -76,15 +76,13 @@ class MessageService
     }
 
     /**
-     * @param $idTemplate
-     * @param $idUser
+     * @param MessageTemplate $message
+     * @param User $user
      *
-     * @return bool
+     * @return bool|int
      */
-    public function sendMessage($idTemplate, $idUser)
+    public function sendMessage(MessageTemplate $message, User $user)
     {
-        $message = $this->entityManager->getRepository(MessageTemplate::class)->find($idTemplate);
-        $user = $this->entityManager->getRepository(User::class)->find($idUser);
         if (!$user || !$message) {
             return false;
         }

@@ -20,10 +20,13 @@
         "sonata-project/admin-bundle": "^3.12",
         "sonata-project/doctrine-orm-admin-bundle": "^3.1",
         "sonata-project/user-bundle": "^3.2",
-        "laravel/homestead": "^4.0",
         "sonata-project/core-bundle": "^3.2",
+        "sonata-project/formatter-bundle": "^3.0",
+        "knplabs/knp-markdown-bundle": "^1.5 ",
+        "laravel/homestead": "^4.0",
         "gedmo/doctrine-extensions": "^2.4",
-        "hwi/oauth-bundle": "^0.5.3"
+        "hwi/oauth-bundle": "^0.5.3",
+        "stof/doctrine-extensions-bundle": "^1.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "~3.0",

@@ -5,16 +5,18 @@ namespace MessageBundle\Entity;
 use Application\Sonata\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="message_user")
+ * @ORM\HasLifecycleCallbacks()
  */
 class MessageUser
 {
     /**
      * @ORM\Id()
-     * @ORM\ManyToOne(targetEntity="MessageTemplate", inversedBy="EmailUser")
+     * @ORM\ManyToOne(targetEntity="MessageTemplate", inversedBy="messageUser")
      * @ORM\JoinColumn(name="message_id", referencedColumnName="id", nullable=false)
      */
     protected $message;
@@ -32,13 +34,13 @@ class MessageUser
      *
      * @return $this
      */
-    public function addMessage(MessageTemplate $message = null)
+    public function setMessage(MessageTemplate $message = null)
     {
         if ($this->message !== null) {
-            $this->message->removeUser($this);
+            $this->message->removeMessageUser($this);
         }
         if ($message !== null) {
-            $message->addUser($this);
+            $message->addMessageUser($this);
         }
         $this->message = $message;
         return $this;
@@ -46,7 +48,7 @@ class MessageUser
 
     /**
      * @ORM\Id()
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\UserBundle\Entity\User", inversedBy="EmailUser")
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\UserBundle\Entity\User", inversedBy="messageUser")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      */
     protected $user;
@@ -60,32 +62,28 @@ class MessageUser
     }
 
     /**
-     * @param $id
-     */
-    public function setUser($id)
-    {
-        $this->user = $id;
-    }
-
-    /**
-     * @param User|null $user
+     * @param array|User|null $user
      * @return $this
      */
-    public function addUser(User $user = null)
+    public function setUser($user = null)
     {
-        if ($this->user !== null) {
-            $this->user->remove($this);
-        }
-        if ($user !== null) {
-            $user->addProjectUser($this);
+        if (!array($user)) {
+
+            if ($this->user !== null) {
+                $this->user->removeMessagesUser($this);
+            }
+            if ($user !== null) {
+                $user->addMessagesUser($this);
+            }
         }
         $this->user = $user;
         return $this;
     }
 
     /**
-     * @Gedmo\Timestampable(on="create")
      *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\ManyToOne(targetEntity="MessageUser")
      * @ORM\Column(name="created", type="datetime")
      */
     private $created;
@@ -111,5 +109,13 @@ class MessageUser
     {
         $this->created = $created;
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return 'Message "' . $this->message->getSubject(). '"';
     }
 }

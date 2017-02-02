@@ -25,6 +25,7 @@ class AppKernel extends Kernel
             new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
+
             //userBundle
             new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
 
@@ -33,6 +34,14 @@ class AppKernel extends Kernel
 
             // CMF Symfony SocialAuthBundle
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
+
+            // Sonata editor
+            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+            new Sonata\FormatterBundle\SonataFormatterBundle(),
+            new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
+
+            // for Gedmo\
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
