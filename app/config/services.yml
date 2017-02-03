@@ -57,6 +57,6 @@ services:
 
     admin.msg_user_entity:
         class: MessageBundle\SonataAdmin\MessageUserEntity
-        arguments: [~, MessageBundle\Entity\MessageUser, 'MessageBundle:MessageUser', '@message_service', '@doctrine.orm.default_entity_manager']
+        arguments: [~, MessageBundle\Entity\MessageUser, ~, '@message_service', '@doctrine.orm.default_entity_manager']
         tags:
             - { name: sonata.admin, manager_type: orm, group: Messages, label: Sending message }
