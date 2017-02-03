@@ -2,7 +2,9 @@
 
 namespace MessageBundle\Entity;
 
+use AppBundle\Entity\Traits\IdTrait;
 use Application\Sonata\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -14,8 +16,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class MessageUser
 {
+    use IdTrait;
+
     /**
-     * @ORM\Id()
      * @ORM\ManyToOne(targetEntity="MessageTemplate", inversedBy="messageUser")
      * @ORM\JoinColumn(name="message_id", referencedColumnName="id", nullable=false)
      */
@@ -47,7 +50,6 @@ class MessageUser
     }
 
     /**
-     * @ORM\Id()
      * @ORM\ManyToOne(targetEntity="Application\Sonata\UserBundle\Entity\User", inversedBy="messageUser")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      */
@@ -81,7 +83,6 @@ class MessageUser
     }
 
     /**
-     *
      * @Gedmo\Timestampable(on="create")
      * @ORM\ManyToOne(targetEntity="MessageUser")
      * @ORM\Column(name="created", type="datetime")
@@ -91,7 +92,7 @@ class MessageUser
     /**
      * Get created
      *
-     * @return \DateTime
+     * @return string
      */
     public function getCreated()
     {

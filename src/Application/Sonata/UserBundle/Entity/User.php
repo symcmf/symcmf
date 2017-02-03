@@ -2,6 +2,7 @@
 
 namespace Application\Sonata\UserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use MessageBundle\Entity\MessageUser;
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
@@ -12,6 +13,14 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User extends BaseUser
 {
+    /**
+     * User constructor.
+     */
+    public function __construct()
+    {
+        $this->messageUser = new ArrayCollection();
+    }
+
     /**
      * @var integer $id
      */
@@ -35,7 +44,7 @@ class User extends BaseUser
     /**
      * @param MessageUser $messageUser
      */
-    public function addMessagesUser(MessageUser $messageUser)
+    public function addMessageUser(MessageUser $messageUser)
     {
         $this->messageUser->add($messageUser);
     }

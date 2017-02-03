@@ -18,7 +18,7 @@ class MessageTemplate
     use IdTrait, TimestampableTrait;
 
     /**
-     * @ORM\OneToMany(targetEntity="MessageUser", mappedBy="message", cascade={"remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="MessageUser", mappedBy="message", cascade={"remove", "persist"}, orphanRemoval=true)
      */
     private $messageUser;
 

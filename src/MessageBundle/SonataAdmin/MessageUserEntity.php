@@ -1,12 +1,14 @@
 <?php
 namespace MessageBundle\SonataAdmin;
 
+use Application\Sonata\UserBundle\Entity\User;
+use MessageBundle\Entity\MessageTemplate;
 use MessageBundle\Entity\MessageUser;
 use MessageBundle\Services\MessageService;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Symfony\Component\Validator\Constraints\DateTime;
+use Sonata\AdminBundle\Route\RouteCollection;
 
 class MessageUserEntity extends AbstractAdmin
 {
@@ -52,14 +54,60 @@ class MessageUserEntity extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('message', 'sonata_type_model_list')
+            ->add('message', 'sonata_type_model_list', [
+                'empty_data' => false,
+            ])
             ->add('user', 'sonata_type_model', [
-//                'multiple' => true,
+                'multiple'   => true,
+                'mapped'     => false,
+                'empty_data' => false,
             ]);
     }
 
+    /**
+     * @param RouteCollection $collection
+     */
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        // remove action edit from this entity
+        $collection->remove('edit');
+    }
+
+    /**
+     * @param mixed $object
+     */
     public function prePersist($object)
     {
         $this->service->sendMessage($object->getMessage(), $object->getUser());
+    }
+
+    /**
+     * @param mixed $object
+     *
+     * @return mixed
+     */
+    public function create($object)
+    {
+        // delete old object from queue on deleting
+        $this->entityManager->clear();
+
+        $uniqId     = $this->getRequest()->query->get('uniqid');
+        $formData   = $this->getRequest()->request->get($uniqId);
+
+        $messageId  = $formData['message'];
+        $users      = $formData['user'];
+
+        foreach ($users as $userId) {
+            $message = $this->entityManager->getRepository(MessageTemplate::class)->find($messageId);
+            $user    = $this->entityManager->getRepository(User::class)->find($userId);
+
+            // create new object
+            $object = new MessageUser();
+            $object->setMessage($message);
+            $object->setUser($user);
+            // push it
+            parent::create($object);
+        }
+        return $object;
     }
 }
