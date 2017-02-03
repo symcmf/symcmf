@@ -58,6 +58,29 @@ class MessageService
     }
 
     /**
+     * Get allowed variables for replacing
+     */
+    public function getAllowVariables()
+    {
+        return [
+            'username',
+            'email',
+            'firstname',
+            'lastname',
+        ];
+    }
+
+    /**
+     * @param $variable - key for replacing
+     *
+     * @return bool
+     */
+    private function canReplaced ($variable)
+    {
+        return in_array($variable, $this->getAllowVariables());
+    }
+
+    /**
      * @param MessageTemplate $message
      * @param User $user
      *
@@ -69,6 +92,9 @@ class MessageService
         // get all variables from template
         $variables = $this->getStringBetweenSymbols('{{', '}}', $template);
         foreach ($variables as $variable) {
+            if (!$this->canReplaced(trim($variable))) {
+                continue;
+            }
             $getter = 'get' . ucfirst(trim($variable));
             $template = str_replace('{{' . $variable . '}}', $user->$getter(), $template);
         }

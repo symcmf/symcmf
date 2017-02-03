@@ -54,8 +54,6 @@ services:
         arguments: [~, MessageBundle\Entity\MessageTemplate, ~, '@message_service']
         tags:
             - { name: sonata.admin, manager_type: orm, group: Messages, label: Message templates }
-        calls:
-            - [ setTemplate, [edit, MessageBundle:CRUD:message.template.edit.html.twig]]
 
     admin.msg_user_entity:
         class: MessageBundle\SonataAdmin\MessageUserEntity
