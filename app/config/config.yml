@@ -34,6 +34,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form_themes:
+        - 'SonataFormatterBundle:Form:formatter.html.twig'
 
 # Doctrine Configuration
 doctrine:
@@ -52,6 +54,13 @@ doctrine:
         entity_managers:
             default:
                 auto_mapping: true
+
+# Setting for Gedmo
+stof_doctrine_extensions:
+    default_locale: en_US
+    orm:
+        default:
+            timestampable: true
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -85,6 +94,45 @@ sonata_block:
 sonata_user:
     #security_acl: true # Uncomment for ACL support
     manager_type: orm  # can be orm or mongodb
+    admin:                  # Admin Classes
+        user:
+          class:          Application\Sonata\UserBundle\Admin\UserAdmin
+          #Sonata\UserBundle\Admin\Entity\UserAdmin
+          translation:    SonataUserBundle
+
+sonata_formatter:
+    ckeditor:
+        templates:
+            browser:  'SonataFormatterBundle:Ckeditor:browser.html.twig'
+            upload:   'SonataFormatterBundle:Ckeditor:upload.html.twig'
+    formatters:
+        markdown:
+            service: sonata.formatter.text.markdown
+            extensions:
+                - sonata.formatter.twig.control_flow
+                - sonata.formatter.twig.gist
+        #        - sonata.media.formatter.twig #keep this commented unless you are using media bundle.
+        text:
+            service: sonata.formatter.text.text
+            extensions:
+                - sonata.formatter.twig.control_flow
+                - sonata.formatter.twig.gist
+        #        - sonata.media.formatter.twig
+        rawhtml:
+            service: sonata.formatter.text.raw
+            extensions:
+                - sonata.formatter.twig.control_flow
+                - sonata.formatter.twig.gist
+        #        - sonata.media.formatter.twig
+        richhtml:
+            service: sonata.formatter.text.raw
+            extensions:
+                - sonata.formatter.twig.control_flow
+                - sonata.formatter.twig.gist
+        #        - sonata.media.formatter.twig
+        twig:
+            service: sonata.formatter.text.twigengine
+            extensions: [] # Twig formatter cannot have extensions
 
 fos_user:
     db_driver:          orm # can be orm or odm

@@ -6,42 +6,44 @@ use AppBundle\Entity\Traits\IdTrait;
 use AppBundle\Entity\Traits\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity()
  * @ORM\Table(name="message_template")
+ * @ORM\HasLifecycleCallbacks()
  */
 class MessageTemplate
 {
     use IdTrait, TimestampableTrait;
 
     /**
-     * @ORM\OneToMany(targetEntity="MessageUser", mappedBy="user", cascade={"remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="MessageUser", mappedBy="message", cascade={"remove"}, orphanRemoval=true)
      */
-    private $users;
+    private $messageUser;
 
     /**
-     * @param MessageUser $user
+     * @param MessageUser $messageUser
      */
-    public function addUser(MessageUser $user)
+    public function addMessageUser(MessageUser $messageUser)
     {
-        $this->users->add($user);
+        $this->messageUser->add($messageUser);
     }
 
     /**
-     * @param MessageUser $user
+     * @param MessageUser $messageUser
      */
-    public function removeUser(MessageUser $user)
+    public function removeMessageUser(MessageUser $messageUser)
     {
-        $this->users->removeElement($user);
+        $this->messageUser->removeElement($messageUser);
     }
 
     /**
      * @return array
      */
-    public function getUsers()
+    public function getMessageUser()
     {
-        return $this->users->toArray();
+        return $this->messageUser->toArray();
     }
 
     /**
@@ -107,5 +109,13 @@ class MessageTemplate
     {
         $this->template = $template;
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return 'Template "' . $this->subject . '"';
     }
 }

@@ -22,12 +22,12 @@ class FOSUBUserProvider extends BaseClass
     /**
      * @var string
      */
-    private $setterId;
+    private $setId;
 
     /**
      * @var string
      */
-    private $setterToken;
+    private $setToken;
 
     /**
      * Set client id and token for user
@@ -40,8 +40,8 @@ class FOSUBUserProvider extends BaseClass
      */
     private function setSocialKeys($user, $id = null, $token = null)
     {
-        $user->{$this->setterId}($id);
-        $user->{$this->setterToken}($token);
+        $user->{$this->setId}($id);
+        $user->{$this->setToken}($token);
         return $user;
     }
 
@@ -54,8 +54,30 @@ class FOSUBUserProvider extends BaseClass
     private function getSocialAliases()
     {
         $setter = 'set' . ucfirst($this->service);
-        $this->setterId = $setter . 'Id';
-        $this->setterToken = $setter . 'AccessToken';
+        $this->setId = $setter . 'Id';
+        $this->setToken = $setter . 'AccessToken';
+    }
+
+    /**
+     * Get social keys with old standards of social
+     */
+    private function getKeys()
+    {
+        $this->getSocialAliases();
+    }
+
+    /**
+     * @param $user
+     * @param string|null $id
+     * @param string|null $token
+     * @param string|null $nickname
+     *
+     * @return UserInterface
+     */
+    private function setKeys($user, $id = null, $token = null, $nickname = null)
+    {
+        $user = $this->setSocialKeys($user, $id, $token);
+        return $user;
     }
 
     /**
@@ -67,12 +89,13 @@ class FOSUBUserProvider extends BaseClass
         $property = $this->getProperty($response);
         $username = $response->getUsername();
         //on connect - get the access token and the user ID
-        $this->getSocialAliases();
+        $this->getKeys();
         //we "disconnect" previously connected users
         if (($previousUser = $this->userManager->findUserBy([$property => $username]))) {
-            $this->userManager->updateUser($this->setSocialKeys($previousUser));
+            $user = $this->setKeys($previousUser);
+            $this->userManager->updateUser($user);
         }
-        $user = $this->setSocialKeys($user, $username, $response->getAccessToken());
+        $user = $this->setKeys($user, $username, $response->getAccessToken(), $response->getNickname());
         $this->userManager->updateUser($user);
     }
 
@@ -89,24 +112,27 @@ class FOSUBUserProvider extends BaseClass
             $user = $this->userManager->findUserByEmail($response->getEmail());
             // if user was already register
             if ($user) {
-                $this->getSocialAliases();
-                $user = $this->setSocialKeys($user, $username, $response->getAccessToken());
+                $this->getKeys();
+                $user = $this->setKeys($user, $username, $response->getAccessToken(), $response->getNickname());
                 $user->setUsername($response->getNickname());
                 $this->userManager->updateUser($user);
                 return $user;
             }
         }
         if (!$user) {
-            $this->getSocialAliases();
+            $this->getKeys();
             // create new user here
             $user = $this->userManager->createUser();
+
             // set id and token for new user
-            $this->setSocialKeys($user, $username, $response->getAccessToken());
+            $user = $this->setKeys($user, $username, $response->getAccessToken(), $response->getNickname());
+
             // set another variables
             $user->setUsername($response->getNickname());
             $user->setEmail($response->getEmail());
             $user->setPassword($username);
             $user->setEnabled(true);
+
             $this->userManager->updateUser($user);
             return $user;
         }

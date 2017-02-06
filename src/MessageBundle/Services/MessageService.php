@@ -58,17 +58,43 @@ class MessageService
     }
 
     /**
+     * Get allowed variables for replacing
+     */
+    public function getAllowVariables()
+    {
+        return [
+            'username',
+            'email',
+            'firstname',
+            'lastname',
+        ];
+    }
+
+    /**
+     * @param $variable - key for replacing
+     *
+     * @return bool
+     */
+    private function canReplaced ($variable)
+    {
+        return in_array($variable, $this->getAllowVariables());
+    }
+
+    /**
      * @param MessageTemplate $message
      * @param User $user
      *
      * @return string - message with replaced variables
      */
-    public function getMessage(MessageTemplate $message, User $user)
+    protected function getMessage(MessageTemplate $message, User $user)
     {
         $template = $message->getTemplate();
         // get all variables from template
         $variables = $this->getStringBetweenSymbols('{{', '}}', $template);
         foreach ($variables as $variable) {
+            if (!$this->canReplaced(trim($variable))) {
+                continue;
+            }
             $getter = 'get' . ucfirst(trim($variable));
             $template = str_replace('{{' . $variable . '}}', $user->$getter(), $template);
         }
@@ -76,15 +102,13 @@ class MessageService
     }
 
     /**
-     * @param $idTemplate
-     * @param $idUser
+     * @param MessageTemplate $message
+     * @param User $user
      *
-     * @return bool
+     * @return bool|int
      */
-    public function sendMessage($idTemplate, $idUser)
+    public function sendMessage(MessageTemplate $message, User $user)
     {
-        $message = $this->entityManager->getRepository(MessageTemplate::class)->find($idTemplate);
-        $user = $this->entityManager->getRepository(User::class)->find($idUser);
         if (!$user || !$message) {
             return false;
         }

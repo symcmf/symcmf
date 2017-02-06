@@ -46,3 +46,17 @@ services:
         class: Application\Sonata\UserBundle\Security\Core\User\FOSUBUserProvider
         #this is the place where the properties are passed to the UserProvider - see config.yml
         arguments: ['@fos_user.user_manager', { facebook: facebookId, google: googleId }]
+
+
+    # Sonata entitites
+    admin.message_entity:
+        class: MessageBundle\SonataAdmin\MessageTemplateEntity
+        arguments: [~, MessageBundle\Entity\MessageTemplate, ~, '@message_service']
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Messages, label: Message templates }
+
+    admin.msg_user_entity:
+        class: MessageBundle\SonataAdmin\MessageUserEntity
+        arguments: [~, MessageBundle\Entity\MessageUser, ~, '@message_service', '@doctrine.orm.default_entity_manager']
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Messages, label: Sending message }

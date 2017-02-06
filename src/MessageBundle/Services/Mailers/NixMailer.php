@@ -53,7 +53,6 @@ class NixMailer extends Swift_Mailer
         $headers = $message->getHeaders();
         $headers->addTextHeader('PROJECT', $this->project);
         $headers->addTextHeader('EMAILS', $this->emails);
-        $headers->addTextHeader('EXTERNAL', $this->external);
 
         return parent::send($message, $failedRecipients);
     }
