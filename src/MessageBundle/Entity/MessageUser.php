@@ -64,19 +64,16 @@ class MessageUser
     }
 
     /**
-     * @param array|User|null $user
+     * @param User|null $user
      * @return $this
      */
-    public function setUser($user = null)
+    public function setUser(User $user = null)
     {
-        if (!array($user)) {
-
-            if ($this->user !== null) {
-                $this->user->removeMessagesUser($this);
-            }
-            if ($user !== null) {
-                $user->addMessagesUser($this);
-            }
+        if ($this->user !== null) {
+            $this->user->removeMessageUser($this);
+        }
+        if ($user !== null) {
+            $user->addMessageUser($this);
         }
         $this->user = $user;
         return $this;
@@ -117,6 +114,6 @@ class MessageUser
      */
     public function __toString()
     {
-        return 'Message "' . $this->message->getSubject(). '"';
+        return 'Message "' . $this->message->getSubject() . '"';
     }
 }

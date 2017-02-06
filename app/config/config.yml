@@ -94,7 +94,11 @@ sonata_block:
 sonata_user:
     #security_acl: true # Uncomment for ACL support
     manager_type: orm  # can be orm or mongodb
-
+    admin:                  # Admin Classes
+        user:
+          class:          Application\Sonata\UserBundle\Admin\UserAdmin
+          #Sonata\UserBundle\Admin\Entity\UserAdmin
+          translation:    SonataUserBundle
 
 sonata_formatter:
     ckeditor:

@@ -2,6 +2,7 @@
 namespace MessageBundle\SonataAdmin;
 
 use Application\Sonata\AdminEntity\AbstractAdminEntity;
+use Application\Sonata\UserBundle\Entity\Group;
 use Application\Sonata\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
 use MessageBundle\Entity\MessageTemplate;

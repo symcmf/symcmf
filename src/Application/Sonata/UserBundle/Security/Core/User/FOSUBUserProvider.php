@@ -12,8 +12,6 @@ use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseClass;
  */
 class FOSUBUserProvider extends BaseClass
 {
-    use FOSSocialSupportTrait;
-
     /**
      * Name of social network
      *
@@ -24,12 +22,12 @@ class FOSUBUserProvider extends BaseClass
     /**
      * @var string
      */
-    private $setterId;
+    private $setId;
 
     /**
      * @var string
      */
-    private $setterToken;
+    private $setToken;
 
     /**
      * Set client id and token for user
@@ -42,8 +40,8 @@ class FOSUBUserProvider extends BaseClass
      */
     private function setSocialKeys($user, $id = null, $token = null)
     {
-        $user->{$this->setterId}($id);
-        $user->{$this->setterToken}($token);
+        $user->{$this->setId}($id);
+        $user->{$this->setToken}($token);
         return $user;
     }
 
@@ -56,8 +54,8 @@ class FOSUBUserProvider extends BaseClass
     private function getSocialAliases()
     {
         $setter = 'set' . ucfirst($this->service);
-        $this->setterId = $setter . 'Id';
-        $this->setterToken = $setter . 'AccessToken';
+        $this->setId = $setter . 'Id';
+        $this->setToken = $setter . 'AccessToken';
     }
 
     /**
@@ -66,7 +64,6 @@ class FOSUBUserProvider extends BaseClass
     private function getKeys()
     {
         $this->getSocialAliases();
-        $this->getSocialKeysOld($this->service);
     }
 
     /**
@@ -80,7 +77,6 @@ class FOSUBUserProvider extends BaseClass
     private function setKeys($user, $id = null, $token = null, $nickname = null)
     {
         $user = $this->setSocialKeys($user, $id, $token);
-        $user = $this->setSocialKeysOld($user, $id, $nickname, $token);
         return $user;
     }
 
