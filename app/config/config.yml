@@ -36,6 +36,7 @@ twig:
     strict_variables: "%kernel.debug%"
     form_themes:
         - 'SonataFormatterBundle:Form:formatter.html.twig'
+        - 'SonataCoreBundle:Form:datepicker.html.twig'
 
 # Doctrine Configuration
 doctrine:

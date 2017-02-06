@@ -390,16 +390,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "v2.5.10",
+            "version": "v2.5.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "fc376f7a61498e18520cd6fa083752a4ca08072b"
+                "reference": "1b1effbddbdc0f40d1c8f849f44bcddac4f52a48"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/fc376f7a61498e18520cd6fa083752a4ca08072b",
-                "reference": "fc376f7a61498e18520cd6fa083752a4ca08072b",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/1b1effbddbdc0f40d1c8f849f44bcddac4f52a48",
+                "reference": "1b1effbddbdc0f40d1c8f849f44bcddac4f52a48",
                 "shasum": ""
             },
             "require": {
@@ -457,7 +457,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2017-01-23T23:17:10+00:00"
+            "time": "2017-02-04T21:20:13+00:00"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -1761,16 +1761,16 @@
         },
         {
             "name": "laravel/homestead",
-            "version": "v4.0.3",
+            "version": "v4.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/homestead.git",
-                "reference": "5af81945e933d90adfaffcf2400d23a0d511da84"
+                "reference": "133c09dd2872af46efa0324a5c985a8c707efc69"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/homestead/zipball/5af81945e933d90adfaffcf2400d23a0d511da84",
-                "reference": "5af81945e933d90adfaffcf2400d23a0d511da84",
+                "url": "https://api.github.com/repos/laravel/homestead/zipball/133c09dd2872af46efa0324a5c985a8c707efc69",
+                "reference": "133c09dd2872af46efa0324a5c985a8c707efc69",
                 "shasum": ""
             },
             "require": {
@@ -1803,7 +1803,7 @@
                 }
             ],
             "description": "A virtual machine for web artisans.",
-            "time": "2017-01-05T15:32:34+00:00"
+            "time": "2017-02-06T03:10:50+00:00"
         },
         {
             "name": "michelf/php-markdown",
@@ -2168,16 +2168,16 @@
         },
         {
             "name": "sensio/framework-extra-bundle",
-            "version": "v3.0.20",
+            "version": "v3.0.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
-                "reference": "0d8fa024edb41f9228daf78f96552f9d9079854e"
+                "reference": "ed86f6fb1753e76b39ff8b87f527045ca6b97169"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/0d8fa024edb41f9228daf78f96552f9d9079854e",
-                "reference": "0d8fa024edb41f9228daf78f96552f9d9079854e",
+                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/ed86f6fb1753e76b39ff8b87f527045ca6b97169",
+                "reference": "ed86f6fb1753e76b39ff8b87f527045ca6b97169",
                 "shasum": ""
             },
             "require": {
@@ -2232,7 +2232,7 @@
                 "annotations",
                 "controllers"
             ],
-            "time": "2017-02-01T15:59:54+00:00"
+            "time": "2017-02-02T15:31:23+00:00"
         },
         {
             "name": "sensiolabs/security-checker",
@@ -2280,16 +2280,16 @@
         },
         {
             "name": "sonata-project/admin-bundle",
-            "version": "3.12.0",
+            "version": "3.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "a06c89c300a246cd1e13ad687d2389a53e8c0d8b"
+                "reference": "021646de4c11c170ae6205bc5740818b50da3591"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/a06c89c300a246cd1e13ad687d2389a53e8c0d8b",
-                "reference": "a06c89c300a246cd1e13ad687d2389a53e8c0d8b",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/021646de4c11c170ae6205bc5740818b50da3591",
+                "reference": "021646de4c11c170ae6205bc5740818b50da3591",
                 "shasum": ""
             },
             "require": {
@@ -2373,7 +2373,7 @@
                 "bootstrap",
                 "sonata"
             ],
-            "time": "2017-01-31T10:13:36+00:00"
+            "time": "2017-02-03T09:12:44+00:00"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -4326,16 +4326,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.8.16",
+            "version": "v2.8.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "9fef72a3ab561c4bfa703a70369db028dec387d2"
+                "reference": "c423a13a031c9388b7f9103f176b1872c00c7ffa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/9fef72a3ab561c4bfa703a70369db028dec387d2",
-                "reference": "9fef72a3ab561c4bfa703a70369db028dec387d2",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/c423a13a031c9388b7f9103f176b1872c00c7ffa",
+                "reference": "c423a13a031c9388b7f9103f176b1872c00c7ffa",
                 "shasum": ""
             },
             "require": {
@@ -4413,6 +4413,7 @@
                 "monolog/monolog": "~1.11",
                 "ocramius/proxy-manager": "~0.4|~1.0|~2.0",
                 "phpdocumentor/reflection": "^1.0.7",
+                "sensio/framework-extra-bundle": "^3.0.2",
                 "symfony/phpunit-bridge": "~3.2"
             },
             "type": "library",
@@ -4457,7 +4458,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2017-01-12T20:27:46+00:00"
+            "time": "2017-02-06T12:47:48+00:00"
         },
         {
             "name": "twig/extensions",
@@ -4783,16 +4784,16 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v2.8.16",
+            "version": "v2.8.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
-                "reference": "1e76e80da601c6969336309678a0af4018abcae7"
+                "reference": "6b9436c6f6fc474335871bb9c90743606d967806"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/1e76e80da601c6969336309678a0af4018abcae7",
-                "reference": "1e76e80da601c6969336309678a0af4018abcae7",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/6b9436c6f6fc474335871bb9c90743606d967806",
+                "reference": "6b9436c6f6fc474335871bb9c90743606d967806",
                 "shasum": ""
             },
             "require": {
@@ -4834,7 +4835,7 @@
             ],
             "description": "Symfony PHPUnit Bridge",
             "homepage": "https://symfony.com",
-            "time": "2017-01-02T20:30:24+00:00"
+            "time": "2017-01-21T16:40:50+00:00"
         }
     ],
     "aliases": [],
