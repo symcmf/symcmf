@@ -42,6 +42,16 @@ class AppKernel extends Kernel
 
             // for Gedmo\
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+
+            // CMF Symfony PageBundle
+            new Sonata\PageBundle\SonataPageBundle(),
+            new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
+            new Sonata\SeoBundle\SonataSeoBundle(),
+            new Sonata\CacheBundle\SonataCacheBundle(),
+            new Application\Sonata\PageBundle\ApplicationSonataPageBundle(),
+            new Sonata\NotificationBundle\SonataNotificationBundle(),
+            new Application\Sonata\NotificationBundle\ApplicationSonataNotificationBundle(),
+
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
