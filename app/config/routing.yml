@@ -38,6 +38,20 @@ sonata_user:
   resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
   prefix: /admin
 
+# SonataPageBundle routes
+sonata_page_exceptions:
+    resource: '@SonataPageBundle/Resources/config/routing/exceptions.xml'
+    prefix: /
+
+sonata_page_cache:
+    resource: '@SonataPageBundle/Resources/config/routing/cache.xml'
+    prefix: /
+
+# SonataCacheBundle route
+sonata_cache_cache:
+    resource: '@SonataCacheBundle/Resources/config/routing/cache.xml'
+    prefix: /
+
 admin:
   resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
   prefix: /admin
