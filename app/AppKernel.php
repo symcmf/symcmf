@@ -43,6 +43,7 @@ class AppKernel extends Kernel
             // for Gedmo\
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
 
+
             // CMF Symfony Sonata Media Bundle
             new Sonata\MediaBundle\SonataMediaBundle(),
             new Sonata\ClassificationBundle\SonataClassificationBundle(),
@@ -51,6 +52,16 @@ class AppKernel extends Kernel
             new Sonata\IntlBundle\SonataIntlBundle(),
             // You need to add this dependency to make media functional
             new JMS\SerializerBundle\JMSSerializerBundle(),
+
+            // CMF Symfony PageBundle
+            new Sonata\PageBundle\SonataPageBundle(),
+            new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
+            new Sonata\SeoBundle\SonataSeoBundle(),
+            new Sonata\CacheBundle\SonataCacheBundle(),
+            new Application\Sonata\PageBundle\ApplicationSonataPageBundle(),
+            new Sonata\NotificationBundle\SonataNotificationBundle(),
+            new Application\Sonata\NotificationBundle\ApplicationSonataNotificationBundle(),
+
 
         );
 

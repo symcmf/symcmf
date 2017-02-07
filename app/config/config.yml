@@ -36,6 +36,7 @@ twig:
     strict_variables: "%kernel.debug%"
     form_themes:
         - 'SonataFormatterBundle:Form:formatter.html.twig'
+        - 'SonataCoreBundle:Form:datepicker.html.twig'
 
 # Doctrine Configuration
 doctrine:
@@ -81,6 +82,42 @@ swiftmailer:
             password:  "%mailer_password%"
             spool:     { type: memory }
 
+sonata_notification:
+    backend: sonata.notification.backend.runtime
+
+sonata_seo:
+    encoding:         UTF-8
+    page:
+        title:            Sonata Project
+        default:          sonata.seo.page.default
+        metas:
+            name:
+                keywords:             foo bar
+                description:          The description
+                robots:               index, follow
+
+            property:
+                # Facebook application settings
+                #'fb:app_id':          XXXXXX
+                #'fb:admins':          admin1, admin2
+
+                # Open Graph information
+                # see http://developers.facebook.com/docs/opengraphprotocol/#types or http://ogp.me/
+                'og:site_name':       Sonata Project Sandbox
+                'og:description':     A demo of the some rich bundles for your Symfony2 projects
+
+            http-equiv:
+                'Content-Type':         text/html; charset=utf-8
+                #'X-Ua-Compatible':      IE=EmulateIE7
+
+            charset:
+                UTF-8:    ''
+
+        head:
+            'xmlns':              http://www.w3.org/1999/xhtml
+            'xmlns:og':           http://opengraphprotocol.org/schema/
+            #'xmlns:fb':           "http://www.facebook.com/2008/fbml"
+
 sonata_block:
     default_contexts: [cms]
     blocks:
@@ -90,6 +127,10 @@ sonata_block:
         sonata.user.block.menu:    # used to display the menu in profile pages
         sonata.user.block.account: # used to display menu option (login option)
         sonata.block.service.text: # used to if you plan to use Sonata user routes
+        sonata.block.service.rss:
+        sonata.media.block.media:
+        sonata.media.block.gallery:
+    context_manager: sonata.page.block.context_manager
 
 sonata_user:
     #security_acl: true # Uncomment for ACL support
@@ -168,6 +209,44 @@ sonata_media:
         image:
           resizer: sonata.media.resizer.square
 
+sonata_page:
+    slugify_service:   sonata.core.slugify.cocur # old BC value is sonata.core.slugify.native
+    # Generates a snapshot when a page is saved (from the admin)
+    direct_publication: false # or %kernel.debug% if you want to publish in dev mode (but not in prod)
+
+    multisite: host
+    use_streamed_response: true # set the value to false in debug mode or if the reverse proxy does not handle streamed response
+    ignore_route_patterns:
+        - ^(.*)admin(.*)   # ignore admin route, ie route containing 'admin'
+        - ^_(.*)          # ignore symfony routes
+
+    ignore_routes:
+        - sonata_page_cache_esi
+        - sonata_page_cache_ssi
+        - sonata_page_js_sync_cache
+        - sonata_page_js_async_cache
+        - sonata_cache_esi
+        - sonata_cache_ssi
+        - sonata_cache_js_async
+        - sonata_cache_js_sync
+        - sonata_cache_apc
+
+    ignore_uri_patterns:
+        - ^/admin\/   # ignore admin route, ie route containing 'admin'
+
+    page_defaults:
+        homepage: {decorate: false} # disable decoration for homepage, key - is a page route
+
+    default_template: default # template key from templates section, used as default for pages
+    templates:
+        default:  { path: 'SonataPageBundle::layout.html.twig',          name: 'default' }
+        2columns: { path: 'SonataPageBundle::2columns_layout.html.twig', name: '2 columns layout' }
+
+    # manage the http errors
+    catch_exceptions:
+        not_found: [404]    # render 404 page with "not_found" key (name generated: _page_internal_error_{key})
+        fatal:     [500]    # so you can use the same page for different http errors or specify specific page for each error
+
 fos_user:
     db_driver:          orm # can be orm or odm
     firewall_name:      main
@@ -215,12 +294,11 @@ hwi_oauth:
             scope:               "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
     # here you will add one (or more) configurations for resource owners
 
-doctrine:
-    dbal:
-        types:
-            json:       Sonata\Doctrine\Types\JsonType
-    orm:
-        auto_generate_proxy_classes: "%kernel.debug%"
-        entity_managers:
-            default:
-                auto_mapping: true
+cmf_routing:
+    chain:
+        routers_by_id:
+            # enable the DynamicRouter with high priority to allow overwriting configured routes with content
+            # cmf_routing.dynamic_router: 200
+            # enable the symfony default router with a lower priority
+            sonata.page.router: 150
+            router.default: 100
