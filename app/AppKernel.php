@@ -24,6 +24,12 @@ class AppKernel extends Kernel
             new Sonata\AdminBundle\SonataAdminBundle(),
             new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
 
+            // for Gedmo
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+
+            // Assetic for Sonata Admin Bundle
+            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
+
             //userBundle
             new FOS\UserBundle\FOSUserBundle(),
             new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
@@ -39,10 +45,6 @@ class AppKernel extends Kernel
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new Sonata\FormatterBundle\SonataFormatterBundle(),
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
-
-            // for Gedmo\
-            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-
 
             // CMF Symfony Sonata Media Bundle
             new Sonata\MediaBundle\SonataMediaBundle(),
@@ -62,6 +64,9 @@ class AppKernel extends Kernel
             new Sonata\NotificationBundle\SonataNotificationBundle(),
             new Application\Sonata\NotificationBundle\ApplicationSonataNotificationBundle(),
 
+            // CMF Symfony NewsBundle
+            new Sonata\NewsBundle\SonataNewsBundle(),
+            new Application\Sonata\NewsBundle\ApplicationSonataNewsBundle(),
 
         );
 

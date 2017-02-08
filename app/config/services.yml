@@ -53,10 +53,10 @@ services:
         class: MessageBundle\SonataAdmin\MessageTemplateEntity
         arguments: [~, MessageBundle\Entity\MessageTemplate, ~, '@message_service']
         tags:
-            - { name: sonata.admin, manager_type: orm, group: Messages, label: Message templates }
+            - { name: sonata.admin, manager_type: orm, group: sonata.admin.group.message, label: Message templates }
 
     admin.msg_user_entity:
         class: MessageBundle\SonataAdmin\MessageUserEntity
         arguments: [~, MessageBundle\Entity\MessageUser, ~, '@message_service', '@doctrine.orm.default_entity_manager']
         tags:
-            - { name: sonata.admin, manager_type: orm, group: Messages, label: Sending message }
+            - { name: sonata.admin, manager_type: orm, group: sonata.admin.group.message, label: Sending message }
