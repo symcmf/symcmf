@@ -2,8 +2,7 @@ sonata_admin:
     dashboard:
         groups:
             sonata.admin.group.content:
-                label:           sonata_content
-                label_catalogue: SonataAdminBundle
+                label:           Content
                 icon:            '<i class="fa fa-th"></i>'
                 items:
                     - sonata.news.admin.comment
@@ -12,8 +11,7 @@ sonata_admin:
                     - sonata.media.admin.gallery
 
             sonata.admin.group.classification:
-                label:           sonata_classification
-                label_catalogue: SonataClassificationBundle
+                label:           Classification
                 icon:            '<i class="fa fa-sitemap"></i>'
                 items:
                     - sonata.classification.admin.category
@@ -21,16 +19,14 @@ sonata_admin:
                     - sonata.classification.admin.collection
 
             sonata.admin.group.site_builder:
-                label:           sonata_site_builder
-                label_catalogue: SonataAdminBundle
+                label:           Site build
                 icon:            '<i class="fa fa-puzzle-piece"></i>'
                 items:
                     - sonata.page.admin.page
                     - sonata.page.admin.site
 
             sonata.admin.group.administration:
-                label:           sonata_administration
-                label_catalogue: SonataAdminBundle
+                label:           Administration
                 icon:            '<i class="fa fa-cogs"></i>'
                 items:
                     - sonata.user.admin.user
@@ -39,8 +35,7 @@ sonata_admin:
                     - sonata.notification.admin.message
 
             sonata.admin.group.message:
-                label:           sonata_messages
-                label_catalogue: SonataAdminBundle
+                label:           Messages
                 icon:            '<i class="fa fa-envelope-o"></i>'
                 items:
                     - admin.message_entity
