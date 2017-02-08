@@ -30,6 +30,12 @@ class AppKernel extends Kernel
             // Assetic for Sonata Admin Bundle
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
 
+            // CMF Symfony REST API support
+            new FOS\RestBundle\FOSRestBundle(),
+            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
+            // FOR Serialization all bundle for sonata admin
+            new JMS\SerializerBundle\JMSSerializerBundle(),
+
             //userBundle
             new FOS\UserBundle\FOSUserBundle(),
             new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
@@ -52,8 +58,7 @@ class AppKernel extends Kernel
             new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
             new Application\Sonata\ClassificationBundle\ApplicationSonataClassificationBundle(),
             new Sonata\IntlBundle\SonataIntlBundle(),
-            // You need to add this dependency to make media functional
-            new JMS\SerializerBundle\JMSSerializerBundle(),
+
 
             // CMF Symfony PageBundle
             new Sonata\PageBundle\SonataPageBundle(),

@@ -66,6 +66,31 @@ sonata_cache_cache:
     resource: '@SonataCacheBundle/Resources/config/routing/cache.xml'
     prefix: /
 
+# Routers for rest api
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /api/doc
+
+sonata_api_media:
+    type:         rest
+    prefix:       /api
+    resource:     "@SonataMediaBundle/Resources/config/routing/api.xml"
+
+sonata_api_user:
+    type:         rest
+    prefix:       /api/user
+    resource:     "@SonataUserBundle/Resources/config/routing/api.xml"
+
+sonata_api_news:
+    type:         rest
+    prefix:       /api
+    resource:     "@SonataNewsBundle/Resources/config/routing/api.xml"
+
+sonata_api_page:
+    type:         rest
+    prefix:       /api/page
+    resource:     "@SonataPageBundle/Resources/config/routing/api.xml"
+
 admin:
   resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
   prefix: /admin
