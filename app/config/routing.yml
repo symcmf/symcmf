@@ -91,6 +91,11 @@ sonata_api_page:
     prefix:       /api/page
     resource:     "@SonataPageBundle/Resources/config/routing/api.xml"
 
+sonata_api_messages:
+    type:         rest
+    prefix:       /api
+    resource:     "@MessageBundle/Resources/config/routing/api.xml"
+
 admin:
   resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
   prefix: /admin

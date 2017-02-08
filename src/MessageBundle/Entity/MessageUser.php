@@ -4,9 +4,11 @@ namespace MessageBundle\Entity;
 
 use AppBundle\Entity\Traits\IdTrait;
 use Application\Sonata\UserBundle\Entity\User;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\UserInterface;
 use Gedmo\Mapping\Annotation as Gedmo;
+use MessageBundle\Model\MessageTemplateInterface;
+use MessageBundle\Model\MessageUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -14,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="message_user")
  * @ORM\HasLifecycleCallbacks()
  */
-class MessageUser
+class MessageUser implements MessageUserInterface
 {
     use IdTrait;
 
@@ -33,11 +35,11 @@ class MessageUser
     }
 
     /**
-     * @param MessageTemplate|null $message
+     * @param MessageTemplateInterface|null $message
      *
      * @return $this
      */
-    public function setMessage(MessageTemplate $message = null)
+    public function setMessage(MessageTemplateInterface $message = null)
     {
         if ($this->message !== null) {
             $this->message->removeMessageUser($this);
@@ -64,10 +66,10 @@ class MessageUser
     }
 
     /**
-     * @param User|null $user
+     * @param UserInterface|null $user
      * @return $this
      */
-    public function setUser(User $user = null)
+    public function setUser(UserInterface $user = null)
     {
         if ($this->user !== null) {
             $this->user->removeMessageUser($this);

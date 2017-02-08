@@ -81,3 +81,14 @@ services:
         class: Application\Sonata\PageBundle\Controller\Api\SnapshotController
         arguments:
               - '@sonata.page.manager.snapshot'
+
+    message.manager.message.template:
+        class: MessageBundle\Entity\MessageTemplate
+        arguments:
+              - MessageBundle\Entity\MessageTemplateManager
+              - '@doctrine'
+
+    message.controller.api.message.template:
+        class: MessageBundle\Controller\Api\MessageTemplateController
+        arguments:
+              - '@message.manager.message.template'

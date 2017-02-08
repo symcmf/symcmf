@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serializer>
+    <class name="MessageBundle\Entity\MessageTemplate" exclusion-policy="all" xml-root-name="message_template">
+        <property name="subject" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write"/>
+        <property name="template" type="string" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write"/>
+    </class>
+</serializer>
