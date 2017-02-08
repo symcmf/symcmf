@@ -16,10 +16,6 @@ imports:
     - { resource: sonata/sonata_seo.yml }
     - { resource: sonata/sonata_user.yml }
 
-    # rest api config
-#    - { resource: rest.yml }
-
-
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
@@ -169,14 +165,6 @@ sensio_framework_extra:
     view:    { annotations: true }
     router:  { annotations: true }
     request: { converters: true }
-
-# for SonataPageBundle > 2.3.6
-jms_serializer:
-    metadata:
-        directories:
-            -
-                path: "%kernel.root_dir%/../vendor/sonata-project/datagrid-bundle/Resources/config/serializer"
-                namespace_prefix: 'Sonata\DatagridBundle'
 
 twig:
     exception_controller: 'FOS\RestBundle\Controller\ExceptionController::showAction'
