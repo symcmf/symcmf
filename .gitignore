@@ -1,4 +1,7 @@
 /web/bundles/
+/web/upload/
+/web/assetic/
+/web/fonts/
 /app/bootstrap.php.cache
 /app/cache/*
 /app/config/parameters.yml
@@ -14,4 +17,3 @@
 /Homestead.yaml
 /.idea/
 /.project
-/web/upload/*
