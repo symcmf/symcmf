@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "060e7d1ce888d30a5ad70eeb864f1589",
+    "content-hash": "1b392f1340a76cb96ca3f05c3d98c22b",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -390,16 +390,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "v2.5.11",
+            "version": "v2.5.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "1b1effbddbdc0f40d1c8f849f44bcddac4f52a48"
+                "reference": "7b9e911f9d8b30d43b96853dab26898c710d8f44"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/1b1effbddbdc0f40d1c8f849f44bcddac4f52a48",
-                "reference": "1b1effbddbdc0f40d1c8f849f44bcddac4f52a48",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/7b9e911f9d8b30d43b96853dab26898c710d8f44",
+                "reference": "7b9e911f9d8b30d43b96853dab26898c710d8f44",
                 "shasum": ""
             },
             "require": {
@@ -457,7 +457,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2017-02-04T21:20:13+00:00"
+            "time": "2017-02-08T12:53:47+00:00"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -4104,16 +4104,16 @@
         },
         {
             "name": "sonata-project/page-bundle",
-            "version": "3.3.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataPageBundle.git",
-                "reference": "dbfd8b7b5b1b14226bdc8478706beb193928a7c6"
+                "reference": "bc2636ade1fc5fdeb8f56e2a9e56ec32eab31084"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataPageBundle/zipball/dbfd8b7b5b1b14226bdc8478706beb193928a7c6",
-                "reference": "dbfd8b7b5b1b14226bdc8478706beb193928a7c6",
+                "url": "https://api.github.com/repos/sonata-project/SonataPageBundle/zipball/bc2636ade1fc5fdeb8f56e2a9e56ec32eab31084",
+                "reference": "bc2636ade1fc5fdeb8f56e2a9e56ec32eab31084",
                 "shasum": ""
             },
             "require": {
@@ -4161,7 +4161,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.x-dev"
+                    "dev-master": "4.x-dev"
                 }
             },
             "autoload": {
@@ -4194,7 +4194,7 @@
                 "page",
                 "sonata"
             ],
-            "time": "2017-01-17T11:25:33+00:00"
+            "time": "2017-01-25 01:00:16"
         },
         {
             "name": "sonata-project/seo-bundle",
@@ -5817,6 +5817,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "sonata-project/user-bundle": 20,
+        "sonata-project/page-bundle": 20,
         "sonata-project/datagrid-bundle": 20
     },
     "prefer-stable": false,

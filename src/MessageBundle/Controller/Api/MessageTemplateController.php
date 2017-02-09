@@ -2,12 +2,12 @@
 
 namespace MessageBundle\Controller\Api;
 
+use Application\Sonata\Controller\Api\SupportFOSRestApiTrait;
 use Exception;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\Route;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Request\ParamFetcherInterface;
-use JMS\Serializer\SerializationContext;
 use MessageBundle\Entity\MessageTemplateManager;
 use MessageBundle\Model\MessageTemplateInterface;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
@@ -16,7 +16,6 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use FOS\RestBundle\View\View as FOSRestView;
-use FOS\RestBundle\Context\Context;
 
 /**
  * Class MessageTemplateController
@@ -24,6 +23,9 @@ use FOS\RestBundle\Context\Context;
  */
 class MessageTemplateController
 {
+
+    use SupportFOSRestApiTrait;
+
     /**
      * @var MessageTemplateInterface
      */
@@ -258,19 +260,7 @@ class MessageTemplateController
             $messageTemplate = $form->getData();
 
             $this->messageTemplateManager->save($messageTemplate);
-            $view = FOSRestView::create($messageTemplate);
-
-            if (class_exists('FOS\RestBundle\Context\Context')) {
-                $context = new Context();
-                $context->setGroups(['sonata_api_read']);
-                $view->setContext($context);
-            } else {
-                $serializationContext = SerializationContext::create();
-                $serializationContext->setGroups(['sonata_api_read']);
-                $serializationContext->enableMaxDepthChecks();
-                $view->setSerializationContext($serializationContext);
-            }
-            return $view;
+            return $this->serializeContext($messageTemplate, ['sonata_api_read']);
         }
         return $form;
     }

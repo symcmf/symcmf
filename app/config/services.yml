@@ -82,6 +82,15 @@ services:
         arguments:
               - '@sonata.page.manager.snapshot'
 
+    sonata.news.controller.api.post:
+        class: Application\Sonata\NewsBundle\Controller\Api\PostController
+        arguments:
+                - '@sonata.news.manager.post'
+                - '@sonata.news.manager.comment'
+                - '@sonata.news.mailer'
+                - '@form.factory'
+                - '@sonata.formatter.pool'
+
     message.manager.message:
         class: MessageBundle\Entity\MessageTemplateManager
         arguments:

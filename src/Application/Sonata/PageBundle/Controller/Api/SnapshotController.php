@@ -31,7 +31,7 @@ class SnapshotController extends ParentController
      * @QueryParam(name="enabled", requirements="0|1", nullable=true, strict=true, description="Enabled/Disabled snapshots filter")
      * @QueryParam(name="orderBy", requirements="ASC|DESC", map=true, nullable=true, strict=true, description="Order by array (key is field, value is direction)")
      *
-     * @View(serializerGroups="sonata_api_read", serializerEnableMaxDepthChecks=true)
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param ParamFetcherInterface $paramFetcher
      *
