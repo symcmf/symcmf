@@ -5,6 +5,7 @@ namespace MessageBundle\Entity;
 use AppBundle\Entity\Traits\IdTrait;
 use AppBundle\Entity\Traits\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Groups;
 use MessageBundle\Model\MessageTemplateInterface;
 use MessageBundle\Model\MessageUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -58,11 +59,14 @@ class MessageTemplate implements MessageTemplateInterface
      *      minMessage = "Subject must be at least {{ limit }} characters long",
      *      maxMessage = "Subject can't be longer than {{ limit }} characters"
      * )
+     * @Groups({"sonata_api_read", "sonata_api_write"})
      */
-    private $subject;
+    protected $subject;
 
     /**
      * Get subject
+     *
+     * @Groups({"sonata_api_read", "sonata_api_write"})
      *
      * @return string
      */
@@ -88,11 +92,15 @@ class MessageTemplate implements MessageTemplateInterface
      * @var string
      *
      * @ORM\Column(name="template", type="text")
+     *
+     * @Groups({"sonata_api_read", "sonata_api_write"})
      */
-    private $template;
+    protected $template;
 
     /**
      * Get template
+     *
+     * @Groups({"sonata_api_read", "sonata_api_write"})
      *
      * @return string
      */
@@ -105,6 +113,9 @@ class MessageTemplate implements MessageTemplateInterface
      * Set template
      *
      * @param string $template
+     *
+     * @Groups({"sonata_api_read", "sonata_api_write"})
+     *
      * @return $this
      */
     public function setTemplate($template)

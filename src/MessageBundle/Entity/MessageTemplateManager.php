@@ -16,9 +16,11 @@ class MessageTemplateManager extends BaseEntityManager implements MessageTemplat
      * @param array $sort
      * @return Pager
      */
-    public function getPager(array $criteria, $page, $limit = 10, array $sort = array())
+    public function getPager(array $criteria, $page, $limit = 10, array $sort = [])
     {
-        $query = null;
+        $query = $this->getRepository()
+            ->createQueryBuilder('m')
+            ->select('m');
 
         $pager = new Pager();
         $pager->setMaxPerPage($limit);

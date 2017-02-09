@@ -82,13 +82,32 @@ services:
         arguments:
               - '@sonata.page.manager.snapshot'
 
-    message.manager.message.template:
-        class: MessageBundle\Entity\MessageTemplate
+    message.manager.message:
+        class: MessageBundle\Entity\MessageTemplateManager
         arguments:
-              - MessageBundle\Entity\MessageTemplateManager
+              - MessageBundle\Entity\MessageTemplate
               - '@doctrine'
 
-    message.controller.api.message.template:
+    message.controller.api.message:
         class: MessageBundle\Controller\Api\MessageTemplateController
         arguments:
-              - '@message.manager.message.template'
+              - '@message.manager.message'
+              - '@form.factory'
+
+    message.serializer.handler.message:
+        class: MessageBundle\Serializer\MessageSerializerHandler
+        tags:
+              - { name: jms_serializer.subscribing_handler }
+        arguments:
+            - '@message.manager.message'
+
+    sonata.page.api.form.type.message:
+        class: MessageBundle\Form\Type\ApiMessageType
+        tags:
+              - { name: form.type, alias: message_api_form_message}
+        arguments:
+            - '@jms_serializer.metadata_factory'
+            - '@doctrine'
+            - message_api_form_message
+            - MessageBundle\Entity\MessageTemplate
+            - sonata_api_write
