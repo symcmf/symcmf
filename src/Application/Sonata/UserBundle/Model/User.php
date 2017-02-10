@@ -302,7 +302,6 @@ abstract class User extends AbstractedUser implements UserInterface
     }
 
     /**
-     *
      * @return \DateTime
      */
     public function getDateOfBirth()
@@ -323,7 +322,6 @@ abstract class User extends AbstractedUser implements UserInterface
     }
 
     /**
-     *
      * @return string
      */
     public function getFirstname()
@@ -344,7 +342,6 @@ abstract class User extends AbstractedUser implements UserInterface
     }
 
     /**
-     *
      * @return string
      */
     public function getGender()
@@ -365,7 +362,6 @@ abstract class User extends AbstractedUser implements UserInterface
     }
 
     /**
-     *
      * @return string
      */
     public function getLastname()
@@ -386,7 +382,6 @@ abstract class User extends AbstractedUser implements UserInterface
     }
 
     /**
-     *
      * @return string
      */
     public function getLocale()
@@ -568,7 +563,6 @@ abstract class User extends AbstractedUser implements UserInterface
     }
 
     /**
-     *
      * @return string
      */
     public function getGoogleId()
