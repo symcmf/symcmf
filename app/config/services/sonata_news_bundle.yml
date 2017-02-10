@@ -8,3 +8,8 @@ services:
                 - '@sonata.news.mailer'
                 - '@form.factory'
                 - '@sonata.formatter.pool'
+
+    sonata.news.controller.api.comment:
+        class: Application\Sonata\NewsBundle\Controller\Api\CommentController
+        arguments:
+                - '@sonata.news.manager.comment'

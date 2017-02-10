@@ -51,6 +51,81 @@ class PageController extends ParentController
     }
 
     /**
+     * Retrieves a specific page.
+     *
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="page id"}
+     *  },
+     *  output={"class"="Sonata\PageBundle\Model\PageInterface", "groups"="sonata_api_read"},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      404="Returned when page is not found"
+     *  }
+     * )
+     *
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     *
+     * @param $id
+     *
+     * @return PageInterface
+     */
+    public function getPageAction($id)
+    {
+        return parent::getPageAction($id);
+    }
+
+    /**
+     * Retrieves a specific page's blocks.
+     *
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="page id"}
+     *  },
+     *  output={"class"="Sonata\BlockBundle\Model\BlockInterface", "groups"="sonata_api_read"},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      404="Returned when page is not found"
+     *  }
+     * )
+     *
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     *
+     * @param $id
+     *
+     * @return BlockInterface[]
+     */
+    public function getPageBlocksAction($id)
+    {
+        return parent::getPageBlocksAction($id);
+    }
+
+    /**
+     * Retrieves a specific page's child pages.
+     *
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="page id"}
+     *  },
+     *  output={"class"="Sonata\BlockBundle\Model\BlockInterface", "groups"="sonata_api_read"},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      404="Returned when page is not found"
+     *  }
+     * )
+     *
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     *
+     * @param $id
+     *
+     * @return PageInterface[]
+     */
+    public function getPagePagesAction($id)
+    {
+        return parent::getPagePagesAction($id);
+    }
+
+    /**
      * Adds a block.
      *
      * @ApiDoc(

@@ -48,6 +48,32 @@ class SiteController extends ParentController
     }
 
     /**
+     * Retrieves a specific site.
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  requirements={
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="site id"}
+     *  },
+     *  output={"class"="Sonata\PageBundle\Model\SiteInterface", "groups"="sonata_api_read"},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      404="Returned when page is not found"
+     *  }
+     * )
+     *
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     *
+     * @param $id
+     *
+     * @return SiteInterface
+     */
+    public function getSiteAction($id)
+    {
+        parent::getSiteAction($id);
+    }
+
+    /**
      * Write a site, this method is used by both POST and PUT action methods.
      *
      * @param Request  $request Symfony request

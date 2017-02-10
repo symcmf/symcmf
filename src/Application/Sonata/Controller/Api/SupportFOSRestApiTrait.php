@@ -16,11 +16,10 @@ trait SupportFOSRestApiTrait
     public function setOrderByParam(ParamFetcherInterface $paramFetcher)
     {
         $orderByQueryParam = new QueryParam();
-        // support FOSRestApi >= 1.8
         if (property_exists($orderByQueryParam, 'map')) {
+            // support FOSRestApi 2.0
             $orderByQueryParam->map = true;
         } else {
-            // support FOSRestApi <= 1.7.9
             $orderByQueryParam->array = true;
         }
         $paramFetcher->addParam($orderByQueryParam);

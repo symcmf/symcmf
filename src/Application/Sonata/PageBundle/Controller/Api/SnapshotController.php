@@ -11,7 +11,8 @@ use Sonata\DatagridBundle\Pager\PagerInterface;
 use Sonata\PageBundle\Controller\Api\SnapshotController as ParentController;
 
 /**
- * @author Benoit de Jacobet <benoit.de-jacobet@ekino.com>
+ * Class SnapshotController
+ * @package Application\Sonata\PageBundle\Controller\Api
  */
 class SnapshotController extends ParentController
 {
@@ -43,5 +44,31 @@ class SnapshotController extends ParentController
     {
         $paramFetcher = $this->setOrderByParam($paramFetcher);
         return parent::getSnapshotsAction($paramFetcher);
+    }
+
+    /**
+     * Retrieves a specific snapshot.
+     *
+     * @ApiDoc(
+     *  resource=true,
+     *  requirements={
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="snapshot id"}
+     *  },
+     *  output={"class"="Sonata\PageBundle\Model\SnapshotInterface", "groups"="sonata_api_read"},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      404="Returned when snapshots is not found"
+     *  }
+     * )
+     *
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     *
+     * @param $id
+     *
+     * @return SnapshotInterface
+     */
+    public function getSnapshotAction($id)
+    {
+        return parent::getSnapshotAction($id);
     }
 }
