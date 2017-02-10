@@ -36,16 +36,16 @@ trait SupportFOSRestApiTrait
     public function serializeContext($object, array $groups)
     {
         $view = FOSRestView::create($object);
-        if (class_exists('FOS\RestBundle\Context\Context')) {
-            $context = new Context();
-            $context->setGroups($groups);
-            $view->setContext($context);
-        } else {
+        if (method_exists($view, 'setSerializationContext')) {
             // support FOSRestApi 1.7.9
             $serializationContext = SerializationContext::create();
             $serializationContext->setGroups($groups);
             $serializationContext->enableMaxDepthChecks();
             $view->setSerializationContext($serializationContext);
+        } else {
+            $context = new Context();
+            $context->setGroups($groups);
+            $view->setContext($context);
         }
         return $view;
     }
