@@ -66,8 +66,6 @@ class MessageTemplate implements MessageTemplateInterface
     /**
      * Get subject
      *
-     * @Groups({"sonata_api_read", "sonata_api_write"})
-     *
      * @return string
      */
     public function getSubject()
@@ -100,8 +98,6 @@ class MessageTemplate implements MessageTemplateInterface
     /**
      * Get template
      *
-     * @Groups({"sonata_api_read", "sonata_api_write"})
-     *
      * @return string
      */
     public function getTemplate()
@@ -113,8 +109,6 @@ class MessageTemplate implements MessageTemplateInterface
      * Set template
      *
      * @param string $template
-     *
-     * @Groups({"sonata_api_read", "sonata_api_write"})
      *
      * @return $this
      */

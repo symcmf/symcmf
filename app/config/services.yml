@@ -1,3 +1,8 @@
+imports:
+    - { resource: services/sonata_page_bundle.yml }
+    - { resource: services/sonata_news_bundle.yml }
+    - { resource: services/message_bundle.yml }
+
 # Learn more about services, parameters and containers at
 # http://symfony.com/doc/current/service_container.html
 parameters:
@@ -60,63 +65,3 @@ services:
         arguments: [~, MessageBundle\Entity\MessageUser, ~, '@message_service', '@doctrine.orm.default_entity_manager']
         tags:
             - { name: sonata.admin, manager_type: orm, group: sonata.admin.group.message, label: Sending message }
-
-    # ovverride controllers of pageBundle (api) - support FOSRest 2.0
-    sonata.page.controller.api.page:
-        class: Application\Sonata\PageBundle\Controller\Api\PageController
-        arguments:
-              - '@sonata.page.manager.site'
-              - '@sonata.page.manager.page'
-              - '@sonata.page.manager.block'
-              - '@form.factory'
-              - '@sonata.notification.backend'
-
-    sonata.page.controller.api.site:
-        class: Application\Sonata\PageBundle\Controller\Api\SiteController
-        arguments:
-              - '@sonata.page.manager.site'
-              - '@form.factory'
-
-    sonata.page.controller.api.snapshot:
-        class: Application\Sonata\PageBundle\Controller\Api\SnapshotController
-        arguments:
-              - '@sonata.page.manager.snapshot'
-
-    sonata.news.controller.api.post:
-        class: Application\Sonata\NewsBundle\Controller\Api\PostController
-        arguments:
-                - '@sonata.news.manager.post'
-                - '@sonata.news.manager.comment'
-                - '@sonata.news.mailer'
-                - '@form.factory'
-                - '@sonata.formatter.pool'
-
-    message.manager.message:
-        class: MessageBundle\Entity\MessageTemplateManager
-        arguments:
-              - MessageBundle\Entity\MessageTemplate
-              - '@doctrine'
-
-    message.controller.api.message:
-        class: MessageBundle\Controller\Api\MessageTemplateController
-        arguments:
-              - '@message.manager.message'
-              - '@form.factory'
-
-    message.serializer.handler.message:
-        class: MessageBundle\Serializer\MessageSerializerHandler
-        tags:
-              - { name: jms_serializer.subscribing_handler }
-        arguments:
-            - '@message.manager.message'
-
-    sonata.page.api.form.type.message:
-        class: MessageBundle\Form\Type\ApiMessageType
-        tags:
-              - { name: form.type, alias: message_api_form_message}
-        arguments:
-            - '@jms_serializer.metadata_factory'
-            - '@doctrine'
-            - message_api_form_message
-            - MessageBundle\Entity\MessageTemplate
-            - sonata_api_write

@@ -2,6 +2,7 @@
 
 namespace Application\Sonata\PageBundle\Controller\Api;
 
+use Application\Sonata\Controller\Api\SupportFOSRestApiTrait;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Request\ParamFetcherInterface;
@@ -14,6 +15,7 @@ use Sonata\PageBundle\Controller\Api\SnapshotController as ParentController;
  */
 class SnapshotController extends ParentController
 {
+    use SupportFOSRestApiTrait;
     /**
      * Retrieves the list of snapshots (paginated).
      *
@@ -29,7 +31,7 @@ class SnapshotController extends ParentController
      * @QueryParam(name="root", requirements="0|1", nullable=true, strict=true, description="Filter snapshots having no parent id")
      * @QueryParam(name="parent", requirements="\d+", nullable=true, strict=true, description="Get snapshots being child of given snapshots id")
      * @QueryParam(name="enabled", requirements="0|1", nullable=true, strict=true, description="Enabled/Disabled snapshots filter")
-     * @QueryParam(name="orderBy", requirements="ASC|DESC", map=true, nullable=true, strict=true, description="Order by array (key is field, value is direction)")
+     * @QueryParam(name="orderBy", requirements="ASC|DESC", nullable=true, strict=true, description="Order by array (key is field, value is direction)")
      *
      * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
@@ -39,6 +41,7 @@ class SnapshotController extends ParentController
      */
     public function getSnapshotsAction(ParamFetcherInterface $paramFetcher)
     {
+        $paramFetcher = $this->setOrderByParam($paramFetcher);
         return parent::getSnapshotsAction($paramFetcher);
     }
 }

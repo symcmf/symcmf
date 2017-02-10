@@ -4,9 +4,11 @@ namespace MessageBundle\Entity;
 
 use AppBundle\Entity\Traits\IdTrait;
 use Application\Sonata\UserBundle\Entity\User;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\UserInterface;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation\Groups;
 use MessageBundle\Model\MessageTemplateInterface;
 use MessageBundle\Model\MessageUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -21,13 +23,16 @@ class MessageUser implements MessageUserInterface
     use IdTrait;
 
     /**
+     * @var MessageTemplateInterface
+     *
      * @ORM\ManyToOne(targetEntity="MessageTemplate", inversedBy="messageUser")
      * @ORM\JoinColumn(name="message_id", referencedColumnName="id", nullable=false)
+     * @Groups({"sonata_api_read", "sonata_api_write"})
      */
     protected $message;
 
     /**
-     * @return MessageTemplate,
+     * @return MessageTemplateInterface,
      */
     public function getMessage()
     {
@@ -36,7 +41,6 @@ class MessageUser implements MessageUserInterface
 
     /**
      * @param MessageTemplateInterface|null $message
-     *
      * @return $this
      */
     public function setMessage(MessageTemplateInterface $message = null)
@@ -52,13 +56,17 @@ class MessageUser implements MessageUserInterface
     }
 
     /**
+     * @var UserInterface
+     *
      * @ORM\ManyToOne(targetEntity="Application\Sonata\UserBundle\Entity\User", inversedBy="messageUser")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * @Groups({"sonata_api_read", "sonata_api_write"})
      */
     protected $user;
 
     /**
-     * @return User
+     * @Groups({"sonata_api_read", "sonata_api_write"})
+     * @return UserInterface
      */
     public function getUser()
     {
@@ -82,6 +90,8 @@ class MessageUser implements MessageUserInterface
     }
 
     /**
+     * @var DateTime
+     *
      * @Gedmo\Timestampable(on="create")
      * @ORM\ManyToOne(targetEntity="MessageUser")
      * @ORM\Column(name="created", type="datetime")
@@ -90,7 +100,6 @@ class MessageUser implements MessageUserInterface
 
     /**
      * Get created
-     *
      * @return string
      */
     public function getCreated()
@@ -102,7 +111,6 @@ class MessageUser implements MessageUserInterface
      * Set created
      *
      * @param \DateTime $created
-     *
      * @return $this
      */
     public function setCreated($created)

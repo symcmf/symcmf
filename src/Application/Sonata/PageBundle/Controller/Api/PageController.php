@@ -46,41 +46,8 @@ class PageController extends ParentController
      */
     public function getPagesAction(ParamFetcherInterface $paramFetcher)
     {
-        $supportedCriteria = array(
-            'enabled' => '',
-            'edited' => '',
-            'internal' => '',
-            'root' => '',
-            'site' => '',
-            'parent' => '',
-        );
-
-        $orderByQueryParam = new QueryParam();
-        if (property_exists($orderByQueryParam, 'map')) {
-            $orderByQueryParam->map = true;
-        } else {
-            $orderByQueryParam->array = true;
-        }
-        $paramFetcher->addParam($orderByQueryParam);
-
-        $page = $paramFetcher->get('page');
-        $limit = $paramFetcher->get('count');
-        $sort = $paramFetcher->get('orderBy');
-        $criteria = array_intersect_key($paramFetcher->all(), $supportedCriteria);
-
-        foreach ($criteria as $key => $value) {
-            if (null === $value) {
-                unset($criteria[$key]);
-            }
-        }
-
-        if (!$sort) {
-            $sort = array();
-        } elseif (!is_array($sort)) {
-            $sort = array($sort => 'asc');
-        }
-
-        return $this->pageManager->getPager($criteria, $page, $limit, $sort);
+        $paramFetcher = $this->setOrderByParam($paramFetcher);
+        return parent::getPagesAction($paramFetcher);
     }
 
     /**

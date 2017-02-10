@@ -33,7 +33,7 @@ class SiteController extends ParentController
      * @QueryParam(name="count", requirements="\d+", default="10", description="Maximum number of sites per page")
      * @QueryParam(name="enabled", requirements="0|1", nullable=true, strict=true, description="Enabled/Disabled sites filter")
      * @QueryParam(name="is_default", requirements="0|1", nullable=true, strict=true, description="Default sites filter")
-     * @QueryParam(name="orderBy", requirements="ASC|DESC", map=true, nullable=true, strict=true, description="Order by array (key is field, value is direction)")
+     * @QueryParam(name="orderBy", requirements="ASC|DESC", nullable=true, strict=true, description="Order by array (key is field, value is direction)")
      *
      * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
@@ -43,6 +43,7 @@ class SiteController extends ParentController
      */
     public function getSitesAction(ParamFetcherInterface $paramFetcher)
     {
+        $paramFetcher = $this->setOrderByParam($paramFetcher);
         return parent::getSitesAction($paramFetcher);
     }
 

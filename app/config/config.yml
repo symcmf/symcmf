@@ -31,7 +31,7 @@ framework:
     form:            ~
     csrf_protection: ~
     validation:      { enable_annotations: true }
-    #serializer:      { enable_annotations: true }
+    serializer:      { enable_annotations: true }
     templating:
         engines: ['twig']
     default_locale:  "%locale%"
@@ -169,7 +169,10 @@ sensio_framework_extra:
 jms_serializer:
     metadata:
         directories:
-            -
+             -
+                path: "%kernel.root_dir%/../src/Application/Sonata/UserBundle/Resources/config/serializer/FOSUserBundle"
+                namespace_prefix: 'FOS\UserBundle'
+             -
                 path: "%kernel.root_dir%/../vendor/sonata-project/datagrid-bundle/Resources/config/serializer"
                 namespace_prefix: 'Sonata\DatagridBundle'
 
