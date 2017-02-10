@@ -1,6 +1,9 @@
 imports:
+    # add services for SonataPageBundle
     - { resource: services/sonata_page_bundle.yml }
+    # add services for SonataNewsBundle
     - { resource: services/sonata_news_bundle.yml }
+    # add services for MessageBundle
     - { resource: services/message_bundle.yml }
 
 # Learn more about services, parameters and containers at
