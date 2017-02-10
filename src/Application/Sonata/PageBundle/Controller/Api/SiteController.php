@@ -68,7 +68,7 @@ class SiteController extends ParentController
             $site = $form->getData();
 
             $this->siteManager->save($site);
-            return $this->serializeContext($site, ['sonata_api_read']);;
+            return $this->serializeContext($site, ['sonata_api_read']);
         }
 
         return $form;

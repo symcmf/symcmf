@@ -10,6 +10,7 @@ use FOS\RestBundle\Request\ParamFetcherInterface;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sonata\DatagridBundle\Pager\PagerInterface;
 use Sonata\NewsBundle\Model\Comment;
+use Sonata\NewsBundle\Model\PostInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -51,7 +52,65 @@ class PostController extends ParentController
      */
     public function getPostsAction(ParamFetcherInterface $paramFetcher)
     {
-        parent::getPostsAction($paramFetcher);
+       return parent::getPostsAction($paramFetcher);
+    }
+
+    /**
+     * Retrieves a specific post.
+     *
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="post id"}
+     *  },
+     *  output={"class"="sonata_news_api_form_post", "groups"={"sonata_api_read"}},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      404="Returned when post is not found"
+     *  }
+     * )
+     *
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     *
+     * @Route(requirements={"_format"="json|xml"})
+     *
+     * @param int $id A post identifier
+     *
+     * @return PostInterface
+     */
+    public function getPostAction($id)
+    {
+       return parent::getPostAction($id);
+    }
+
+    /**
+     * Retrieves the comments of specified post.
+     *
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="Post id"}
+     *  },
+     *  output={"class"="Sonata\DatagridBundle\Pager\PagerInterface", "groups"={"sonata_api_read"}},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      404="Returned when post is not found"
+     *  }
+     * )
+     *
+     * @QueryParam(name="page", requirements="\d+", default="1", description="Page for comments list pagination")
+     * @QueryParam(name="count", requirements="\d+", default="10", description="Number of comments by page")
+     *
+     * @Route(requirements={"_format"="json|xml"})
+     *
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
+     *
+     * @param int                   $id           A post identifier
+     * @param ParamFetcherInterface $paramFetcher
+     *
+     * @return PagerInterface
+     */
+    public function getPostCommentsAction($id, ParamFetcherInterface $paramFetcher)
+    {
+        return parent::getPostCommentsAction($id, $paramFetcher);
     }
 
     /**
@@ -109,7 +168,7 @@ class PostController extends ParentController
 
             $this->commentManager->save($comment);
             $this->mailer->sendCommentNotification($comment);
-            return $this->serializeContext($comment);
+            return $this->serializeContext($comment, ['sonata_api_read']);
         }
 
         return $form;
@@ -171,7 +230,7 @@ class PostController extends ParentController
         if ($form->isValid()) {
             $comment = $form->getData();
             $this->commentManager->save($comment);
-            return $this->serializeContext($comment);
+            return $this->serializeContext($comment, ['sonata_api_read']);
         }
 
         return $form;
@@ -203,7 +262,7 @@ class PostController extends ParentController
             $post->setContent($this->formatterPool->transform($post->getContentFormatter(), $post->getRawContent()));
             $this->postManager->save($post);
 
-            return $this->serializeContext($post);
+            return $this->serializeContext($post, ['sonata_api_read']);
         }
 
         return $form;

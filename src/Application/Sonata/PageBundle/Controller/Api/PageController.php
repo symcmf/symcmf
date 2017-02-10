@@ -121,7 +121,7 @@ class PageController extends ParentController
             $block->setPage($page);
 
             $this->blockManager->save($block);
-            return $this->serializeContext($block);
+            return $this->serializeContext($block, ['sonata_api_read']);
         }
 
         return $form;
