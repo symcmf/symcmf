@@ -16,11 +16,11 @@ trait SupportFOSRestApiTrait
     public function setOrderByParam(ParamFetcherInterface $paramFetcher)
     {
         $orderByQueryParam = new QueryParam();
-        // support FOSRestApi ^2.0
+        // support FOSRestApi >= 1.8
         if (property_exists($orderByQueryParam, 'map')) {
             $orderByQueryParam->map = true;
         } else {
-            // support FOSRestApi 1.7.9
+            // support FOSRestApi <= 1.7.9
             $orderByQueryParam->array = true;
         }
         $paramFetcher->addParam($orderByQueryParam);
@@ -37,12 +37,13 @@ trait SupportFOSRestApiTrait
     {
         $view = FOSRestView::create($object);
         if (method_exists($view, 'setSerializationContext')) {
-            // support FOSRestApi 1.7.9
+            // support FOSRestApi <= v1.7.9
             $serializationContext = SerializationContext::create();
             $serializationContext->setGroups($groups);
             $serializationContext->enableMaxDepthChecks();
             $view->setSerializationContext($serializationContext);
         } else {
+            // since FOSRestApi >= v1.8
             $context = new Context();
             $context->setGroups($groups);
             $view->setContext($context);
