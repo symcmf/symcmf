@@ -57,7 +57,7 @@ class MessageTemplateController
      *
      * @QueryParam(name="page", requirements="\d+", default="1", description="Page for entities list pagination (1-indexed)")
      * @QueryParam(name="count", requirements="\d+", default="10", description="Number of entities by page")
-
+     * @QueryParam(name="orderBy", requirements="ASC|DESC", nullable=true, strict=true, description="Order by array (key is field, value is direction)")
      *
      * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
@@ -65,21 +65,9 @@ class MessageTemplateController
      *
      * @return PagerInterface
      */
-    public function getMessagesAction(ParamFetcherInterface $paramFetcher)
+    public function getTemplatesAction(ParamFetcherInterface $paramFetcher)
     {
-        $orderByQueryParam = new QueryParam();
-        $orderByQueryParam->name = 'orderBy';
-        $orderByQueryParam->requirements = 'ASC|DESC';
-        $orderByQueryParam->nullable = true;
-        $orderByQueryParam->strict = true;
-        $orderByQueryParam->description = 'Query users order by clause (key is field, value is direction)';
-        if (property_exists($orderByQueryParam, 'map')) {
-            $orderByQueryParam->map = true;
-        } else {
-            $orderByQueryParam->array = true;
-        }
-
-        $paramFetcher->addParam($orderByQueryParam);
+        $this->setOrderByParam($paramFetcher);
 
         $page = $paramFetcher->get('page');
         $limit = $paramFetcher->get('count');
@@ -126,7 +114,7 @@ class MessageTemplateController
      *
      * @throws NotFoundHttpException
      */
-    public function getMessageAction($id)
+    public function getTemplateAction($id)
     {
         return $this->getMessageTemplate($id);
     }
@@ -167,9 +155,9 @@ class MessageTemplateController
      *
      * @throws NotFoundHttpException
      */
-    public function postMessageAction(Request $request)
+    public function postTemplateAction(Request $request)
     {
-        return $this->handleWriteMessage($request);
+        return $this->handleWriteTemplate($request);
     }
 
     /**
@@ -195,9 +183,9 @@ class MessageTemplateController
      *
      * @throws NotFoundHttpException
      */
-    public function putMessageAction($id, Request $request)
+    public function putTemplateAction($id, Request $request)
     {
-        return $this->handleWriteMessage($request, $id);
+        return $this->handleWriteTemplate($request, $id);
     }
 
     /**
@@ -222,7 +210,7 @@ class MessageTemplateController
      *
      * @throws NotFoundHttpException
      */
-    public function deleteMessageAction($id)
+    public function deleteTemplateAction($id)
     {
         $message = $this->getMessageTemplate($id);
 
@@ -243,7 +231,7 @@ class MessageTemplateController
      *
      * @return FormInterface|FOSRestView
      */
-    protected function handleWriteMessage($request, $id = null)
+    protected function handleWriteTemplate($request, $id = null)
     {
         $messageTemplate = $id ? $this->getMessageTemplate($id) : null;
 

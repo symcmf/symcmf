@@ -87,7 +87,7 @@ class MessageUserController
      *
      * @return PagerInterface
      */
-    public function getSentmessagesAction(ParamFetcherInterface $paramFetcher)
+    public function getMessagesAction(ParamFetcherInterface $paramFetcher)
     {
         $page = $paramFetcher->get('page');
         $limit = $paramFetcher->get('count');
@@ -120,7 +120,7 @@ class MessageUserController
      *
      * @throws NotFoundHttpException
      */
-    public function getSentmessageAction($id)
+    public function getMessageAction($id)
     {
         return $this->getMessageUser($id);
     }
@@ -132,7 +132,7 @@ class MessageUserController
      *
      * @throws NotFoundHttpException
      */
-    public function getMessageUser($id)
+    private function getMessageUser($id)
     {
         $messageUser = $this->messageUserManager->find($id);
 
@@ -168,7 +168,7 @@ class MessageUserController
      * @throws RuntimeException
      */
 
-    public function postSentmessageMessageUserAction($messageId, $userId)
+    public function postMessageTemplateUserAction($messageId, $userId)
     {
         $messageTemplate = $this->messageTemplateManager->find($messageId);
 
@@ -193,7 +193,7 @@ class MessageUserController
     }
 
     /**
-     * Deletes a message template.
+     * Deletes a row about sent message
      *
      * @ApiDoc(
      *  requirements={
@@ -214,7 +214,7 @@ class MessageUserController
      *
      * @throws NotFoundHttpException
      */
-    public function deleteSentmessageAction($id)
+    public function deleteMessageAction($id)
     {
         $message = $this->getMessageUser($id);
 
