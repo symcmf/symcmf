@@ -3,6 +3,7 @@
 namespace Application\Sonata\UserBundle\Model;
 
 use FOS\UserBundle\Entity\User as AbstractedUser;
+use JMS\Serializer\Annotation\Groups;
 use Sonata\UserBundle\Model\UserInterface;
 
 /**
@@ -279,6 +280,8 @@ abstract class User extends AbstractedUser implements UserInterface
     }
 
     /**
+     * @Groups({"sonata_api_read", "sonata_api_write"})
+     *
      * @return string
      */
     public function getBiography()
@@ -304,66 +307,6 @@ abstract class User extends AbstractedUser implements UserInterface
     public function getDateOfBirth()
     {
         return $this->dateOfBirth;
-    }
-
-    /**
-     * @param string $facebookData
-     *
-     * @return User
-     */
-    public function setFacebookData($facebookData)
-    {
-        $this->facebookData = $facebookData;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFacebookData()
-    {
-        return $this->facebookData;
-    }
-
-    /**
-     * @param string $facebookName
-     *
-     * @return User
-     */
-    public function setFacebookName($facebookName)
-    {
-        $this->facebookName = $facebookName;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFacebookName()
-    {
-        return $this->facebookName;
-    }
-
-    /**
-     * @param string $facebookUid
-     *
-     * @return User
-     */
-    public function setFacebookUid($facebookUid)
-    {
-        $this->facebookUid = $facebookUid;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFacebookUid()
-    {
-        return $this->facebookUid;
     }
 
     /**
@@ -404,66 +347,6 @@ abstract class User extends AbstractedUser implements UserInterface
     public function getGender()
     {
         return $this->gender;
-    }
-
-    /**
-     * @param string $gplusData
-     *
-     * @return User
-     */
-    public function setGplusData($gplusData)
-    {
-        $this->gplusData = $gplusData;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getGplusData()
-    {
-        return $this->gplusData;
-    }
-
-    /**
-     * @param string $gplusName
-     *
-     * @return User
-     */
-    public function setGplusName($gplusName)
-    {
-        $this->gplusName = $gplusName;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getGplusName()
-    {
-        return $this->gplusName;
-    }
-
-    /**
-     * @param string $gplusUid
-     *
-     * @return User
-     */
-    public function setGplusUid($gplusUid)
-    {
-        $this->gplusUid = $gplusUid;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getGplusUid()
-    {
-        return $this->gplusUid;
     }
 
     /**
@@ -547,66 +430,6 @@ abstract class User extends AbstractedUser implements UserInterface
     }
 
     /**
-     * @param string $twitterData
-     *
-     * @return User
-     */
-    public function setTwitterData($twitterData)
-    {
-        $this->twitterData = $twitterData;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTwitterData()
-    {
-        return $this->twitterData;
-    }
-
-    /**
-     * @param string $twitterName
-     *
-     * @return User
-     */
-    public function setTwitterName($twitterName)
-    {
-        $this->twitterName = $twitterName;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTwitterName()
-    {
-        return $this->twitterName;
-    }
-
-    /**
-     * @param string $twitterUid
-     *
-     * @return User
-     */
-    public function setTwitterUid($twitterUid)
-    {
-        $this->twitterUid = $twitterUid;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTwitterUid()
-    {
-        return $this->twitterUid;
-    }
-
-    /**
      * @param string $website
      *
      * @return User
@@ -681,6 +504,7 @@ abstract class User extends AbstractedUser implements UserInterface
 
     /**
      * @param string $facebookId
+     *
      * @return void
      */
     public function setFacebookId($facebookId)
@@ -768,5 +592,4 @@ abstract class User extends AbstractedUser implements UserInterface
     {
         return $this->googleAccessToken;
     }
-
 }

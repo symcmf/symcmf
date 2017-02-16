@@ -5,6 +5,9 @@ namespace MessageBundle\Entity;
 use AppBundle\Entity\Traits\IdTrait;
 use AppBundle\Entity\Traits\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Groups;
+use MessageBundle\Model\MessageTemplateInterface;
+use MessageBundle\Model\MessageUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -13,7 +16,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="message_template")
  * @ORM\HasLifecycleCallbacks()
  */
-class MessageTemplate
+class MessageTemplate implements MessageTemplateInterface
 {
     use IdTrait, TimestampableTrait;
 
@@ -23,17 +26,17 @@ class MessageTemplate
     private $messageUser;
 
     /**
-     * @param MessageUser $messageUser
+     * @param MessageUserInterface $messageUser
      */
-    public function addMessageUser(MessageUser $messageUser)
+    public function addMessageUser(MessageUserInterface $messageUser)
     {
         $this->messageUser->add($messageUser);
     }
 
     /**
-     * @param MessageUser $messageUser
+     * @param MessageUserInterface $messageUser
      */
-    public function removeMessageUser(MessageUser $messageUser)
+    public function removeMessageUser(MessageUserInterface $messageUser)
     {
         $this->messageUser->removeElement($messageUser);
     }
@@ -56,8 +59,9 @@ class MessageTemplate
      *      minMessage = "Subject must be at least {{ limit }} characters long",
      *      maxMessage = "Subject can't be longer than {{ limit }} characters"
      * )
+     * @Groups({"sonata_api_read", "sonata_api_write"})
      */
-    private $subject;
+    protected $subject;
 
     /**
      * Get subject
@@ -86,8 +90,10 @@ class MessageTemplate
      * @var string
      *
      * @ORM\Column(name="template", type="text")
+     *
+     * @Groups({"sonata_api_read", "sonata_api_write"})
      */
-    private $template;
+    protected $template;
 
     /**
      * Get template
@@ -103,6 +109,7 @@ class MessageTemplate
      * Set template
      *
      * @param string $template
+     *
      * @return $this
      */
     public function setTemplate($template)

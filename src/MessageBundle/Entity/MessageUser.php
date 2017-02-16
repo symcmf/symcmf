@@ -4,9 +4,13 @@ namespace MessageBundle\Entity;
 
 use AppBundle\Entity\Traits\IdTrait;
 use Application\Sonata\UserBundle\Entity\User;
-use Doctrine\Common\Collections\ArrayCollection;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\UserInterface;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation\Groups;
+use MessageBundle\Model\MessageTemplateInterface;
+use MessageBundle\Model\MessageUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -14,18 +18,21 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="message_user")
  * @ORM\HasLifecycleCallbacks()
  */
-class MessageUser
+class MessageUser implements MessageUserInterface
 {
     use IdTrait;
 
     /**
+     * @var MessageTemplateInterface
+     *
      * @ORM\ManyToOne(targetEntity="MessageTemplate", inversedBy="messageUser")
      * @ORM\JoinColumn(name="message_id", referencedColumnName="id", nullable=false)
+     * @Groups({"sonata_api_read", "sonata_api_write"})
      */
     protected $message;
 
     /**
-     * @return MessageTemplate,
+     * @return MessageTemplateInterface,
      */
     public function getMessage()
     {
@@ -33,11 +40,10 @@ class MessageUser
     }
 
     /**
-     * @param MessageTemplate|null $message
-     *
+     * @param MessageTemplateInterface|null $message
      * @return $this
      */
-    public function setMessage(MessageTemplate $message = null)
+    public function setMessage(MessageTemplateInterface $message = null)
     {
         if ($this->message !== null) {
             $this->message->removeMessageUser($this);
@@ -50,13 +56,17 @@ class MessageUser
     }
 
     /**
+     * @var UserInterface
+     *
      * @ORM\ManyToOne(targetEntity="Application\Sonata\UserBundle\Entity\User", inversedBy="messageUser")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * @Groups({"sonata_api_read", "sonata_api_write"})
      */
     protected $user;
 
     /**
-     * @return User
+     * @Groups({"sonata_api_read", "sonata_api_write"})
+     * @return UserInterface
      */
     public function getUser()
     {
@@ -64,10 +74,10 @@ class MessageUser
     }
 
     /**
-     * @param User|null $user
+     * @param UserInterface|null $user
      * @return $this
      */
-    public function setUser(User $user = null)
+    public function setUser(UserInterface $user = null)
     {
         if ($this->user !== null) {
             $this->user->removeMessageUser($this);
@@ -80,6 +90,8 @@ class MessageUser
     }
 
     /**
+     * @var DateTime
+     *
      * @Gedmo\Timestampable(on="create")
      * @ORM\ManyToOne(targetEntity="MessageUser")
      * @ORM\Column(name="created", type="datetime")
@@ -88,7 +100,6 @@ class MessageUser
 
     /**
      * Get created
-     *
      * @return string
      */
     public function getCreated()
@@ -100,7 +111,6 @@ class MessageUser
      * Set created
      *
      * @param \DateTime $created
-     *
      * @return $this
      */
     public function setCreated($created)

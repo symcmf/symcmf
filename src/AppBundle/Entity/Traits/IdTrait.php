@@ -3,6 +3,7 @@
 namespace AppBundle\Entity\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * Class IdTrait
@@ -21,7 +22,6 @@ trait IdTrait
 
     /**
      * Get id
-     *
      * @return int
      */
     public function getId()

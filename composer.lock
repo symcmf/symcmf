@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "39d1dcab22f82c31ccb932c56cc73200",
+    "content-hash": "a84406239c5e22775d5c8177ba3c102f",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -48,16 +48,16 @@
         },
         {
             "name": "cocur/slugify",
-            "version": "v2.3",
+            "version": "v2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cocur/slugify.git",
-                "reference": "57a00e06a382928e350cc7bbb13b19f1b8f4e73a"
+                "reference": "f11f22d4e60c408187c3efd8ac201c022a93cc3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cocur/slugify/zipball/57a00e06a382928e350cc7bbb13b19f1b8f4e73a",
-                "reference": "57a00e06a382928e350cc7bbb13b19f1b8f4e73a",
+                "url": "https://api.github.com/repos/cocur/slugify/zipball/f11f22d4e60c408187c3efd8ac201c022a93cc3f",
+                "reference": "f11f22d4e60c408187c3efd8ac201c022a93cc3f",
                 "shasum": ""
             },
             "require": {
@@ -108,7 +108,7 @@
                 "slug",
                 "slugify"
             ],
-            "time": "2016-08-09T20:10:17+00:00"
+            "time": "2017-02-09T19:27:52+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -390,16 +390,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "v2.5.11",
+            "version": "v2.5.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "1b1effbddbdc0f40d1c8f849f44bcddac4f52a48"
+                "reference": "7b9e911f9d8b30d43b96853dab26898c710d8f44"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/1b1effbddbdc0f40d1c8f849f44bcddac4f52a48",
-                "reference": "1b1effbddbdc0f40d1c8f849f44bcddac4f52a48",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/7b9e911f9d8b30d43b96853dab26898c710d8f44",
+                "reference": "7b9e911f9d8b30d43b96853dab26898c710d8f44",
                 "shasum": ""
             },
             "require": {
@@ -457,7 +457,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2017-02-04T21:20:13+00:00"
+            "time": "2017-02-08T12:53:47+00:00"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -2210,16 +2210,16 @@
         },
         {
             "name": "laravel/homestead",
-            "version": "v4.0.4",
+            "version": "v4.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/homestead.git",
-                "reference": "133c09dd2872af46efa0324a5c985a8c707efc69"
+                "reference": "a1bcbde2462d8ac1fa608cd6f00b46623aabd705"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/homestead/zipball/133c09dd2872af46efa0324a5c985a8c707efc69",
-                "reference": "133c09dd2872af46efa0324a5c985a8c707efc69",
+                "url": "https://api.github.com/repos/laravel/homestead/zipball/a1bcbde2462d8ac1fa608cd6f00b46623aabd705",
+                "reference": "a1bcbde2462d8ac1fa608cd6f00b46623aabd705",
                 "shasum": ""
             },
             "require": {
@@ -2252,7 +2252,7 @@
                 }
             ],
             "description": "A virtual machine for web artisans.",
-            "time": "2017-02-06T03:10:50+00:00"
+            "time": "2017-02-07T19:06:26+00:00"
         },
         {
             "name": "michelf/php-markdown",
@@ -3295,37 +3295,41 @@
         },
         {
             "name": "sonata-project/datagrid-bundle",
-            "version": "2.2",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataDatagridBundle.git",
-                "reference": "0749e710b936bf84736c648eee16bc45e2c04607"
+                "reference": "8aa9183f2ba1724b290faacb83fb003123bae548"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataDatagridBundle/zipball/0749e710b936bf84736c648eee16bc45e2c04607",
-                "reference": "0749e710b936bf84736c648eee16bc45e2c04607",
+                "url": "https://api.github.com/repos/sonata-project/SonataDatagridBundle/zipball/8aa9183f2ba1724b290faacb83fb003123bae548",
+                "reference": "8aa9183f2ba1724b290faacb83fb003123bae548",
                 "shasum": ""
             },
             "require": {
-                "symfony/dependency-injection": "~2.3|~3.0",
-                "symfony/form": "~2.3|~3.0"
+                "php": "^5.3 || ^7.0",
+                "symfony/dependency-injection": "^2.3 || ^3.0",
+                "symfony/form": "^2.3 || ^3.0"
             },
             "require-dev": {
-                "doctrine/orm": "~2.4",
-                "fabpot/php-cs-fixer": "~0.5|~1.0",
-                "symfony/phpunit-bridge": "~2.7|~3.0"
+                "doctrine/orm": "^2.4",
+                "sllh/php-cs-fixer-styleci-bridge": "^2.0",
+                "symfony/phpunit-bridge": "^2.7 || ^3.0"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.2.x-dev"
+                    "dev-master": "2.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
                     "Sonata\\DatagridBundle\\": ""
-                }
+                },
+                "exclude-from-classmap": [
+                    "Tests/"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -3348,7 +3352,7 @@
                 "datagrid",
                 "sonata"
             ],
-            "time": "2015-12-16T08:53:13+00:00"
+            "time": "2017-02-09T16:25:20+00:00"
         },
         {
             "name": "sonata-project/doctrine-extensions",
@@ -3539,16 +3543,16 @@
         },
         {
             "name": "sonata-project/exporter",
-            "version": "1.7.0",
+            "version": "1.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/exporter.git",
-                "reference": "3be6e971533bf2cbb24803e2ccb06c6e3046d5d2"
+                "reference": "8ee7c0e804dc5e162187d8ed440d260adb3f1bce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/exporter/zipball/3be6e971533bf2cbb24803e2ccb06c6e3046d5d2",
-                "reference": "3be6e971533bf2cbb24803e2ccb06c6e3046d5d2",
+                "url": "https://api.github.com/repos/sonata-project/exporter/zipball/8ee7c0e804dc5e162187d8ed440d260adb3f1bce",
+                "reference": "8ee7c0e804dc5e162187d8ed440d260adb3f1bce",
                 "shasum": ""
             },
             "require": {
@@ -3604,7 +3608,7 @@
                 "export",
                 "xls"
             ],
-            "time": "2016-08-17T08:25:58+00:00"
+            "time": "2017-02-09T16:39:40+00:00"
         },
         {
             "name": "sonata-project/formatter-bundle",
@@ -4104,16 +4108,16 @@
         },
         {
             "name": "sonata-project/page-bundle",
-            "version": "3.3.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataPageBundle.git",
-                "reference": "dbfd8b7b5b1b14226bdc8478706beb193928a7c6"
+                "reference": "bc2636ade1fc5fdeb8f56e2a9e56ec32eab31084"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataPageBundle/zipball/dbfd8b7b5b1b14226bdc8478706beb193928a7c6",
-                "reference": "dbfd8b7b5b1b14226bdc8478706beb193928a7c6",
+                "url": "https://api.github.com/repos/sonata-project/SonataPageBundle/zipball/bc2636ade1fc5fdeb8f56e2a9e56ec32eab31084",
+                "reference": "bc2636ade1fc5fdeb8f56e2a9e56ec32eab31084",
                 "shasum": ""
             },
             "require": {
@@ -4161,7 +4165,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.x-dev"
+                    "dev-master": "4.x-dev"
                 }
             },
             "autoload": {
@@ -4194,7 +4198,7 @@
                 "page",
                 "sonata"
             ],
-            "time": "2017-01-17T11:25:33+00:00"
+            "time": "2017-01-25 01:00:16"
         },
         {
             "name": "sonata-project/seo-bundle",
@@ -4269,16 +4273,16 @@
         },
         {
             "name": "sonata-project/user-bundle",
-            "version": "3.2.0",
+            "version": "3.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataUserBundle.git",
-                "reference": "648064b077dc7437985aadacdb5f97add1b33b06"
+                "reference": "61a8e244dce1e14dd7737e72742b17d742826f62"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/648064b077dc7437985aadacdb5f97add1b33b06",
-                "reference": "648064b077dc7437985aadacdb5f97add1b33b06",
+                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/61a8e244dce1e14dd7737e72742b17d742826f62",
+                "reference": "61a8e244dce1e14dd7737e72742b17d742826f62",
                 "shasum": ""
             },
             "require": {
@@ -4304,7 +4308,7 @@
             },
             "require-dev": {
                 "doctrine/orm": "^2.0",
-                "friendsofsymfony/rest-bundle": "^1.1 || ^2.0",
+                "friendsofsymfony/rest-bundle": "^1.5 || ^2.0",
                 "jms/serializer-bundle": "^0.13 || ^1.0",
                 "nelmio/api-doc-bundle": "^2.4",
                 "sllh/php-cs-fixer-styleci-bridge": "^2.0",
@@ -4354,7 +4358,7 @@
                 "sonata",
                 "user"
             ],
-            "time": "2016-11-25T14:24:43+00:00"
+            "time": "2017-02-09 16:21:34"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -5816,6 +5820,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "sonata-project/user-bundle": 20,
+        "sonata-project/page-bundle": 20,
         "sonata-project/datagrid-bundle": 20
     },
     "prefer-stable": false,
