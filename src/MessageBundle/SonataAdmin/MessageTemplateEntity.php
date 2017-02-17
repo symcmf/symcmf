@@ -65,7 +65,7 @@ class MessageTemplateEntity extends AbstractAdminEntity
         if (!$object->getSubject()) {
             $errorElement
                 ->with('subject')
-                ->assertNotNull()
+                    ->assertNotNull()
                 ->end();
             return;
         }

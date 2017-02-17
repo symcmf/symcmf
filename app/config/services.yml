@@ -20,7 +20,7 @@ services:
     nix_mailer:
         class: MessageBundle\Services\Mailers\NixMailer
         arguments:
-            - '@swiftmailer.transport.real'
+            - '@swiftmailer.mailer.nix_mailer.transport.real'
             - '%nix_header_project%'
             - '%nix_header_emails%'
             - '%nix_header_external%'
