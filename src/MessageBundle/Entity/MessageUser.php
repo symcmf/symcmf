@@ -124,6 +124,7 @@ class MessageUser implements MessageUserInterface
      */
     public function __toString()
     {
-        return 'Message "' . $this->message->getSubject() . '"';
+        $msg = $this->message ? $this->message->getSubject() : '<name>';
+        return 'Message "' . $msg . '"';
     }
 }

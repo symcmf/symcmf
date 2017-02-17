@@ -33,7 +33,10 @@ sonata_formatter:
             extensions: [] # Twig formatter cannot have extensions
 
 ivory_ck_editor:
+     default_config: default
      configs:
+        default:
+            toolbar: full
         news:
             # default toolbar plus Format button
             toolbar:
