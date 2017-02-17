@@ -73,3 +73,21 @@ Symfony CMF
      ```
    
      and browse [http://homestead.app](http://homestead.app).
+     
+     ========================
+     
+## Symfony CMF Api Docs
+     
+1. Create at least one site      
+    
+     ```
+    php app/console sonata:page:create-site
+    ```
+    
+2. Generate pages
+
+    ```
+    php app/console sonata:page:update-core-routes --site=all
+    ```
+    
+3. Browse [http://192.168.10.10/api/doc](http://192.168.10.10/api/doc) to see API Documentation.
