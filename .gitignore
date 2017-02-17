@@ -17,3 +17,6 @@
 /Homestead.yaml
 /.idea/
 /.project
+
+tests/_output/*
+tests/_output/*
