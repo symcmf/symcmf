@@ -35,6 +35,7 @@ class MessageTemplateEntity extends AbstractAdminEntity
         parent::configureListFields($listMapper);
         $listMapper
             ->add('_action', null, [
+                'header_style' => 'width: 15%',
                 'actions' => [
                     'edit' => [],
                     'delete' => [],
@@ -48,9 +49,9 @@ class MessageTemplateEntity extends AbstractAdminEntity
     private function getHelper()
     {
         $metadata = $this->service->getAllowVariables();
-        $helper = 'You can use next special words in you template like: <br>';
+        $helper = $this->trans('form.template.helper_message') . '<br>';
         foreach ($metadata as $field) {
-            $helper .= ' {{ ' . $field    . ' }}' . ' or {{' . $field . '}} <br>';
+            $helper .= ' {{ ' . $field    . ' }}' . ' / {{' . $field . '}} <br>';
         }
         return $helper;
     }
@@ -62,11 +63,11 @@ class MessageTemplateEntity extends AbstractAdminEntity
     {
         $helper = $this->getHelper();
         $formMapper
-            ->with('Template form', ['class' => 'col-md-7'])
+            ->with('form.template.group_template', ['class' => 'col-md-7'])
                 ->add('subject', 'text')
                 ->add('template', 'ckeditor')
             ->end()
-            ->with('Helper', [
+            ->with('form.template.label_helper', [
                 'class' => 'col-md-5',
                 'description' => $helper,
             ])

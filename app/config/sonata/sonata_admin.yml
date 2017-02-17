@@ -11,7 +11,8 @@ sonata_admin:
                     - sonata.media.admin.gallery
 
             sonata.admin.group.classification:
-                label:           Classification
+                label:           sonata_classification
+                label_catalogue: SonataClassificationBundle
                 icon:            '<i class="fa fa-sitemap"></i>'
                 items:
                     - sonata.classification.admin.category
@@ -26,7 +27,8 @@ sonata_admin:
                     - sonata.page.admin.site
 
             sonata.admin.group.administration:
-                label:           Administration
+                label:           sonata_administration
+                label_catalogue: SonataAdminBundle
                 icon:            '<i class="fa fa-cogs"></i>'
                 items:
                     - sonata.user.admin.user
@@ -34,7 +36,8 @@ sonata_admin:
                     - sonata.page.admin.site
 
             sonata.admin.group.message:
-                label:           Messages
+                label:           sonata_message
+                label_catalogue: SonataAdminBundle
                 icon:            '<i class="fa fa-envelope-o"></i>'
                 items:
                     - admin.message_entity

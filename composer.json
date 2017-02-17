@@ -35,7 +35,8 @@
         "nelmio/api-doc-bundle": "^2.13",
         "sonata-project/news-bundle": "^3.1",
         "symfony/assetic-bundle": "^2.8",
-        "sonata-project/block-bundle": "3.2"
+        "sonata-project/block-bundle": "3.2",
+        "lunetics/locale-bundle": "^2.5"
     },
     "require-dev": {
         "sensio/generator-bundle": "~3.0",

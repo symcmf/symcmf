@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="" >
+        <body>
+            <trans-unit id="sonata_message">
+                <source>sonata_message</source>
+                <target>Nachrichten</target>
+            </trans-unit>
+
+            <trans-unit id="sonata_message_templates">
+                <source>sonata_message_templates</source>
+                <target>Nachrichten</target>
+            </trans-unit>
+
+            <trans-unit id="sonata_sites">
+                <source>sonata_sites</source>
+                <target>Website bauen</target>
+            </trans-unit>
+
+            <trans-unit id="sonata_context">
+                <source>sonata_context</source>
+                <target>Kontext</target>
+            </trans-unit>
+
+        </body>
+    </file>
+</xliff>

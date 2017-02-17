@@ -1,0 +1,7 @@
+lunetics_locale:
+    strict_mode: true
+    disable_vary_header: true
+    allowed_locales: "%locales%"
+    guessing_order:
+        - router
+        - browser
