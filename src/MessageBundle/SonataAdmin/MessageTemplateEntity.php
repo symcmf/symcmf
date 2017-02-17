@@ -62,6 +62,14 @@ class MessageTemplateEntity extends AbstractAdminEntity
     public function validate(ErrorElement $errorElement, $object)
     {
         // if empty (null)
+        if (!$object->getSubject()) {
+            $errorElement
+                ->with('subject')
+                ->assertNotNull()
+                ->end();
+            return;
+        }
+
         if (!$object->getTemplate()) {
             $errorElement
                 ->with('template')
@@ -79,9 +87,7 @@ class MessageTemplateEntity extends AbstractAdminEntity
         $helper = $this->getHelper();
         $formMapper
             ->with('Template form', ['class' => 'col-md-7'])
-                ->add('subject', 'text', [
-                    'required' => true,
-                ])
+                ->add('subject', 'text')
                 ->add('template', 'ckeditor')
             ->end()
             ->with('Helper', [
