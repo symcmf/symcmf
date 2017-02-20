@@ -44,14 +44,6 @@ class MessageUserEntity extends AbstractAdminEntity
      */
     public function validate(ErrorElement $errorElement, $object)
     {
-        if (!$object->getMessage()) {
-            $errorElement
-                ->with('message')
-                ->assertNotNull()
-                ->end();
-            return;
-        }
-
         $result = $this->getUsersFromForm();
         if (empty($result['userIds']) && empty($result['groupIds'])) {
             $errorElement

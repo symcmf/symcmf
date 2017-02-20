@@ -5,7 +5,6 @@ use Application\Sonata\AdminEntity\AbstractAdminEntity;
 use MessageBundle\Services\MessageService;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\CoreBundle\Validator\ErrorElement;
 
 class MessageTemplateEntity extends AbstractAdminEntity
 {
@@ -57,29 +56,6 @@ class MessageTemplateEntity extends AbstractAdminEntity
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function validate(ErrorElement $errorElement, $object)
-    {
-        // if empty (null)
-        if (!$object->getSubject()) {
-            $errorElement
-                ->with('subject')
-                    ->assertNotNull()
-                ->end();
-            return;
-        }
-
-        if (!$object->getTemplate()) {
-            $errorElement
-                ->with('template')
-                    ->assertNotNull()
-                ->end();
-            return;
-        }
-    }
-
-    /**
      * @param FormMapper $formMapper
      */
     protected function configureFormFields(FormMapper $formMapper)
@@ -88,7 +64,10 @@ class MessageTemplateEntity extends AbstractAdminEntity
         $formMapper
             ->with('Template form', ['class' => 'col-md-7'])
                 ->add('subject', 'text')
-                ->add('template', 'ckeditor')
+                ->add('template', 'sonata_simple_formatter_type', [
+                    'format' => 'richhtml',
+                    'ckeditor_context' => 'default', // optional
+                ])
             ->end()
             ->with('Helper', [
                 'class' => 'col-md-5',

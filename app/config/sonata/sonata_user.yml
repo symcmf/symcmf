@@ -6,3 +6,6 @@ sonata_user:
           class:          Application\Sonata\UserBundle\Admin\UserAdmin
           #Sonata\UserBundle\Admin\Entity\UserAdmin
           translation:    SonataUserBundle
+    profile:
+        form:
+          validation_groups:  [Profile, Default]

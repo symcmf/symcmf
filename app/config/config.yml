@@ -107,7 +107,6 @@ fos_user:
     registration:
         confirmation:
             enabled: true
-
     group:
         group_class:    Application\Sonata\UserBundle\Entity\Group
         group_manager:  sonata.user.orm.group_manager
@@ -156,10 +155,23 @@ fos_rest:
     body_listener:          true
     format_listener:        true
     view:
+        templating_formats:
+                html: false
+                xml:  false
         view_response_listener: force
     body_converter:
         enabled:  true
         validate: true
+    routing_loader:
+        include_format: false
+
+nelmio_api_doc:
+    sandbox:
+        body_format:
+            formats:
+                - json
+                - form
+            default_format: json
 
 sensio_framework_extra:
     view:    { annotations: true }

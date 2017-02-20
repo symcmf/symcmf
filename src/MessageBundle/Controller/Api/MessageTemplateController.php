@@ -81,9 +81,9 @@ class MessageTemplateController
         }
 
         if (!$sort) {
-            $sort = array();
+            $sort = [];
         } elseif (!is_array($sort)) {
-            $sort = array($sort, 'asc');
+            $sort = [$sort, 'asc'];
         }
 
         return $this->messageTemplateManager->getPager($criteria, $page, $limit, $sort);
@@ -104,9 +104,7 @@ class MessageTemplateController
      *  }
      * )
      *
-     * @View(serializerGroups="sonata_api_read", serializerEnableMaxDepthChecks=true)
-     *
-     * @Route(requirements={"_format"="json|xml"})
+     * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
      * @param $id
      *
@@ -129,11 +127,9 @@ class MessageTemplateController
     public function getMessageTemplate($id)
     {
         $template = $this->messageTemplateManager->find($id);
-
         if (!$template) {
             throw new NotFoundHttpException(sprintf('Message template (%d) not found', $id));
         }
-
         return $template;
     }
 
@@ -202,7 +198,6 @@ class MessageTemplateController
      *  }
      * )
      *
-     * @Route(requirements={"_format"="json|xml"})
      *
      * @param int $id A message template identifier
      *
@@ -246,7 +241,6 @@ class MessageTemplateController
 
         if ($form->isValid()) {
             $messageTemplate = $form->getData();
-
             $this->messageTemplateManager->save($messageTemplate);
             return $this->serializeContext($messageTemplate, ['sonata_api_read']);
         }

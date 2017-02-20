@@ -112,8 +112,6 @@ class MessageUserController
      *
      * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
-     * @Route(requirements={"_format"="json|xml"})
-     *
      * @param $id
      *
      * @return MessageUserInterface
@@ -205,8 +203,6 @@ class MessageUserController
      *      404="Returned when unable to find message template"
      *  }
      * )
-     *
-     * @Route(requirements={"_format"="json|xml"})
      *
      * @param int $id A sent message identifier
      *
