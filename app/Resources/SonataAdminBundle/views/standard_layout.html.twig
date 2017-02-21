@@ -201,9 +201,7 @@ file that was distributed with this source code.
                                                 </a>
                                                 <ul class="dropdown-menu dropdown-user">
                                                     {% include sonata_admin.adminPool.getTemplate('user_block') %}
-                                                    <p>
-                                                        {{ locale_switcher(null, null, 'AppBundle:Admin:switcher_links.html.twig') }}
-                                                    </p>
+                                                    <div id="switcher-language">{{ locale_switcher(null, null, 'AppBundle:Admin:switcher_links.html.twig') }}</div>
                                                 </ul>
 
                                             </li>

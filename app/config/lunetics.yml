@@ -5,3 +5,5 @@ lunetics_locale:
     guessing_order:
         - router
         - browser
+        - session
+        - cookie

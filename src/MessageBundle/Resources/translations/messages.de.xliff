@@ -3,8 +3,8 @@
     <file source-language="de" target-language="de" datatype="plaintext" original="file.ext">
         <body>
 
-            <trans-unit id="breadcrumb.link_message_user_create">
-                <source>breadcrumb.link_message_user_create</source>
+             <trans-unit id="breadcrumb.link_message_user_list">
+                <source>breadcrumb.link_message_user_list</source>
                 <target>Nachrichtenliste senden</target>
             </trans-unit>
 
