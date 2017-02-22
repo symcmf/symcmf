@@ -26,7 +26,6 @@ parameters:
         - en
         - fr
         - de
-    app_locales: en|fr|de|es|cs|nl|ru|uk|ro|pt_BR|pl|it|ja|id|ca|sl|hr
 
 framework:
     #esi:             ~
