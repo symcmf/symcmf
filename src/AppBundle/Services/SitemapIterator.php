@@ -35,7 +35,7 @@ class SitemapIterator implements SourceIteratorInterface
     {
         $this->key++;
         $this->current = [
-            'permalink'  => '/the/path/to/target',
+            'permalink'  => '',
             'lastmod'    => '',
             'changefreq' => 'weekly',
             'priority'   => 0.5
