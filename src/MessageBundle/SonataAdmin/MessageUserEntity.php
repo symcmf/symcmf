@@ -45,18 +45,18 @@ class MessageUserEntity extends AbstractAdminEntity
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with('Send message', ['class' => 'col-md-12'])
+            ->with('form.sending.send_panel', ['class' => 'col-md-12'])
                 ->add('message', 'sonata_type_model_list', [
                     'empty_data' => false,
                 ])
             ->end()
-            ->with('To users', ['class' => 'col-md-6'])
+            ->with('form.sending.to_user_panel', ['class' => 'col-md-6'])
                 ->add('user', 'sonata_type_model', [
                     'multiple'   => true,
                     'mapped'     => false,
                 ])
             ->end()
-            ->with('To users from groups', ['class' => 'col-md-6'])
+            ->with('form.sending.to_group_panel', ['class' => 'col-md-6'])
                 ->add('groups', 'sonata_type_model', [
                     'multiple'   => true,
                     'class'      => 'Application\Sonata\UserBundle\Entity\Group',

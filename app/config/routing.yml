@@ -1,6 +1,7 @@
 app:
-    resource: "@AppBundle/Controller/"
+    resource: '@AppBundle/Controller/'
     type:     annotation
+    prefix:   /
 
 # FOSUserBundle's routing
 fos_user_security:
@@ -26,12 +27,14 @@ fos_user_change_password:
 hwi_oauth_security:
     resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
     prefix: /login
+
 hwi_oauth_connect:
     resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
     prefix: /login
+
 hwi_oauth_redirect:
     resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
-    prefix:   /login
+    prefix: /login
 
 # Admin's routing
 sonata_user:
@@ -52,14 +55,11 @@ sonata_page_exceptions:
     resource: '@SonataPageBundle/Resources/config/routing/exceptions.xml'
     prefix: /
 
-sonata_page_cache:
-    resource: '@SonataPageBundle/Resources/config/routing/cache.xml'
-    prefix: /
-
 #SonataNewsBundle
 news:
     resource: '@SonataNewsBundle/Resources/config/routing/news.xml'
     prefix: /news
+
 
 # SonataCacheBundle route
 sonata_cache_cache:

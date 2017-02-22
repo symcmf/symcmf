@@ -1,0 +1,14 @@
+lunetics_locale:
+    strict_mode: true
+    disable_vary_header: true
+    allowed_locales: "%locales%"
+    guessing_order:
+        - query
+        - session
+        - cookie
+    cookie:
+        set_on_change: true
+        name:  _locale
+
+    session:
+        variable: _locale

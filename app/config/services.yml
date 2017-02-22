@@ -61,10 +61,10 @@ services:
         class: MessageBundle\SonataAdmin\MessageTemplateEntity
         arguments: [~, MessageBundle\Entity\MessageTemplate, ~, '@message_service']
         tags:
-            - { name: sonata.admin, manager_type: orm, group: sonata.admin.group.message, label: Message templates }
+            - { name: sonata.admin, manager_type: orm, group: sonata.admin.group.message, label: message_template, label_translator_strategy: sonata.admin.label.strategy.underscore }
 
     admin.msg_user_entity:
         class: MessageBundle\SonataAdmin\MessageUserEntity
         arguments: [~, MessageBundle\Entity\MessageUser, ~, '@message_service', '@doctrine.orm.default_entity_manager']
         tags:
-            - { name: sonata.admin, manager_type: orm, group: sonata.admin.group.message, label: Sending message }
+            - { name: sonata.admin, manager_type: orm, group: sonata.admin.group.message, label: sending_message, label_translator_strategy: sonata.admin.label.strategy.underscore  }

@@ -43,6 +43,7 @@ assetic:
                 - bundles/sonataadmin/css/tree.css
                 - bundles/sonataadmin/vendor/jqueryui/themes/flick/jquery-ui.min.css
                 - bundles/sonatapage/sonata-page.back.min.css
+                - styles/style.css
 
         sonata_formatter_js:
             inputs:

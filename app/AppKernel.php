@@ -73,6 +73,9 @@ class AppKernel extends Kernel
             new Sonata\NewsBundle\SonataNewsBundle(),
             new Application\Sonata\NewsBundle\ApplicationSonataNewsBundle(),
 
+            // Multilanguage
+            new Lunetics\LocaleBundle\LuneticsLocaleBundle(),
+
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

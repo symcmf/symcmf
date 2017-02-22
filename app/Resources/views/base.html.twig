@@ -4,25 +4,11 @@
 <head>
     <meta charset="utf-8">
     <link rel="icon" href="favicon.ico">
-
-    {% block stylesheets %}
-        {{ include('/blocks/css_block.html.twig') }}
-    {% endblock %}
-
     <title>{% block title %} Symfony CMF {% endblock %}</title>
-
-    {% block javascript_top %}
-        {{ include('/blocks/javascript_top_block.html.twig') }}
-    {% endblock %}
 </head>
 <body>
-
     <div class="container">
         {% block body %}{% endblock %}
     </div>
-
-    {% block javascripts %}
-        {{ include('/blocks/javascript_bottom_block.html.twig') }}
-    {% endblock %}
 </body>
 </html>

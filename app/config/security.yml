@@ -20,16 +20,16 @@ security:
 
     firewalls:
         admin:
-            pattern:  /admin(.*)
+            pattern:  ^/admin/
             context:  user
             form_login:
-                provider:  fos_userbundle
-                login_path:  /admin/login
-                use_forward:  false
-                check_path:  /admin/login_check
+                provider:      fos_userbundle
+                login_path:    /admin/login
+                use_forward:   false
+                check_path:    /admin/login_check
                 failure_path:  null
             logout:
-                path:  /admin/logout
+                path:   /admin/logout
             anonymous:  true
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
