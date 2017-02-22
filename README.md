@@ -62,19 +62,10 @@ Symfony CMF
 6. Create all the database tables
 
     ```
-    php bin/console doctrine:schema:update --force
+    bash php app/db-update.sh
     ```
 
-7. Finally, browse [http://192.168.10.10](http://192.168.10.10), you should see the main page of application.
-   Or add to your hosts file 
-    
-     ```
-        192.168.10.10  homestead.app
-     ```
-   
-     and browse [http://homestead.app](http://homestead.app).
-     
-     ========================
+===========================
      
 ## Symfony CMF Setup
      
@@ -104,9 +95,7 @@ Symfony CMF
    php app/console sonata:seo:sitemap <dir_for_sitemap_files> <host>
     ```
     
-   Note: 
-   
-   The command will generate all files in a temporary folder to avoid issue will files are indexed. Once the files are generated then the files will be copied to the web folder. The sonata-project.org argument will be used to prefix url with the provided domain.
+   > The command will generate all files in a temporary folder to avoid issue will files are indexed. Once the files are generated then the files will be copied to the <_dir_for_sitemap_files_> folder. The <_host_> argument will be used to prefix url with the provided domain.
    
 5. Create admin 
 
@@ -114,3 +103,11 @@ Symfony CMF
      php bin/console fos:user:create --super-admin
      ```
      
+6. Finally, browse [http://192.168.10.10](http://192.168.10.10), you should see the main page of application.
+   Or add to your hosts file 
+    
+     ```
+        192.168.10.10  homestead.app
+     ```
+   
+     and browse [http://homestead.app](http://homestead.app).
