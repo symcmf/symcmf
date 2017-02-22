@@ -68,3 +68,6 @@ services:
         arguments: [~, MessageBundle\Entity\MessageUser, ~, '@message_service', '@doctrine.orm.default_entity_manager']
         tags:
             - { name: sonata.admin, manager_type: orm, group: sonata.admin.group.message, label: sending_message, label_translator_strategy: sonata.admin.label.strategy.underscore  }
+
+    app.sitemap_service:
+            class: AppBundle\Services\SitemapIterator
