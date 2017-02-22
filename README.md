@@ -76,7 +76,7 @@ Symfony CMF
      
      ========================
      
-## Symfony CMF Api Docs
+## Symfony CMF Setup
      
 1. Create at least one site      
     
@@ -90,4 +90,27 @@ Symfony CMF
     php app/console sonata:page:update-core-routes --site=all
     ```
     
-3. Browse [http://192.168.10.10/api/doc](http://192.168.10.10/api/doc) to see API Documentation.
+3. Published pages for all users 
+    
+    At this point, no snapshots are available so the end user will get an error. The following command need to be run:
+    
+    ```
+    php app/console sonata:page:create-snapshots --site=all
+    ```
+    
+4. Generate sitemap 
+
+    ```
+   php app/console sonata:seo:sitemap <dir_for_sitemap_files> <host>
+    ```
+    
+   Note: 
+   
+   The command will generate all files in a temporary folder to avoid issue will files are indexed. Once the files are generated then the files will be copied to the web folder. The sonata-project.org argument will be used to prefix url with the provided domain.
+   
+5. Create admin 
+
+     ```
+     php bin/console fos:user:create --super-admin
+     ```
+     
