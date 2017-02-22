@@ -1,76 +1,65 @@
 app:
     resource: '@AppBundle/Controller/'
     type:     annotation
-    prefix:   /{_locale}
-    requirements:
-        _locale: '%app_locales%'
-    defaults:
-        _locale: '%locale%'
-
-homepage:
-    path: /{_locale}
-    requirements:
-        _locale: '%app_locales%'
-    defaults:
-        _locale:  '%locale%'
+    prefix:   /
 
 # FOSUserBundle's routing
 fos_user_security:
   resource: "@FOSUserBundle/Resources/config/routing/security.xml"
-  prefix: /{_locale}/
-  requirements:
-          _locale: '%app_locales%'
 
 fos_user_profile:
   resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
-  prefix: /{_locale}/profile
+  prefix: /profile
 
 fos_user_register:
   resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
-  prefix: /{_locale}/register
+  prefix: /register
 
 fos_user_resetting:
   resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
-  prefix: /{_locale}/resetting
+  prefix: /resetting
 
 fos_user_change_password:
   resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
-  prefix: /{_locale}/profile
+  prefix: /profile
 
 #HWIOAuthBundle routes
 hwi_oauth_security:
     resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
-    prefix: /{_locale}/login
+    prefix: /login
+
 hwi_oauth_connect:
     resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
-    prefix: /{_locale}/login
+    prefix: /login
+
 hwi_oauth_redirect:
     resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
-    prefix: /{_locale}/login
+    prefix: /login
 
 # Admin's routing
 sonata_user:
   resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
-  prefix: /{_locale}/admin
+  prefix: /admin
 
 # Media routes
 gallery:
     resource: '@SonataMediaBundle/Resources/config/routing/gallery.xml'
-    prefix: /{_locale}/media/gallery
+    prefix: /media/gallery
 
 media:
     resource: '@SonataMediaBundle/Resources/config/routing/media.xml'
-    prefix: /{_locale}/media
+    prefix: /media
 
 # SonataPageBundle routes
 sonata_page_exceptions:
     resource: '@SonataPageBundle/Resources/config/routing/exceptions.xml'
-    prefix: /{_locale}/
+    prefix: /
 
 #SonataNewsBundle
 news:
     resource: '@SonataNewsBundle/Resources/config/routing/news.xml'
-    prefix: /{_locale}/news
+    prefix: /news
+
 
 # SonataCacheBundle route
 sonata_cache_cache:
@@ -109,9 +98,9 @@ sonata_api_messages:
 
 admin:
   resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
-  prefix: /{_locale}/admin
+  prefix: /admin
 
 _sonata_admin:
   resource: .
   type: sonata_admin
-  prefix: /{_locale}/admin
+  prefix: /admin

@@ -3,7 +3,12 @@ lunetics_locale:
     disable_vary_header: true
     allowed_locales: "%locales%"
     guessing_order:
-        - router
-        - browser
+        - query
         - session
         - cookie
+    cookie:
+        set_on_change: true
+        name:  _locale
+
+    session:
+        variable: _locale
