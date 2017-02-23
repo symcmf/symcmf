@@ -24,7 +24,7 @@ sonata_page:
         - ^/admin\/   # ignore admin route, ie route containing 'admin'
 
     page_defaults:
-        homepage: {decorate: false} # disable decoration for homepage, key - is a page route
+        homepage: { decorate: true} # disable decoration for homepage, key - is a page route
 
     default_template: default # template key from templates section, used as default for pages
     templates:

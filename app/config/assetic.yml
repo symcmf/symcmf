@@ -52,6 +52,10 @@ assetic:
                 - bundles/sonataformatter/markitup/sets/html/set.js
                 - bundles/sonataformatter/markitup/sets/textile/set.js
 
+        sonata-page-front-min:
+            inputs: '%kernel.root_dir%/../src/Application/Sonata/PageBundle/Resources/public/sonata-page.front.css'
+            output: 'bundles/sonatapage/sonata-page.front.css'
+
         font-awesome-otf:
             inputs: 'bundles/sonatacore/vendor/components-font-awesome/fonts/FontAwesome.otf'
             output: 'fonts/FontAwesome.otf'

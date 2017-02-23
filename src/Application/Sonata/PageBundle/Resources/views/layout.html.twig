@@ -5,14 +5,29 @@
         <div class="content">
             <div class="row page-header">
                 {{ sonata_page_render_container('header', 'global') }}
+                {% block header %}
+                    <div class="pull-right">
+                            {% block auth_block %}
+                                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                    {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+                                    <a href="{{ path('fos_user_security_logout') }}">
+                                            {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                    </a>
+                                {% else %}
+                                    <a href="{{ path('fos_user_security_login') }}">
+                                            {{ 'layout.login'|trans({}, 'FOSUserBundle') }}
+                                    </a>
+                                {% endif %}
+                            {% endblock %}
+                    </div>
+                    <h2><a href="/">Sonata Demo</a></h2>
+                {% endblock %}
             </div>
-
             {% block sonata_page_breadcrumb %}
                 <div class="row">
                     {% if sonata_seo_context is not defined %}
                         {% set sonata_seo_context = 'homepage' %}
                     {% endif %}
-                    {{ sonata_block_render_event('breadcrumb', { 'context': sonata_seo_context, 'current_uri': app.request.requestUri }) }}
                 </div>
             {% endblock %}
 
