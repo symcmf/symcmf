@@ -60,5 +60,4 @@ sonata_block:
         # Formatter
         sonata.formatter.block.formatter:
 
-        sonata.seo.block.breadcrumb.homepage:
     context_manager: sonata.page.block.context_manager

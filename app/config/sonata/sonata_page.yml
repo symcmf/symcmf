@@ -33,15 +33,15 @@ sonata_page:
             name: 'default'
             containers:
                 header:
-                    name: Header
+                    name: header
                 content_top:
-                    name: Top content
+                    name: content_top
                 content:
-                    name: Main content
+                    name: content
                 content_bottom:
-                    name: Bottom content
+                    name: content_bottom
                 footer:
-                    name: Footer
+                    name: footer
             matrix:
                 layout: |
                         HHHHHHHH
@@ -65,7 +65,7 @@ sonata_page:
             inherits_containers: default
             containers:
                 left_col:
-                    name: Left column
+                    name: left_col
                     blocks:
                         - sonata.media.block.media
                         - sonata.media.block.gallery
@@ -75,7 +75,7 @@ sonata_page:
                     blocks:
                         - sonata.media.block.media
                 right_col:
-                    name: Right column
+                    name: right_col
                     blocks:
                         - sonata.news.block.recent_posts
                         - sonata.order.block.recent_orders
