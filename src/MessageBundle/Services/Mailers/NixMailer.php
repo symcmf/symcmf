@@ -30,11 +30,11 @@ class NixMailer extends Swift_Mailer
     /**
      * NixMailer constructor.
      * @param Swift_Transport $transport
-     * @param string|null $project
-     * @param string|null $emails
-     * @param string|null $external
+     * @param null $project
+     * @param null $emails
+     * @param null $external
      */
-    public function __construct(Swift_Transport $transport, $project = null, $emails = null, $external = null)
+    public function __construct($transport, $project = null, $emails = null, $external = null)
     {
         $this->project = $project;
         $this->emails = $emails;

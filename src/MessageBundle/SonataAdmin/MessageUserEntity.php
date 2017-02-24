@@ -2,7 +2,6 @@
 namespace MessageBundle\SonataAdmin;
 
 use Application\Sonata\AdminEntity\AbstractAdminEntity;
-use Application\Sonata\UserBundle\Entity\Group;
 use Application\Sonata\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
 use MessageBundle\Entity\MessageTemplate;
@@ -10,6 +9,7 @@ use MessageBundle\Entity\MessageUser;
 use MessageBundle\Services\MessageService;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\CoreBundle\Validator\ErrorElement;
 
 class MessageUserEntity extends AbstractAdminEntity
 {
@@ -40,6 +40,27 @@ class MessageUserEntity extends AbstractAdminEntity
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function validate(ErrorElement $errorElement, $object)
+    {
+        $result = $this->getUsersFromForm();
+        if (empty($result['userIds']) && empty($result['groupIds'])) {
+            $errorElement
+                ->with('user')
+                ->addViolation('This field can\'t be null, if field \'Groups\' null too')
+                ->end();
+
+            $errorElement
+                ->with('groups')
+                ->addViolation('This field can\'t be null, if field \'Users\' null too')
+                ->end();
+
+            return;
+        }
+    }
+
+    /**
      * @param FormMapper $formMapper
      */
     protected function configureFormFields(FormMapper $formMapper)
@@ -52,15 +73,16 @@ class MessageUserEntity extends AbstractAdminEntity
             ->end()
             ->with('form.sending.to_user_panel', ['class' => 'col-md-6'])
                 ->add('user', 'sonata_type_model', [
-                    'multiple'   => true,
-                    'mapped'     => false,
+                    'label' => 'Users',
+                    'multiple' => true,
+                    'mapped' => false,
                 ])
             ->end()
             ->with('form.sending.to_group_panel', ['class' => 'col-md-6'])
                 ->add('groups', 'sonata_type_model', [
-                    'multiple'   => true,
-                    'class'      => 'Application\Sonata\UserBundle\Entity\Group',
-                    'mapped'     => false,
+                    'multiple' => true,
+                    'class' => 'Application\Sonata\UserBundle\Entity\Group',
+                    'mapped' => false,
                 ])
             ->end();
     }
@@ -111,6 +133,27 @@ class MessageUserEntity extends AbstractAdminEntity
     }
 
     /**
+     * @return array
+     */
+    private function getFormData()
+    {
+        $uniqId = $this->getRequest()->query->get('uniqid');
+        return $this->getRequest()->request->get($uniqId);
+    }
+
+    /**
+     * Method for getting users from form fields
+     */
+    private function getUsersFromForm()
+    {
+        $formData = $this->getFormData();
+        return [
+            'userIds'   => isset($formData['user']) ? $formData['user'] : [],
+            'groupIds'  => isset($formData['groups']) ? $formData['groups'] : [],
+        ];
+    }
+
+    /**
      * @param mixed $object
      *
      * @return mixed
@@ -120,14 +163,15 @@ class MessageUserEntity extends AbstractAdminEntity
         // delete old object from queue on deleting
         $this->entityManager->clear();
 
-        $uniqId     = $this->getRequest()->query->get('uniqid');
-        $formData   = $this->getRequest()->request->get($uniqId);
-
+        $formData   = $this->getFormData();
         $messageId  = $formData['message'];
         $message    = $this->entityManager->getRepository(MessageTemplate::class)->find($messageId);
 
-        $userIds    = isset($formData['user']) ? $formData['user'] : [];
-        $groupIds   = isset($formData['groups']) ? $formData['groups'] : [];
+        $result   = $this->getUsersFromForm();
+
+        $userIds  = $result['userIds'];
+        $groupIds = $result['groupIds'];
+
         $users = $this->getUsers($userIds, $groupIds);
 
         foreach ($users as $user) {

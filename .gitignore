@@ -18,3 +18,5 @@
 /.idea/
 /.project
 /web/sitemap*
+tests/_output/*
+tests/_output/*

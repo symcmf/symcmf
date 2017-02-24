@@ -28,6 +28,8 @@ class MessageUser implements MessageUserInterface
      * @ORM\ManyToOne(targetEntity="MessageTemplate", inversedBy="messageUser")
      * @ORM\JoinColumn(name="message_id", referencedColumnName="id", nullable=false)
      * @Groups({"sonata_api_read", "sonata_api_write"})
+     *
+     * @Assert\NotNull()
      */
     protected $message;
 
@@ -124,6 +126,7 @@ class MessageUser implements MessageUserInterface
      */
     public function __toString()
     {
-        return 'Message "' . $this->message->getSubject() . '"';
+        $msg = $this->message ? $this->message->getSubject() : '<name>';
+        return 'Message "' . $msg . '"';
     }
 }

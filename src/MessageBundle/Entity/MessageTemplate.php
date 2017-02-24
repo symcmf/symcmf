@@ -8,13 +8,16 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\Groups;
 use MessageBundle\Model\MessageTemplateInterface;
 use MessageBundle\Model\MessageUserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
+
 
 /**
  * @ORM\Entity()
  * @ORM\Table(name="message_template")
  * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity(fields="subject", message="Sorry, this subject is already used.")
  */
 class MessageTemplate implements MessageTemplateInterface
 {
@@ -52,13 +55,14 @@ class MessageTemplate implements MessageTemplateInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="subject", type="string", length=255)
+     * @ORM\Column(name="subject", type="string", length=255, nullable=false, unique=true)
      * @Assert\Length(
      *      min = 2,
      *      max = 50,
      *      minMessage = "Subject must be at least {{ limit }} characters long",
      *      maxMessage = "Subject can't be longer than {{ limit }} characters"
      * )
+     * @Assert\NotNull()
      * @Groups({"sonata_api_read", "sonata_api_write"})
      */
     protected $subject;
@@ -89,7 +93,8 @@ class MessageTemplate implements MessageTemplateInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="template", type="text")
+     * @ORM\Column(name="template", type="text", nullable=false)
+     * @Assert\NotNull()
      *
      * @Groups({"sonata_api_read", "sonata_api_write"})
      */

@@ -65,7 +65,10 @@ class MessageTemplateEntity extends AbstractAdminEntity
         $formMapper
             ->with('form.template.group_template', ['class' => 'col-md-7'])
                 ->add('subject', 'text')
-                ->add('template', 'ckeditor')
+                ->add('template', 'sonata_simple_formatter_type', [
+                    'format' => 'richhtml',
+                    'ckeditor_context' => 'default', // optional
+                ])
             ->end()
             ->with('form.template.label_helper', [
                 'class' => 'col-md-5',

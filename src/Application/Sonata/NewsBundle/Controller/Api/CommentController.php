@@ -32,8 +32,6 @@ class CommentController extends ParentController
      *
      * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
-     * @Route(requirements={"_format"="json|xml"})
-     *
      * @param int $id A comment identifier
      *
      * @return Comment
@@ -43,5 +41,30 @@ class CommentController extends ParentController
     public function getCommentAction($id)
     {
         return parent::getCommentAction($id);
+    }
+
+    /**
+     * Deletes a comment.
+     *
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="comment identifier"}
+     *  },
+     *  statusCodes={
+     *      200="Returned when comment is successfully deleted",
+     *      400="Returned when an error has occurred while comment deletion",
+     *      404="Returned when unable to find comment"
+     *  }
+     * )
+     *
+     * @param int $id A comment identifier
+     *
+     * @return View
+     *
+     * @throws NotFoundHttpException
+     */
+    public function deleteCommentAction($id)
+    {
+        return parent::deleteCommentAction($id);
     }
 }

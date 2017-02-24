@@ -44,8 +44,6 @@ class PostController extends ParentController
      *
      * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
-     * @Route(requirements={"_format"="json|xml"})
-     *
      * @param ParamFetcherInterface $paramFetcher
      *
      * @return PagerInterface
@@ -71,8 +69,6 @@ class PostController extends ParentController
      *
      * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
-     * @Route(requirements={"_format"="json|xml"})
-     *
      * @param int $id A post identifier
      *
      * @return PostInterface
@@ -80,6 +76,82 @@ class PostController extends ParentController
     public function getPostAction($id)
     {
        return parent::getPostAction($id);
+    }
+
+    /**
+     * Adds a post.
+     *
+     * @ApiDoc(
+     *  input={"class"="sonata_news_api_form_post", "name"="", "groups"={"sonata_api_write"}},
+     *  output={"class"="sonata_news_api_form_post", "groups"={"sonata_api_read"}},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      400="Returned when an error has occurred while post creation",
+     *  }
+     * )
+     *
+     * @param Request $request A Symfony request
+     *
+     * @return Post
+     *
+     * @throws NotFoundHttpException
+     */
+    public function postPostAction(Request $request)
+    {
+        return parent::postPostAction($request);
+    }
+
+    /**
+     * Updates a post.
+     *
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="post identifier"}
+     *  },
+     *  input={"class"="sonata_news_api_form_post", "name"="", "groups"={"sonata_api_write"}},
+     *  output={"class"="sonata_news_api_form_post", "groups"={"sonata_api_read"}},
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      400="Returned when an error has occurred while post update",
+     *      404="Returned when unable to find post"
+     *  }
+     * )
+     *
+     * @param int     $id      A Post identifier
+     * @param Request $request A Symfony request
+     *
+     * @return Post
+     *
+     * @throws NotFoundHttpException
+     */
+    public function putPostAction($id, Request $request)
+    {
+        return parent::putPostAction($id, $request);
+    }
+
+    /**
+     * Deletes a post.
+     *
+     * @ApiDoc(
+     *  requirements={
+     *      {"name"="id", "dataType"="integer", "requirement"="\d+", "description"="post identifier"}
+     *  },
+     *  statusCodes={
+     *      200="Returned when post is successfully deleted",
+     *      400="Returned when an error has occurred while post deletion",
+     *      404="Returned when unable to find post"
+     *  }
+     * )
+     *
+     * @param int $id A Post identifier
+     *
+     * @return View
+     *
+     * @throws NotFoundHttpException
+     */
+    public function deletePostAction($id)
+    {
+        return parent::deletePostAction($id);
     }
 
     /**
@@ -98,8 +170,6 @@ class PostController extends ParentController
      *
      * @QueryParam(name="page", requirements="\d+", default="1", description="Page for comments list pagination")
      * @QueryParam(name="count", requirements="\d+", default="10", description="Number of comments by page")
-     *
-     * @Route(requirements={"_format"="json|xml"})
      *
      * @View(serializerGroups={"sonata_api_read"}, serializerEnableMaxDepthChecks=true)
      *
@@ -129,8 +199,6 @@ class PostController extends ParentController
      *      404="Returned when post is not found"
      *  }
      * )
-     *
-     * @Route(requirements={"_format"="json|xml"})
      *
      * @param int     $id      A post identifier
      * @param Request $request
@@ -190,8 +258,6 @@ class PostController extends ParentController
      *      404="Returned when unable to find comment"
      *  }
      * )
-     *
-     * @Route(requirements={"_format"="json|xml"})
      *
      * @param int     $postId    A post identifier
      * @param int     $commentId A comment identifier
