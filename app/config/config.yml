@@ -50,6 +50,8 @@ twig:
     form_themes:
         - 'SonataFormatterBundle:Form:formatter.html.twig'
         - 'SonataCoreBundle:Form:datepicker.html.twig'
+    form:
+        resources: ['bootstrap_3_layout.html.twig']
 
 # Doctrine Configuration
 doctrine:

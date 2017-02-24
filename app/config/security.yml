@@ -31,7 +31,6 @@ security:
                 failure_path:   null
             logout:
                 path:           /admin/logout
-                target:         /admin/login
             anonymous:  true
 
         # disables authentication for assets and the profiler, adapt it according to your needs
