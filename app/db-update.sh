@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-php console doctrine:cache:clear-metadata
-php console doctrine:schema:update --force
+php app/console doctrine:cache:clear-metadata
+php app/console doctrine:schema:update --force
