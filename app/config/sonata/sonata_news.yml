@@ -1,6 +1,6 @@
 sonata_news:
-    title:        Sonata Project
-    link:         https://sonata-project.org
+    title:        "%link%"
+    link:         "%title%"
     description:  Cool bundles on top of Symfony2
     salt:         'secureToken'
     permalink_generator: sonata.news.permalink.date # sonata.news.permalink.collection
@@ -8,5 +8,5 @@ sonata_news:
     comment:
         notification:
             emails:   [email@example.org, email2@example.org]
-            from:     no-reply@sonata-project.org
+            from:     "%admin_address%"
             template: 'SonataNewsBundle:Mail:comment_notification.txt.twig'

@@ -100,10 +100,16 @@ Symfony CMF
 5. Create admin 
 
      ```
-     php bin/console fos:user:create --super-admin
+     php app/console fos:user:create --super-admin
      ```
      
-6. Finally, browse [http://192.168.10.10](http://192.168.10.10), you should see the main page of application.
+6. For setup styles
+    
+    ```
+    php app/console assetic:dump web/
+    ```
+       
+7. Finally, browse [http://192.168.10.10](http://192.168.10.10), you should see the main page of application.
    Or add to your hosts file 
     
      ```

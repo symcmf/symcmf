@@ -19,10 +19,6 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
 
-    # Configuration for fos_user bundle
-    fos_user_address: super@mail.com
-    fos_user_sender_name: Admin
-
     # Configuration for nix-mailer
     nix_header_project: 'name-project'
     nix_header_emails: 'emails'
@@ -34,3 +30,10 @@ parameters:
 
     google_app_id: 664637073932-di639tn4pjrffdlr9pgtc1bm806dr3ga.apps.googleusercontent.com
     google_app_secret: Cc5yktRstazRAWeS4rm9V_mU
+
+    # Configuration for CMF
+
+    admin_address: super@mail.com
+    admin_name: Admin
+    link:  https://sonata-cmf.org
+    title: Sonata CMF

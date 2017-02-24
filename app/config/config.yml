@@ -110,8 +110,8 @@ fos_user:
     service:
         mailer: nix_mailer_service
     from_email:
-        address:      "%fos_user_address%"
-        sender_name:  "%fos_user_sender_name%"
+        address:      "%admin_address%"
+        sender_name:  "%admin_name%"
     registration:
         confirmation:
             enabled: true

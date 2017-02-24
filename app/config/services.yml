@@ -42,7 +42,7 @@ services:
     # simple mailer service for EmailBundle
     mailer_emailbundle_service:
         class: MessageBundle\Services\Mailers\MailerService
-        arguments: ['@nix_mailer', '%fos_user_address%']
+        arguments: ['@nix_mailer', '%admin_address%']
 
     # service for EmailBundle
     message_service:
