@@ -1,5 +1,5 @@
 {# TODO fix bug with adding block container in global container. Open issue - https://github.com/sonata-project/sandbox/issues/590 #}
-{{ sonata_page_render_container('header', 'global') }}
+{{ sonata_page_render_container('content_header', 'global') }}
 {% block header %}
     <div class="pull-right">
         <div id="switcher-language">{{ locale_switcher(null, null, 'AppBundle:Admin:switcher_links.html.twig') }}</div>

@@ -32,7 +32,7 @@ sonata_page:
             path: 'ApplicationSonataPageBundle::layout.html.twig'
             name: 'default'
             containers:
-                header:
+                content_header:
                     name: content_header
                 content_top:
                     name: content_top
@@ -40,7 +40,7 @@ sonata_page:
                     name: content
                 content_bottom:
                     name: content_bottom
-                footer:
+                content_footer:
                     name: content_footer
             matrix:
                 layout: |
@@ -91,13 +91,13 @@ sonata_page:
                         BBBBBBBBBB
                         FFFFFFFFFF
                 mapping:
-                       H: header
+                       H: content_header
                        T: content_top
                        L: left_col
                        R: right_col
                        C: content
                        B: content_bottom
-                       F: footer
+                       F: content_footer
     # manage the http errors
     catch_exceptions:
         not_found: [404]    # render 404 page with "not_found" key (name generated: _page_internal_error_{key})
