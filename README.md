@@ -89,27 +89,19 @@ Symfony CMF
     php app/console sonata:page:create-snapshots --site=all
     ```
     
-4. Generate sitemap 
-
-    ```
-   php app/console sonata:seo:sitemap <dir_for_sitemap_files> <host>
-    ```
-    
-   > The command will generate all files in a temporary folder to avoid issue will files are indexed. Once the files are generated then the files will be copied to the <_dir_for_sitemap_files_> folder. The <_host_> argument will be used to prefix url with the provided domain.
-   
-5. Create admin 
+4. Create admin 
 
      ```
      php app/console fos:user:create --super-admin
      ```
      
-6. For setup styles
+5. For setup styles
     
     ```
     php app/console assetic:dump web/
     ```
        
-7. Finally, browse [http://192.168.10.10](http://192.168.10.10), you should see the main page of application.
+6. Finally, browse [http://192.168.10.10](http://192.168.10.10), you should see the main page of application.
    Or add to your hosts file 
     
      ```
@@ -117,3 +109,11 @@ Symfony CMF
      ```
    
      and browse [http://homestead.app](http://homestead.app).
+     
+7. Generate sitemap 
+
+    ```
+   php app/console sonata:seo:sitemap <dir_for_sitemap_files> <host>
+    ```
+    
+   > The command will generate all files in a temporary folder to avoid issue will files are indexed. Once the files are generated then the files will be copied to the <_dir_for_sitemap_files_> folder. The <_host_> argument will be used to prefix url with the provided domain.
