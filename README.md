@@ -20,7 +20,7 @@ Symfony CMF
 2. Run composer
    
        ```
-       composer install
+       composer install --no-scripts
        ```
 3. Setup homestead/vagrant environment in project folder:
 	
@@ -53,21 +53,29 @@ Symfony CMF
     vagrant up
     ```
     
-5. Run composer update to prevent errors
+5. Run composer install for running scripts
     
     ```
-    composer update
+    composer install
     ```
     
 6. Create all the database tables
 
     ```
-    bash php app/db-update.sh
+    ./app/db-update.sh
     ```
 
 ===========================
      
 ## Symfony CMF Setup
+     
+0. Setup CMF site
+
+    ```
+    ./app/setup.sh
+    ```
+     
+     > It will be run next commands:
      
 1. Create at least one site      
     
