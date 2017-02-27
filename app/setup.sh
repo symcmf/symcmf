@@ -7,3 +7,6 @@ php app/console sonata:page:create-snapshots --site=1
 php app/console fos:user:create --super-admin
 
 php app/console assetic:dump web/
+
+chmod 777 -R app/cache/ app/logs/
+chmod 777 -R app/cache/* app/logs/*
