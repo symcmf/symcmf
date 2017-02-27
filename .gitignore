@@ -20,3 +20,5 @@
 /web/sitemap*
 tests/_output/*
 tests/_output/*
+
+web/uploads/*
