@@ -39,7 +39,7 @@
 
         {% block sonata_page_top_bar %}
             {% block page_top_bar %} {# Deprecated block #}
-                {% if (is_granted('ROLE_SUPER_ADMIN') and sonata_page.isEditor) or ( app.user and is_granted('ROLE_PREVIOUS_ADMIN') ) %}
+                {% if sonata_page.isEditor or ( app.user and is_granted('ROLE_PREVIOUS_ADMIN') ) %}
                     {% if sonata_page.isEditor and sonata_page.isInlineEditionOn %}
                         <!-- CMS specific variables -->
                         <script>

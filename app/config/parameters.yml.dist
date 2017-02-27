@@ -36,4 +36,4 @@ parameters:
     admin_address: super@mail.com
     admin_name: Admin
     link:  https://sonata-cmf.org
-    title: Sonata CMF
+    title: Symfony CMF
