@@ -62,7 +62,7 @@ Symfony CMF
 6. Create all the database tables
 
     ```
-    ./app/db-update.sh
+    bash app/db-update.sh
     ```
 
 ===========================
@@ -72,10 +72,10 @@ Symfony CMF
 0. Setup CMF site
 
     ```
-    ./app/setup.sh
+    bash app/setup.sh
     ```
      
-     > It will be run next commands:
+     > It will execute next commands:
      
 1. Create at least one site      
     

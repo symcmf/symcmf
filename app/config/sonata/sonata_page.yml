@@ -33,7 +33,7 @@ sonata_page:
             name: 'default'
             containers:
                 header:
-                    name: header
+                    name: content_header
                 content_top:
                     name: content_top
                 content:
@@ -41,7 +41,7 @@ sonata_page:
                 content_bottom:
                     name: content_bottom
                 footer:
-                    name: footer
+                    name: content_footer
             matrix:
                 layout: |
                         HHHHHHHH
@@ -54,11 +54,11 @@ sonata_page:
                         FFFFFFFF
 
                 mapping:
-                        H: header
+                        H: content_header
                         T: content_top
                         C: content
                         B: content_bottom
-                        F: footer
+                        F: content_footer
         2columns:
             path: 'ApplicationSonataPageBundle::2columns_layout.html.twig'
             name: '2 columns layout'
