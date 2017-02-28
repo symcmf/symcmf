@@ -71,3 +71,15 @@ services:
 
     app.sitemap_service:
             class: AppBundle\Services\SitemapIterator
+
+    sonata.block.service.menu:
+        class: Sonata\BlockBundle\Block\Service\MenuBlockService
+        tags:
+            - { name: sonata.block }
+        arguments: [ sonata.block.menu, '@templating', '@knp_menu.menu_provider', { main: main } ]
+
+    sonata.block.menu.main:
+        class: AppBundle\Menu\MenuBuilder
+        arguments: ["@knp_menu.factory"]
+        tags:
+            - { name: knp_menu.menu_builder, method: createMainMenu, alias: main }

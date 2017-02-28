@@ -4,6 +4,7 @@
     <div class="container">
         <div class="content">
             <div class="row page-header">
+                {#{{ knp_menu_render('main') }}#}
                 {% include "SonataPageBundle:Block:block_container_header.html.twig" %}
             </div>
             {% block sonata_page_breadcrumb %}
