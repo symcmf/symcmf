@@ -1,5 +1,9 @@
 sonata_block:
     default_contexts: [sonata_page_bundle]
+
+    menus:
+        "AppBundle:MenuBuilder:createMainMenu": "Main Menu"
+
     blocks:
         sonata.admin.block.stats:
             contexts:   [admin]

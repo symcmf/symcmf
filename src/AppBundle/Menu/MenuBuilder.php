@@ -4,24 +4,28 @@ namespace AppBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 
+/**
+ * Class MenuBuilder
+ * @package AppBundle\Menu
+ */
 class MenuBuilder
 {
-    private $factory;
-
     /**
      * @param FactoryInterface $factory
+     * @param array $options
      *
-     * Add any other dependency you need
+     * @return \Knp\Menu\ItemInterface
      */
-    public function __construct(FactoryInterface $factory)
+    public function createMainMenu(FactoryInterface $factory, array $options)
     {
-        $this->factory = $factory;
-    }
-
-    public function createMainMenu(array $options)
-    {
-        $menu = $this->factory->createItem('root');
-        $menu->addChild('Home', array('route' => 'homepage'));
+        $menu = $factory->createItem('root');
+        $menu->addChild('Home', ['route' => 'homepage']);
+        $menu->addChild('Admin', [
+            'route' => 'page_slug',
+            'routeParameters' => [
+                'path' => '/admin'
+            ]
+        ]);
         // ... add more children
 
         return $menu;
