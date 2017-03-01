@@ -24,7 +24,7 @@ sonata_page:
         - ^/admin\/   # ignore admin route, ie route containing 'admin'
 
     page_defaults:
-        homepage: { decorate: true} # disable decoration for homepage, key - is a page route
+        homepage: { decorate: false} # disable decoration for homepage, key - is a page route
 
     default_template: default # template key from templates section, used as default for pages
     templates:
@@ -32,33 +32,33 @@ sonata_page:
             path: 'ApplicationSonataPageBundle::layout.html.twig'
             name: 'default'
             containers:
-                content_header:
-                    name: content_header
+                header:
+                    name: header
                 content_top:
                     name: content_top
                 content:
                     name: content
                 content_bottom:
                     name: content_bottom
-                content_footer:
-                    name: content_footer
+                footer:
+                    name: footer
             matrix:
                 layout: |
                         HHHHHHHH
                         TTTTBBBB
                         TTTTBBBB
                         TTTTBBBB
-                        TTTTBBBB
+                        CCCCCCCC
                         CCCCCCCC
                         CCCCCCCC
                         FFFFFFFF
 
                 mapping:
-                        H: content_header
+                        H: header
                         T: content_top
                         C: content
                         B: content_bottom
-                        F: content_footer
+                        F: footer
         2columns:
             path: 'ApplicationSonataPageBundle::2columns_layout.html.twig'
             name: '2 columns layout'
@@ -91,13 +91,13 @@ sonata_page:
                         BBBBBBBBBB
                         FFFFFFFFFF
                 mapping:
-                       H: content_header
+                       H: header
                        T: content_top
                        L: left_col
                        R: right_col
                        C: content
                        B: content_bottom
-                       F: content_footer
+                       F: footer
     # manage the http errors
     catch_exceptions:
         not_found: [404]    # render 404 page with "not_found" key (name generated: _page_internal_error_{key})

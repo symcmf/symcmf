@@ -5,37 +5,71 @@
             <option name="fields">username</option>
         </constraint>
         <property name="username">
-            <constraint name="NotBlank"/>
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>Registration</value>
+                    <value>Profile</value>
+                </option>
+            </constraint>
             <constraint name="Length">
                 <option name="min">2</option>
                 <option name="max">255</option>
+                <option name="groups">
+                    <value>Registration</value>
+                    <value>Profile</value>
+                </option>
             </constraint>
         </property>
+
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">email</option>
         </constraint>
         <property name="email">
-            <constraint name="NotNull"/>
-            <constraint name="Email"/>
+            <constraint name="NotBlank">
+                <option name="groups">
+                    <value>Registration</value>
+                    <value>Profile</value>
+                </option>
+            </constraint>
             <constraint name="Length">
                 <option name="min">2</option>
-                <option name="max">255</option>
+                <option name="max">254</option>
+                <option name="groups">
+                    <value>Registration</value>
+                    <value>Profile</value>
+                </option>
+            </constraint>
+            <constraint name="Email">
+                <option name="groups">
+                    <value>Registration</value>
+                    <value>Profile</value>
+                </option>
             </constraint>
         </property>
         <property name="plainPassword">
-            <constraint name="NotBlank"/>
+            <constraint name="NotBlank">
+                <option name="groups">Registration</option>
+            </constraint>
             <constraint name="Length">
                 <option name="min">2</option>
                 <option name="max">4096</option>
+                <option name="groups">
+                    <value>Registration</value>
+                    <value>Profile</value>
+                </option>
             </constraint>
         </property>
     </class>
+
     <class name="FOS\UserBundle\Model\Group">
         <property name="name">
-            <constraint name="NotBlank"/>
+            <constraint name="NotBlank">
+                <option name="groups">Registration</option>
+            </constraint>
             <constraint name="Length">
                 <option name="min">2</option>
                 <option name="max">255</option>
+                <option name="groups">Registration</option>
             </constraint>
         </property>
     </class>

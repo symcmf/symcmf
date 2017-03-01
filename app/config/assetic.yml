@@ -81,3 +81,27 @@ assetic:
         font-awesome-woff:
             inputs: 'bundles/sonatacore/vendor/components-font-awesome/fonts/fontawesome-webfont.woff'
             output: 'fonts/fontawesome-webfont.woff'
+
+        font-awesome-otf:
+            inputs: 'bundles/sonatacore/vendor/components-font-awesome/fonts/FontAwesome.otf'
+            output: 'fonts/FontAwesome.otf'
+
+        glyphicons-halflings-regular-eot:
+            inputs: 'bundles/sonatacore/vendor/bootstrap/dist/fonts/glyphicons-halflings-regular.eot'
+            output: 'fonts/glyphicons-halflings-regular.eot'
+
+        glyphicons-halflings-regular-svg:
+            inputs: 'bundles/sonatacore/vendor/bootstrap/dist/fonts/glyphicons-halflings-regular.svg'
+            output: 'fonts/glyphicons-halflings-regular.svg'
+
+        glyphicons-halflings-regular-ttf:
+            inputs: 'bundles/sonatacore/vendor/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf'
+            output: 'fonts/glyphicons-halflings-regular.ttf'
+
+        glyphicons-halflings-regular-woff:
+            inputs: 'bundles/sonatacore/vendor/bootstrap/dist/fonts/glyphicons-halflings-regular.woff'
+            output: 'fonts/glyphicons-halflings-regular.woff'
+
+        glyphicons-halflings-regular-woff2:
+            inputs: 'bundles/sonatacore/vendor/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2'
+            output: 'fonts/glyphicons-halflings-regular.woff2'

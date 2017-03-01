@@ -4,8 +4,10 @@
     <div class="container">
         <div class="content">
             <div class="row page-header">
-                {#{{ knp_menu_render('main') }}#}
-                {% include "SonataPageBundle:Block:block_container_header.html.twig" %}
+                {% if page is defined %}
+                    {{ sonata_page_render_container('header', 'global') }}
+                    {{ sonata_page_render_container('header', page) }}
+                {% endif %}
             </div>
             {% block sonata_page_breadcrumb %}
                 <div class="row">
@@ -51,8 +53,10 @@
         </div>
 
         <footer class="row">
-            {{ sonata_page_render_container('content_footer', 'global') }}
-            {{ sonata_page_render_container('footer_left', 'global') }}
+            {% if page is defined %}
+                {{ sonata_page_render_container('footer', 'global') }}
+                {{ sonata_page_render_container('footer', page) }}
+            {% endif %}
         </footer>
     </div>
 {% endblock %}
