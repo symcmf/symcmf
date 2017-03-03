@@ -2,7 +2,8 @@ sonata_admin:
     dashboard:
         groups:
             sonata.admin.group.content:
-                label:           Content
+                label:           sonata_context
+                label_catalogue: SonataAdminBundle
                 icon:            '<i class="fa fa-th"></i>'
                 items:
                     - sonata.news.admin.comment
@@ -20,7 +21,8 @@ sonata_admin:
                     - sonata.classification.admin.collection
 
             sonata.admin.group.site_builder:
-                label:           Site build
+                label:           sonata_sites
+                label_catalogue: SonataAdminBundle
                 icon:            '<i class="fa fa-puzzle-piece"></i>'
                 items:
                     - sonata.page.admin.page
@@ -34,7 +36,6 @@ sonata_admin:
                 items:
                     - sonata.user.admin.user
                     - sonata.user.admin.group
-                    - sonata.page.admin.site
 
             sonata.admin.group.message:
                 label:           sonata_message

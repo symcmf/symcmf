@@ -13,12 +13,22 @@
                 <target>Message templates list</target>
             </trans-unit>
 
+            <trans-unit id="breadcrumb.link_message_template_create">
+                <source>breadcrumb.link_message_template_create</source>
+                <target>Create message template</target>
+            </trans-unit>
+
+            <trans-unit id="breadcrumb.link_message_user_create">
+                <source>breadcrumb.link_message_user_create</source>
+                <target>Send message</target>
+            </trans-unit>
+
             <trans-unit id="template.name">
                 <source>template.name</source>
                 <target>Message templates</target>
             </trans-unit>
-            <trans-unit id="form.label_subject ">
-                <source>form.label_subject </source>
+            <trans-unit id="form.label_subject">
+                <source>form.label_subject</source>
                 <target>Subject</target>
             </trans-unit>
             <trans-unit id="form.label_template">
