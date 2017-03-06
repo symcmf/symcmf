@@ -5,8 +5,8 @@ class SendingMessageFunctionalCest
     public function _before(FunctionalTester $I)
     {
         $I->amOnPage('/admin/login');
-        $I->fillField('_username', 'adminuser');
-        $I->fillField('_password', '123456');
+        $I->fillField('_username', 'root');
+        $I->fillField('_password', 'root');
         $I->click(['css' => "button[type='submit']"]);
     }
 
