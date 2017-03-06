@@ -13,12 +13,12 @@ echo "Install composer"
 curl -sS https://getcomposer.org/installer | php
 
 echo "Get libraries for project"
-php composer.phar install --prefer-source
+php composer.phar install --prefer-source --no-scripts
 
 echo "Set config file with params"
-cp app/config/parameters.yml.dist app/config/parameters.yml
+cp app/config/parameters.gitlab-ci.yml app/config/parameters.yml
 
 echo "Install DB and seeders for it"
-./app/db-update.sh
+bash app/db-update.sh
 
 ping -c 3 mysql
