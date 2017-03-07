@@ -19,3 +19,4 @@ codeception:php7.0:mysql.latest:
     stage: test
     script:
       - php vendor/codeception/codeception/codecept run functional
+      - vendor/bin/phpunit --coverage-text --colors=never
