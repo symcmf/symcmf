@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-service mysql start
-mysql -h localhost --user=homestead --password=secret -e "CREATE DATABASE IF NOT EXISTS homestead CHARACTER SET utf8 COLLATE utf8_general_ci;"
-mysql -h localhost --user=homestead --password=secret homestead < tests/_data/dump.sql
+sudo service mysql start
+mysql -h localhost --user=root --password=root -e "CREATE DATABASE IF NOT EXISTS homestead CHARACTER SET utf8 COLLATE utf8_general_ci;"
+mysql -h localhost --user=root --password=root homestead < tests/_data/dump.sql
 
 echo "Set config file with params"
 cp app/config/parameters.gitlab-ci.yml app/config/parameters.yml
