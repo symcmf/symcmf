@@ -3,7 +3,6 @@
 service mysql start
 mysql -h localhost --user=homestead --password=secret -e "CREATE DATABASE IF NOT EXISTS homestead CHARACTER SET utf8 COLLATE utf8_general_ci;"
 mysql -h localhost --user=homestead --password=secret homestead < tests/_data/dump.sql
-composer install
 
 echo "Get libraries for project"
 php composer.phar install --prefer-source --no-scripts
