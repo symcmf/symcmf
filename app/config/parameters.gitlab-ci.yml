@@ -5,8 +5,8 @@ parameters:
     database_host:     mysql
     database_port:     3306
     database_name:     homestead
-    database_user:     homestead
-    database_password: secret
+    database_user:     root
+    database_password: root
     # You should uncomment this if you want use pdo_sqlite
     # database_path: "%kernel.root_dir%/data.db3"
 

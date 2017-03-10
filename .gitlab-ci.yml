@@ -2,8 +2,8 @@
 variables:
 
     MYSQL_ROOT_PASSWORD: secret
-    MYSQL_USER: homestead
-    MYSQL_PASSWORD: secret
+    MYSQL_USER: root
+    MYSQL_PASSWORD: root
     MYSQL_DATABASE: homestead
 
 before_script:
