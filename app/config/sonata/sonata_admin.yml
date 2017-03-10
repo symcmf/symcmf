@@ -1,0 +1,72 @@
+sonata_admin:
+    dashboard:
+        groups:
+            sonata.admin.group.content:
+                label:           sonata_context
+                label_catalogue: SonataAdminBundle
+                icon:            '<i class="fa fa-th"></i>'
+                items:
+                    - sonata.news.admin.comment
+                    - sonata.news.admin.post
+                    - sonata.media.admin.media
+                    - sonata.media.admin.gallery
+
+            sonata.admin.group.classification:
+                label:           sonata_classification
+                label_catalogue: SonataClassificationBundle
+                icon:            '<i class="fa fa-sitemap"></i>'
+                items:
+                    - sonata.classification.admin.category
+                    - sonata.classification.admin.tag
+                    - sonata.classification.admin.collection
+
+            sonata.admin.group.site_builder:
+                label:           sonata_sites
+                label_catalogue: SonataAdminBundle
+                icon:            '<i class="fa fa-puzzle-piece"></i>'
+                items:
+                    - sonata.page.admin.page
+                    - sonata.page.admin.site
+                    - sonata.page.admin.shared_block
+
+            sonata.admin.group.administration:
+                label:           sonata_administration
+                label_catalogue: SonataAdminBundle
+                icon:            '<i class="fa fa-cogs"></i>'
+                items:
+                    - sonata.user.admin.user
+                    - sonata.user.admin.group
+
+            sonata.admin.group.message:
+                label:           sonata_message
+                label_catalogue: SonataAdminBundle
+                icon:            '<i class="fa fa-envelope-o"></i>'
+                items:
+                    - admin.message_entity
+                    - admin.msg_user_entity
+
+    assets:
+        stylesheets:
+                # The sandbox includes default pre-optimized version of some css and js
+                # So you can either use them, and add your custom assets here
+                #   ~ or ~
+                # tweak the assetic.yml and the following lines
+                - assetic/sonata_admin_css.css
+                - bundles/sonataadmin/vendor/admin-lte/dist/css/skins/skin-black.min.css
+                - bundles/sonatacore/vendor/components-font-awesome/css/font-awesome.min.css
+                - bundles/sonataformatter/markitup/skins/sonata/style.css
+                - bundles/sonataformatter/markitup/sets/markdown/style.css
+                - bundles/sonataformatter/markitup/sets/html/style.css
+                - bundles/sonataformatter/markitup/sets/textile/style.css
+                - bundles/sonatacore/vendor/select2/select2.css
+                - bundles/sonatacore/vendor/select2/select2-bootstrap.css
+                - bundles/sonataadmin/vendor/iCheck/skins/square/blue.css
+
+        javascripts:
+                - assetic/sonata_admin_js.js
+                - bundles/sonataformatter/vendor/ckeditor/ckeditor.js
+                - bundles/sonataformatter/vendor/markitup-markitup/markitup/jquery.markitup.js
+                - bundles/sonataformatter/markitup/sets/markdown/set.js
+                - bundles/sonataformatter/markitup/sets/html/set.js
+                - bundles/sonataformatter/markitup/sets/textile/set.js
+                - bundles/sonatacore/vendor/select2/select2.js

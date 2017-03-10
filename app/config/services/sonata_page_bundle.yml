@@ -1,0 +1,21 @@
+services:
+    # ovverride controllers of pageBundle (api) - support FOSRest 2.0
+    sonata.page.controller.api.page:
+        class: Application\Sonata\PageBundle\Controller\Api\PageController
+        arguments:
+              - '@sonata.page.manager.site'
+              - '@sonata.page.manager.page'
+              - '@sonata.page.manager.block'
+              - '@form.factory'
+              - '@sonata.notification.backend'
+
+    sonata.page.controller.api.site:
+        class: Application\Sonata\PageBundle\Controller\Api\SiteController
+        arguments:
+              - '@sonata.page.manager.site'
+              - '@form.factory'
+
+    sonata.page.controller.api.snapshot:
+        class: Application\Sonata\PageBundle\Controller\Api\SnapshotController
+        arguments:
+              - '@sonata.page.manager.snapshot'

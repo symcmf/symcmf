@@ -1,0 +1,15 @@
+services:
+    # ovverride controllers of pageBundle (api) - support FOSRest 2.0
+    sonata.news.controller.api.post:
+        class: Application\Sonata\NewsBundle\Controller\Api\PostController
+        arguments:
+                - '@sonata.news.manager.post'
+                - '@sonata.news.manager.comment'
+                - '@sonata.news.mailer'
+                - '@form.factory'
+                - '@sonata.formatter.pool'
+
+    sonata.news.controller.api.comment:
+        class: Application\Sonata\NewsBundle\Controller\Api\CommentController
+        arguments:
+                - '@sonata.news.manager.comment'

@@ -1,69 +1,127 @@
-Symfony Standard Edition
+Symfony CMF
 ========================
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony
-application that you can use as the skeleton for your new applications.
+## Setup development environment with Homestead 
 
-For details on how to download and get started with Symfony, see the
-[Installation][1] chapter of the Symfony Documentation.
+1. Clone project
 
-What's inside?
---------------
+    with SSH
 
-The Symfony Standard Edition is configured with the following defaults:
+    ```
+        git clone git@nix.githost.io:php-skillup/symfony-cmf.git
+    ```
+    
+    or with HTTPS
+    
+    ```
+        git clone https://nix.githost.io/php-skillup/symfony-cmf.git
+    ```
+	
+2. Run composer
+   
+       ```
+       composer install --no-scripts
+       ```
+3. Setup homestead/vagrant environment in project folder:
+	
+    ```
+    ./vendor/bin/homestead make
+	```
 
-  * An AppBundle you can use to start coding;
+4. Edit Homestead.yaml:
+    > Remove the following lines from Homestead.yaml if you don't have this SSH keys on your machine (https://laravel.com/docs/master/homestead#installation-and-setup):
+	> Or generate and paste your SSH keys.
+    
+    ```
+    authorize: ~/.ssh/id_rsa.pub
+    keys:
+        - ~/.ssh/id_rsa
+     ```
+     
+     > Set type option that tells Homestead to use the Symfony nginx configuration.
+     
+     ```
+    sites:
+        - map: homestead.app
+          to: "/home/vagrant/yourprojectfolder/web"
+          type: symfony
+    ```
 
-  * Twig as the only configured template engine;
+5. Run vagrant
+	
+    ```
+    vagrant up
+    ```
+    
+5. Run composer install for running scripts
+    
+    ```
+    composer install
+    ```
+    
+6. Create all the database tables
 
-  * Doctrine ORM/DBAL;
+    ```
+    bash app/db-update.sh
+    ```
 
-  * Swiftmailer;
+===========================
+     
+## Symfony CMF Setup
+     
+0. Setup CMF site
 
-  * Annotations enabled for everything.
+    ```
+    bash app/setup.sh
+    ```
+     
+     > It will execute next commands:
+     
+1. Create at least one site      
+    
+     ```
+    php app/console sonata:page:create-site
+    ```
+    
+2. Generate pages
 
-It comes pre-configured with the following bundles:
+    ```
+    php app/console sonata:page:update-core-routes --site=all
+    ```
+    
+3. Published pages for all users 
+    
+    At this point, no snapshots are available so the end user will get an error. The following command need to be run:
+    
+    ```
+    php app/console sonata:page:create-snapshots --site=all
+    ```
+    
+4. Create admin 
 
-  * **FrameworkBundle** - The core Symfony framework bundle
+     ```
+     php app/console fos:user:create --super-admin
+     ```
+     
+5. For setup styles
+    
+    ```
+    php app/console assetic:dump web/
+    ```
+       
+6. Finally, browse [http://192.168.10.10](http://192.168.10.10), you should see the main page of application.
+   Or add to your hosts file 
+    
+     ```
+        192.168.10.10  homestead.app
+     ```
+   
+     and browse [http://homestead.app](http://homestead.app).
+     
+7. Generate sitemap 
 
-  * [**SensioFrameworkExtraBundle**][6] - Adds several enhancements, including
-    template and routing annotation capability
-
-  * [**DoctrineBundle**][7] - Adds support for the Doctrine ORM
-
-  * [**TwigBundle**][8] - Adds support for the Twig templating engine
-
-  * [**SecurityBundle**][9] - Adds security by integrating Symfony's security
-    component
-
-  * [**SwiftmailerBundle**][10] - Adds support for Swiftmailer, a library for
-    sending emails
-
-  * [**MonologBundle**][11] - Adds support for Monolog, a logging library
-
-  * **WebProfilerBundle** (in dev/test env) - Adds profiling functionality and
-    the web debug toolbar
-
-  * **SensioDistributionBundle** (in dev/test env) - Adds functionality for
-    configuring and working with Symfony distributions
-
-  * [**SensioGeneratorBundle**][13] (in dev/test env) - Adds code generation
-    capabilities
-
-  * **DebugBundle** (in dev/test env) - Adds Debug and VarDumper component
-    integration
-
-All libraries and bundles included in the Symfony Standard Edition are
-released under the MIT or BSD license.
-
-Enjoy!
-
-[1]:  https://symfony.com/doc/3.2/setup.html
-[6]:  https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/index.html
-[7]:  https://symfony.com/doc/3.2/doctrine.html
-[8]:  https://symfony.com/doc/3.2/templating.html
-[9]:  https://symfony.com/doc/3.2/security.html
-[10]: https://symfony.com/doc/3.2/email.html
-[11]: https://symfony.com/doc/3.2/logging.html
-[12]: https://symfony.com/doc/3.2/assetic/asset_management.html
-[13]: https://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html
+    ```
+   php app/console sonata:seo:sitemap <dir_for_sitemap_files> <host>
+    ```
+    
+   > The command will generate all files in a temporary folder to avoid issue will files are indexed. Once the files are generated then the files will be copied to the <_dir_for_sitemap_files_> folder. The <_host_> argument will be used to prefix url with the provided domain.

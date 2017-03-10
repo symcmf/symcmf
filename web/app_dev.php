@@ -1,5 +1,6 @@
 <?php
 
+use Sonata\PageBundle\Request\RequestFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Debug\Debug;
 
@@ -12,7 +13,7 @@ use Symfony\Component\Debug\Debug;
 // Feel free to remove this, extend it, or make something more sophisticated.
 if (isset($_SERVER['HTTP_CLIENT_IP'])
     || isset($_SERVER['HTTP_X_FORWARDED_FOR'])
-    || !(in_array(@$_SERVER['REMOTE_ADDR'], ['127.0.0.1', '::1']) || php_sapi_name() === 'cli-server')
+    || php_sapi_name() === 'cli-server'
 ) {
     header('HTTP/1.0 403 Forbidden');
     exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
@@ -24,7 +25,12 @@ Debug::enable();
 
 $kernel = new AppKernel('dev', true);
 $kernel->loadClassCache();
+
+// multisite : host (SonataPageBundle)
 $request = Request::createFromGlobals();
+// multisite: host_with_path (SonataPageBundle)
+//$request = RequestFactory::createFromGlobals('host_with_path');
+
 $response = $kernel->handle($request);
 $response->send();
 $kernel->terminate($request, $response);

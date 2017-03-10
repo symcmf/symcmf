@@ -1,3 +1,11 @@
+imports:
+    # add services for SonataPageBundle
+    - { resource: services/sonata_page_bundle.yml }
+    # add services for SonataNewsBundle
+    - { resource: services/sonata_news_bundle.yml }
+#     add services for MessageBundle
+    - { resource: services/message_bundle.yml }
+
 # Learn more about services, parameters and containers at
 # http://symfony.com/doc/current/service_container.html
 parameters:
@@ -7,3 +15,65 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+    # custom NixMailer for FOSUserMailer
+    nix_mailer:
+        class: MessageBundle\Services\Mailers\NixMailer
+        arguments:
+            - '@swiftmailer.mailer.nix_mailer.transport.real'
+            - '%nix_header_project%'
+            - '%nix_header_emails%'
+            - '%nix_header_external%'
+
+    # custom NixMailerService for FOSUserMailer
+    nix_mailer_service:
+        class:  Application\Sonata\UserBundle\Services\NixMailerService
+        arguments:
+            - '@nix_mailer'
+            - '@router'
+            - '@templating'
+            -
+                confirmation.template: '%fos_user.registration.confirmation.template%'
+                resetting.template:    '%fos_user.resetting.email.template%'
+                from_email:
+                    confirmation:      '%fos_user.registration.confirmation.from_email%'
+                    resetting:         '%fos_user.resetting.email.from_email%'
+
+    # simple mailer service for EmailBundle
+    mailer_emailbundle_service:
+        class: MessageBundle\Services\Mailers\MailerService
+        arguments: ['@nix_mailer', '%admin_address%']
+
+    # service for EmailBundle
+    message_service:
+        class: MessageBundle\Services\MessageService
+        arguments: ['@doctrine.orm.default_entity_manager','@service_container', '@mailer_emailbundle_service']
+
+     # provider for social auth
+    fos_user_provider:
+        class: Application\Sonata\UserBundle\Security\Core\User\FOSUBUserProvider
+        #this is the place where the properties are passed to the UserProvider - see config.yml
+        arguments: ['@fos_user.user_manager', { facebook: facebookId, google: googleId }]
+
+
+    # Sonata entitites
+    admin.message_entity:
+        class: MessageBundle\SonataAdmin\MessageTemplateEntity
+        arguments: [~, MessageBundle\Entity\MessageTemplate, ~, '@message_service']
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: sonata.admin.group.message, label: message_template, label_translator_strategy: sonata.admin.label.strategy.underscore }
+
+    admin.msg_user_entity:
+        class: MessageBundle\SonataAdmin\MessageUserEntity
+        arguments: [~, MessageBundle\Entity\MessageUser, ~, '@message_service', '@doctrine.orm.default_entity_manager']
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: sonata.admin.group.message, label: sending_message, label_translator_strategy: sonata.admin.label.strategy.underscore  }
+
+    app.sitemap_service:
+            class: AppBundle\Services\SitemapIterator
+
+    sonata.block.menu.main:
+        class: AppBundle\Menu\MenuBuilder
+        arguments: ["@knp_menu.factory"]
+        tags:
+            - { name: knp_menu.menu_builder, method: createMainMenu, alias: main }
