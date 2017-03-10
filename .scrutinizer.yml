@@ -1,7 +1,10 @@
 build:
+  dependencies:
+    override:
+      - composer install --no-interaction --no-scripts
+
   tests:
     before:
-
       - echo "USE mysql;\nCREATE USER 'homestead'@'localhost' IDENTIFIED BY 'secret';\n" | mysql -u root
       - echo "GRANT ALL PRIVILEGES ON * . * TO 'homestead'@'localhost';\n" | mysql -u root
       - bash initial.sh
