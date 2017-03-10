@@ -5,10 +5,10 @@ build:
 
   project_setup:
     before:
-      - sudo service start mysql || true
-      - mysql -e "CREATE DATABASE IF NOT EXISTS homestead CHARACTER SET utf8 COLLATE utf8_general_ci;"
-      - mysql -e "UPDATE user SET password=PASSWORD('root') WHERE user='root';"
-      - mysql -e "FLUSH PRIVILEGES;"
+      - echo "USE mysql;\nUPDATE user SET password=PASSWORD('root') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
+      - service mysql start
+      - mysql -h localhost --user=homestead --password=secret -e "CREATE DATABASE IF NOT EXISTS homestead CHARACTER SET utf8 COLLATE utf8_general_ci;"
+      - mysql -h localhost --user=homestead --password=secret homestead < tests/_data/dump.sql
 
     override:
       - cp app/config/parameters.gitlab-ci.yml app/config/parameters.yml
