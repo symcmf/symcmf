@@ -1,13 +1,16 @@
 sonata_page:
-    slugify_service:   sonata.core.slugify.cocur # old BC value is sonata.core.slugify.native
     # Generates a snapshot when a page is saved (from the admin)
-    direct_publication: false # or %kernel.debug% if you want to publish in dev mode (but not in prod)
+    direct_publication:   false # or %kernel.debug% if you want to publish in dev mode (but not in prod)
+    multisite: host_with_path # host
+    use_streamed_response: false # set the value to false in debug mode or if the reverse proxy does not handle streamed response
 
-    multisite: host
-    use_streamed_response: true # set the value to false in debug mode or if the reverse proxy does not handle streamed response
+    ignore_uri_patterns:
+        - ^/admin(.*)
+        - ^/api/(.*)
+
     ignore_route_patterns:
-        - ^(.*)admin(.*)   # ignore admin route, ie route containing 'admin'
-        - ^_(.*)          # ignore symfony routes
+        - (.*)admin(.*)     # ignore admin route, ie route containing 'admin'
+        - ^_(.*)            # ignore symfony routes
 
     ignore_routes:
         - sonata_page_cache_esi
@@ -20,11 +23,11 @@ sonata_page:
         - sonata_cache_js_sync
         - sonata_cache_apc
 
-    ignore_uri_patterns:
-        - ^/admin\/   # ignore admin route, ie route containing 'admin'
-
-    page_defaults:
-        homepage: { decorate: false} # disable decoration for homepage, key - is a page route
+    cache_invalidation:
+        service:  sonata.page.cache.invalidation.simple
+        recorder: sonata.page.cache.recorder
+        classes:
+            "Application\Sonata\PageBundle\Entity\Block": getId
 
     default_template: default # template key from templates section, used as default for pages
     templates:
@@ -98,6 +101,20 @@ sonata_page:
                        C: content
                        B: content_bottom
                        F: footer
+
+    page_defaults:
+        homepage: { decorate: false, enabled: true }
+
+    caches:
+        esi:
+            token:    add an unique token here # default is a random value
+            version:  3                        # version 3 is the default on debian wheezy ...
+            servers:
+                # you need to ajust this configuration to match your varnish configuration
+                - %sonata_page.varnish.command%
+        ssi:
+            token:    add an unique token here # default is a random value
+
     # manage the http errors
     catch_exceptions:
         not_found: [404]    # render 404 page with "not_found" key (name generated: _page_internal_error_{key})

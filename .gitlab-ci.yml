@@ -1,0 +1,21 @@
+# Variables and root user used
+variables:
+
+    MYSQL_ROOT_PASSWORD: secret
+    MYSQL_USER: homestead
+    MYSQL_PASSWORD: secret
+    MYSQL_DATABASE: homestead
+
+before_script:
+    - bash .gitlab-ci.sh
+    - bash docker-install.sh
+
+codeception:php7.0:mysql.latest:
+    # Select image from https://hub.docker.com/r/_/php/
+    image: php:7.0
+    # Services
+    services:
+      - mysql:latest
+    stage: test
+    script:
+      - php vendor/codeception/codeception/codecept run functional

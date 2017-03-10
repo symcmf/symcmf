@@ -7,7 +7,7 @@ php app/console sonata:page:create-snapshots --site=1
 echo ' Done! '
 
 echo 'Add admin user ...'
-php app/console fos:user:create --super-admin
+php app/console fos:user:create root root@domain.com root --super-admin
 echo ' Done! '
 
 echo ' Setup styles ... '
