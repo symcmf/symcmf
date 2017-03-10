@@ -8,13 +8,13 @@ Symfony CMF
     with SSH
 
     ```
-        git clone git@nix.githost.io:php-skillup/symfony-cmf.git
+        git clone git@github.com:symcmf/symcmf.git
     ```
     
     or with HTTPS
     
     ```
-        git clone https://nix.githost.io/php-skillup/symfony-cmf.git
+        git clone https://github.com/symcmf/symcmf.git
     ```
 	
 2. Run composer
