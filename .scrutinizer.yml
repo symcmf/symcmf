@@ -1,19 +1,38 @@
 build:
+  dependencies:
+    override:
+      - composer install --no-interaction --no-scripts
+
+  project_setup:
+      override:
+      - echo "USE mysql;\nUPDATE user SET password=PASSWORD('root') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
+      - bash initial.sh
+
   tests:
     before:
+      - echo "Generate build_bootstrap for testing"
+      - php vendor/sensio/distribution-bundle/Resources/bin/build_bootstrap.php
 
-      - echo "USE mysql;\nCREATE USER 'homestead'@'localhost' IDENTIFIED BY 'secret';\n" | mysql -u root
-      - echo "GRANT ALL PRIVILEGES ON * . * TO 'homestead'@'localhost';\n" | mysql -u root
-      - bash initial.sh
     override:
       -
-        command: 'php vendor/codeception/codeception/codecept run functional --coverage-xml'
+        command: 'vendor/codeception/codeception/codecept run functional --coverage-xml'
         coverage:
           file: 'tests/_output/coverage.xml'
           format: 'clover'
+
   environment:
     php: 7.0
     mysql: 5.6
+    apache2:
+            modules: ['rewrite']
+            sites:
+                symfony_app:
+                    web_root: 'web/'
+                    host: 'local.dev'
+                    rules:
+                        - 'RewriteCond %{HTTP_REFERER} !^$'
+                        - 'RewriteCond %{HTTP_REFERER} !^http://(www.)?example.com/ [NC]'
+                        - 'RewriteRule .(gif|jpg|png)$ - [F]'
 checks:
   php: true
 filter:
