@@ -1,38 +1,7 @@
-# This file is a "template" of what your parameters.yml file should look like
-# Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
-# http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
+# add configurations
+- { resource: parameters.all.yml }
+
+# Configuration for gitlab pipelines
 parameters:
     database_host:     mysql
     database_port:     3306
-    database_name:     homestead
-    database_user:     root
-    database_password: root
-    # You should uncomment this if you want use pdo_sqlite
-    # database_path: "%kernel.root_dir%/data.db3"
-
-    mailer_transport:  smtp
-    mailer_host:       127.0.0.1
-    mailer_port:       ~
-    mailer_user:       ~
-    mailer_password:   ~
-
-    # A secret key that's used to generate certain security-related tokens
-    secret:            ThisTokenIsNotSoSecretChangeIt
-
-    # Configuration for facebook
-    facebook_app_id: 1743294792554957
-    facebook_app_secret: 3419ddc4ea859d469ac509dc793a0185
-
-    google_app_id: 664637073932-di639tn4pjrffdlr9pgtc1bm806dr3ga.apps.googleusercontent.com
-    google_app_secret: Cc5yktRstazRAWeS4rm9V_mU
-
-    # Configuration for CMF
-
-    admin_address: super@mail.com
-    admin_name: Admin
-    link:  https://sonata-cmf.org
-    title: Symfony CMF
-
-    # Sonata Page Options
-    sonata_page.varnish.command: if [ ! -r "/etc/varnish/secret" ]; then echo "VALID ERROR :/"; else varnishadm -S /etc/varnish/secret -T 127.0.0.1:6082 {{ COMMAND }} "{{ EXPRESSION }}"; fi; # you need to adapt this line to work with your configuration
-
