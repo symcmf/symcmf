@@ -8,13 +8,13 @@ Symfony CMF
     with SSH
 
     ```
-        git clone git@nix.githost.io:php-skillup/symfony-cmf.git
+        git clone git@github.com:symcmf/symcmf.git
     ```
     
     or with HTTPS
     
     ```
-        git clone https://nix.githost.io/php-skillup/symfony-cmf.git
+        git clone https://github.com/symcmf/symcmf.git
     ```
 	
 2. Run composer
@@ -62,54 +62,31 @@ Symfony CMF
 6. Create all the database tables
 
     ```
-    bash app/db-update.sh
+    ./app/db-update.sh
     ```
+    
+    > If you will get error "Permission denied" you have to change access rules with next command 
 
-===========================
-     
+    ```
+    sudo chmod -R 777 app/
+    ```
+    
 ## Symfony CMF Setup
      
-0. Setup CMF site
+1. Setup CMF site
 
     ```
-    bash app/setup.sh
-    ```
-     
-     > It will execute next commands:
-     
-1. Create at least one site      
-    
-     ```
-    php app/console sonata:page:create-site
+    ./app/setup.sh
     ```
     
-2. Generate pages
-
-    ```
-    php app/console sonata:page:update-core-routes --site=all
-    ```
-    
-3. Published pages for all users 
-    
-    At this point, no snapshots are available so the end user will get an error. The following command need to be run:
-    
-    ```
-    php app/console sonata:page:create-snapshots --site=all
-    ```
-    
-4. Create admin 
-
-     ```
-     php app/console fos:user:create --super-admin
-     ```
-     
-5. For setup styles
-    
-    ```
-    php app/console assetic:dump web/
-    ```
-       
-6. Finally, browse [http://192.168.10.10](http://192.168.10.10), you should see the main page of application.
+     #### It will execute next commands:
+     - php app/console sonata:page:create-site
+     - php app/console sonata:page:update-core-routes --site=all
+     - php app/console sonata:page:create-snapshots --site=all
+     - php app/console fos:user:create --super-admin
+     - php app/console assetic:dump web/
+        
+2. After it, browse [http://192.168.10.10](http://192.168.10.10), you should see the main page of application.
    Or add to your hosts file 
     
      ```
@@ -117,11 +94,3 @@ Symfony CMF
      ```
    
      and browse [http://homestead.app](http://homestead.app).
-     
-7. Generate sitemap 
-
-    ```
-   php app/console sonata:seo:sitemap <dir_for_sitemap_files> <host>
-    ```
-    
-   > The command will generate all files in a temporary folder to avoid issue will files are indexed. Once the files are generated then the files will be copied to the <_dir_for_sitemap_files_> folder. The <_host_> argument will be used to prefix url with the provided domain.
