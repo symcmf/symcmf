@@ -19,11 +19,6 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
 
-    # Configuration for nix-mailer
-    nix_header_project: 'name-project'
-    nix_header_emails: 'emails'
-    nix_header_external: '{true}'
-
     # Configuration for facebook
     facebook_app_id: 1743294792554957
     facebook_app_secret: 3419ddc4ea859d469ac509dc793a0185
