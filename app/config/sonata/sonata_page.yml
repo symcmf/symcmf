@@ -1,7 +1,7 @@
 sonata_page:
     # Generates a snapshot when a page is saved (from the admin)
     direct_publication:   false # or %kernel.debug% if you want to publish in dev mode (but not in prod)
-    multisite: host_with_path # host
+    multisite: host #host_with_path
     use_streamed_response: false # set the value to false in debug mode or if the reverse proxy does not handle streamed response
 
     ignore_uri_patterns:

@@ -25,8 +25,12 @@ Debug::enable();
 
 $kernel = new AppKernel('dev', true);
 $kernel->loadClassCache();
-//$request = Request::createFromGlobals();
-$request = RequestFactory::createFromGlobals('host_with_path');
+
+// multisite : host (SonataPageBundle)
+$request = Request::createFromGlobals();
+// multisite: host_with_path (SonataPageBundle)
+//$request = RequestFactory::createFromGlobals('host_with_path');
+
 $response = $kernel->handle($request);
 $response->send();
 $kernel->terminate($request, $response);
