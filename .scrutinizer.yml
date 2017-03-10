@@ -6,7 +6,6 @@ build:
   project_setup:
     before:
       - echo "USE mysql;\nUPDATE user SET password=PASSWORD('root') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
-      - sudo service mysql start
       - mysql -h localhost --user=root --password=root -e "CREATE DATABASE IF NOT EXISTS homestead CHARACTER SET utf8 COLLATE utf8_general_ci;"
       - mysql -h localhost --user=root --password=root homestead < tests/_data/dump.sql
 
