@@ -4,20 +4,9 @@ build:
       - composer install --no-interaction --no-scripts
 
   project_setup:
-    before:
+      override:
       - echo "USE mysql;\nUPDATE user SET password=PASSWORD('root') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
-      - mysql -h localhost --user=root --password=root -e "CREATE DATABASE IF NOT EXISTS homestead CHARACTER SET utf8 COLLATE utf8_general_ci;"
-      - mysql -h localhost --user=root --password=root homestead < tests/_data/dump.sql
-
-    override:
-      - cp app/config/parameters.gitlab-ci.yml app/config/parameters.yml
-      - composer install
-
-      - echo "Install DB and seeders for it"
-      - bash app/db-update.sh
-
-      - echo "Setup Symfony CMF"
-      - bash app/setup.sh
+      - bash initial.sh
 
   tests:
     before:

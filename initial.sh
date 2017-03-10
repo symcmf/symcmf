@@ -5,7 +5,7 @@ mysql -h localhost --user=root --password=root -e "CREATE DATABASE IF NOT EXISTS
 mysql -h localhost --user=root --password=root homestead < tests/_data/dump.sql
 
 echo "Set config file with params"
-cp app/config/parameters.gitlab-ci.yml app/config/parameters.yml
+cp app/config/parameters.ci.yml app/config/parameters.yml
 
 echo "Get libraries for project"
 composer install
