@@ -19,20 +19,14 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
 
-    # Configuration for nix-mailer
-    nix_header_project: 'name-project'
-    nix_header_emails: 'emails'
-    nix_header_external: '{true}'
-
     # Configuration for facebook
-    facebook_app_id: 1743294792554957
-    facebook_app_secret: 3419ddc4ea859d469ac509dc793a0185
+    facebook_app_id: <your number>
+    facebook_app_secret: <your number>
 
-    google_app_id: 664637073932-di639tn4pjrffdlr9pgtc1bm806dr3ga.apps.googleusercontent.com
-    google_app_secret: Cc5yktRstazRAWeS4rm9V_mU
+    google_app_id: <your number>
+    google_app_secret: <your number>
 
     # Configuration for CMF
-
     admin_address: super@mail.com
     admin_name: Admin
     link:  https://sonata-cmf.org
