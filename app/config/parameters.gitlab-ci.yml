@@ -1,7 +1,22 @@
-# add configurations
-- { resource: parameters.all.yml }
-
 # Configuration for gitlab pipelines
 parameters:
     database_host:     mysql
     database_port:     3306
+    database_name:     homestead
+    database_user:     root
+    database_password: root
+    mailer_transport:  smtp
+    mailer_host:       127.0.0.1
+    mailer_port:       ~
+    mailer_user:       ~
+    mailer_password:   ~
+    secret:            ThisTokenIsNotSoSecretChangeIt
+    facebook_app_id:     <your number>
+    facebook_app_secret: <your number>
+    google_app_id:       <your number>
+    google_app_secret:   <your number>
+    admin_address: super@mail.com
+    admin_name: Admin
+    link:  https://sonata-cmf.org
+    title: Symfony CMF
+    sonata_page.varnish.command: if [ ! -r "/etc/varnish/secret" ]; then echo "VALID ERROR :/"; else varnishadm -S /etc/varnish/secret -T 127.0.0.1:6082 {{ COMMAND }} "{{ EXPRESSION }}"; fi; # you need to adapt this line to work with your configuration
