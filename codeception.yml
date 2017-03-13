@@ -26,3 +26,15 @@ modules:
         Doctrine2:
             cleanup: true
             depends: Symfony
+coverage:
+    enabled: true
+    whitelist:
+        include:
+            - src/*
+        exclude:
+            - src/*Bundle/Resources
+            - src/*Bundle/Tests
+            - src/*Bundle/Model/map
+            - src/*Bundle/Model/om
+            - src/*Bundle/Model/*/map
+            - src/*Bundle/Model/*/om
