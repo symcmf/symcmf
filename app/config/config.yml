@@ -86,16 +86,9 @@ stof_doctrine_extensions:
 
 # Swiftmailer Configuration
 swiftmailer:
-    default_mailer: nix_mailer
+    default_mailer: mailer
     mailers:
         mailer:
-            transport: "%mailer_transport%"
-            host:      "%mailer_host%"
-            port:      "%mailer_port%"
-            username:  "%mailer_user%"
-            password:  "%mailer_password%"
-            spool:     { type: memory }
-        nix_mailer:
             transport: "%mailer_transport%"
             host:      "%mailer_host%"
             port:      "%mailer_port%"
@@ -107,8 +100,6 @@ fos_user:
     db_driver:          orm # can be orm or odm
     firewall_name:      main
     user_class:         Application\Sonata\UserBundle\Entity\User
-    service:
-        mailer: nix_mailer_service
     from_email:
         address:      "%admin_address%"
         sender_name:  "%admin_name%"

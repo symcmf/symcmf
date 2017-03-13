@@ -1,7 +1,7 @@
-# Configuration for gitlab pipelines
+# Configuration for travis and scrutinizer
 parameters:
-    database_host:     mysql
-    database_port:     3306
+    database_host:     127.0.0.1
+    database_port:     null
     database_name:     homestead
     database_user:     root
     database_password: root
