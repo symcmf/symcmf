@@ -1,6 +1,13 @@
 Symfony CMF
 ========================
 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/symcmf/symcmf/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/symcmf/symcmf/?branch=master)
+
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/symcmf/symcmf/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/symcmf/symcmf/?branch=master)
+
+[![Code Coverage](https://scrutinizer-ci.com/g/symcmf/symcmf/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/symcmf/symcmf/?branch=master)
+
+
 ## Setup development environment with Homestead 
 
 1. Clone project
