@@ -23,7 +23,7 @@
         "sonata-project/core-bundle": "^3.2",
         "sonata-project/formatter-bundle": "^3.0",
         "knplabs/knp-markdown-bundle": "^1.5 ",
-        "laravel/homestead": "^4.0",
+        "laravel/homestead": "^5.0",
         "gedmo/doctrine-extensions": "^2.4",
         "hwi/oauth-bundle": "^0.5.3",
         "stof/doctrine-extensions-bundle": "^1.2",
@@ -37,15 +37,15 @@
         "symfony/assetic-bundle": "^2.8",
         "sonata-project/block-bundle": "3.2",
         "lunetics/locale-bundle": "^2.5",
-        "behat/mink": "1.5.*",
+        "behat/mink": "1.7.*"
+    },
+    "require-dev": {
+        "sensio/generator-bundle": "~3.0",
+        "symfony/phpunit-bridge": "^3.2",
         "phpunit/phpunit": "5.7.*",
         "codeception/phpbuiltinserver": "dev-master",
         "codeception/codeception": "^2.2",
         "fzaninotto/faker": "^1.6"
-    },
-    "require-dev": {
-        "sensio/generator-bundle": "~3.0",
-        "symfony/phpunit-bridge": "~2.7"
     },
     "scripts": {
         "symfony-scripts": [

@@ -3,13 +3,9 @@ Symfony CMF
 
 [![Build Status](https://travis-ci.org/symcmf/symcmf.svg?branch=master)](https://travis-ci.org/symcmf/symcmf)
 
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/symcmf/symcmf/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/symcmf/symcmf/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/symcmf/symcmf/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/symcmf/symcmf/?branch=master)    [![Code Coverage](https://scrutinizer-ci.com/g/symcmf/symcmf/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/symcmf/symcmf/?branch=master)   [![Dependency Status](https://www.versioneye.com/user/projects/58c67f17c920cf0040c4d2e5/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/58c67f17c920cf0040c4d2e5)
 
-[![Code Coverage](https://scrutinizer-ci.com/g/symcmf/symcmf/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/symcmf/symcmf/?branch=master)
-
-[![Dependency Status](https://www.versioneye.com/user/projects/58c67f17c920cf0040c4d2e5/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/58c67f17c920cf0040c4d2e5)
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/symcmf/symcmf/blob/master/LICENSE)
 
 ## Setup development environment with Homestead 
 
