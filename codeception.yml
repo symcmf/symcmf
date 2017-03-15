@@ -31,12 +31,7 @@ coverage:
     remote:  false
     whitelist:
         include:
-            - src/*
-        exclude:
-            - src/*Bundle/Resources
-            - src/*Bundle/Tests
-            - src/*Bundle/Model/map
-            - src/*Bundle/Model/om
-            - src/*Bundle/Model/*/map
-            - src/*Bundle/Model/*/om
-            - src/*Bundle/Entity
+            - src/MessageBundle/Controller/*
+            - src/MessageBundle/Entity/*
+            - src/MessageBundle/Services/*
+            - src/MessageBundle/SonataAdmin/*

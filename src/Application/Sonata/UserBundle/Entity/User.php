@@ -2,6 +2,7 @@
 
 namespace Application\Sonata\UserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use MessageBundle\Entity\MessageUser;
 use Application\Sonata\UserBundle\Entity\ApplicationBaseUser as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
@@ -18,6 +19,7 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
+        $this->messageUser = new ArrayCollection();
     }
 
     /**
@@ -51,7 +53,7 @@ class User extends BaseUser
     /**
      * @param MessageUser $messageUser
      */
-    public function removeMessagesUser(MessageUser $messageUser)
+    public function removeMessageUser(MessageUser $messageUser)
     {
         $this->messageUser->removeElement($messageUser);
     }
@@ -59,7 +61,7 @@ class User extends BaseUser
     /**
      * @return array
      */
-    public function getMessageUsers()
+    public function getMessageUser()
     {
         return $this->messageUser->toArray();
     }
