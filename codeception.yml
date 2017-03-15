@@ -28,6 +28,7 @@ modules:
             depends: Symfony
 coverage:
     enabled: true
+    remote:  false
     whitelist:
         include:
             - src/*
@@ -38,3 +39,4 @@ coverage:
             - src/*Bundle/Model/om
             - src/*Bundle/Model/*/map
             - src/*Bundle/Model/*/om
+            - src/*Bundle/Entity

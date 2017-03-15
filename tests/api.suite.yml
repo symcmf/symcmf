@@ -3,9 +3,9 @@ modules:
     enabled:
         - \Helper\Api
         - PhpBrowser:
-            url: http://192.168.10.10/
+            url: http://127.0.0.1
         - REST:
-            url: http://192.168.10.10/api
+            url: http://127.0.0.1/api
             depends: PhpBrowser
 
 error_level: "E_ALL & ~E_STRICT & ~E_DEPRECATED & ~E_USER_DEPRECATED"

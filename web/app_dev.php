@@ -1,5 +1,7 @@
 <?php
 
+require_once(__DIR__ . '/../c3.php');
+
 use Sonata\PageBundle\Request\RequestFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Debug\Debug;
