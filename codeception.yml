@@ -33,3 +33,5 @@ coverage:
             - src/MessageBundle/Entity/*
             - src/MessageBundle/Services/*
             - src/MessageBundle/SonataAdmin/*
+            - src/Application/Sonata/PageBundle/Controller/*
+            - src/Application/Sonata/NewsBundle/Controller/*
