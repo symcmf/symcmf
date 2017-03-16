@@ -5,7 +5,6 @@ namespace MessageBundle\Controller\Api;
 use Application\Sonata\Controller\Api\SupportFOSRestApiTrait;
 use Exception;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
-use FOS\RestBundle\Controller\Annotations\Route;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\UserBundle\Model\UserManager;

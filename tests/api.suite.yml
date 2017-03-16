@@ -3,7 +3,8 @@ modules:
     enabled:
         - \Helper\Api
         - REST:
-            url: http://127.0.0.1/api
             depends: PhpBrowser
+            url: http://127.0.0.1/api
+
 
 error_level: "E_ALL & ~E_STRICT & ~E_DEPRECATED & ~E_USER_DEPRECATED"

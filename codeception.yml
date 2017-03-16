@@ -4,7 +4,6 @@ paths:
     log: tests/_output
     data: tests/_data
     support: tests/_support
-#    envs: tests/_envs
 settings:
     bootstrap: _bootstrap.php
     colors: true
@@ -28,7 +27,6 @@ modules:
             depends: Symfony
 coverage:
     enabled: true
-    remote:  false
     whitelist:
         include:
             - src/MessageBundle/Controller/*

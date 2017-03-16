@@ -30,8 +30,6 @@ if (!array_key_exists('HTTP_X_CODECEPTION_CODECOVERAGE', $_SERVER)) {
     return;
 }
 
-//$_SERVER['HTTP_X_CODECEPTION_CODECOVERAGE_DEBUG'] = 1;
-
 if (!function_exists('__c3_error')) {
     function __c3_error($message)
     {
