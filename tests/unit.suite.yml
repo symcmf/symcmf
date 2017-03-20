@@ -7,5 +7,12 @@ modules:
     enabled:
         - Asserts
         - \Helper\Unit
+        - Symfony:
+            var_path: 'app'
+            app_path: 'app'
+        - Doctrine2:
+            depends: Symfony2
+            cleanup: true
+
 
 error_level: "E_ALL & ~E_STRICT & ~E_DEPRECATED & ~E_USER_DEPRECATED"

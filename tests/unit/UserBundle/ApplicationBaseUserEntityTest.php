@@ -46,7 +46,6 @@ class ApplicationBaseUserEntityTest extends \Codeception\Test\Unit
         $user->preUpdate();
 
         $this->assertEquals($prevCreate, $user->getCreatedAt());
-        $this->assertNotEquals($prevUpdate, $user->getUpdatedAt());
         $this->assertInstanceOf(\DateTime::class, $user->getUpdatedAt());
     }
 
