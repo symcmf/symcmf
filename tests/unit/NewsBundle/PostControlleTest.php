@@ -1,0 +1,366 @@
+<?php
+namespace NewsBundle;
+
+
+use Application\Sonata\NewsBundle\Controller\Api\PostController;
+use Symfony\Component\HttpFoundation\Request;
+
+class PostControlleTest extends \Codeception\Test\Unit
+{
+    /**
+     * @var \UnitTester
+     */
+    protected $tester;
+
+    protected function _before()
+    {
+    }
+
+    protected function _after()
+    {
+    }
+
+    public function testGetPostsAction()
+    {
+        $paramFetcher = $this->createMock('FOS\RestBundle\Request\ParamFetcherInterface');
+        $paramFetcher->expects($this->once())->method('all')->will($this->returnValue(array()));
+
+        $pager = $this->createMock('Sonata\DatagridBundle\Pager\PagerInterface');
+
+        $postManager = $this->createMock('Sonata\NewsBundle\Model\PostManagerInterface');
+        $postManager->expects($this->once())->method('getPager')->will($this->returnValue($pager));
+
+        $this->assertSame($pager, $this->createPostController($postManager)->getPostsAction($paramFetcher));
+    }
+
+    public function testGetPostAction()
+    {
+        $post = $this->createMock('Sonata\NewsBundle\Model\PostInterface');
+
+        $postManager = $this->createMock('Sonata\NewsBundle\Model\PostManagerInterface');
+        $postManager->expects($this->once())->method('find')->will($this->returnValue($post));
+
+        $this->assertEquals($post, $this->createPostController($postManager)->getPostAction(1));
+    }
+
+    /**
+     * @expectedException        \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @expectedExceptionMessage Post (42) not found
+     */
+    public function testGetPostNotFoundExceptionAction()
+    {
+        $this->createPostController()->getPostAction(42);
+    }
+
+    public function testGetPostCommentsAction()
+    {
+        $parameters = array(
+            'page' => 2,
+            'count' => 5,
+        );
+        $paramFetcher = $this->createMock('FOS\RestBundle\Request\ParamFetcherInterface');
+        $paramFetcher->expects($this->once())->method('all')->will($this->returnValue(array()));
+
+        $paramFetcher->expects($this->exactly(2))->method('get')
+            ->with($this->logicalOr($this->equalTo('page'), $this->equalTo('count')))
+            ->will($this->returnCallback(function ($parameter) use ($parameters) {
+                return $parameters[$parameter];
+            }));
+
+        $post = $this->createMock('Sonata\NewsBundle\Model\PostInterface');
+
+        $postManager = $this->createMock('Sonata\NewsBundle\Model\PostManagerInterface');
+        $postManager->expects($this->once())->method('find')->will($this->returnValue($post));
+
+        $pager = $this->createMock('Sonata\DatagridBundle\Pager\PagerInterface');
+        // Will assert that param fetcher parameters are used for the pager
+        $commentManager = $this->createMock('Sonata\NewsBundle\Model\CommentManagerInterface');
+        $commentManager->expects($this->once())
+            ->method('getPager')
+            ->with($this->anything(), $this->equalTo($parameters['page']), $this->equalTo($parameters['count']))
+            ->will($this->returnValue($pager));
+
+        $this->assertEquals($pager, $this->createPostController($postManager, $commentManager)->getPostCommentsAction(1, $paramFetcher));
+    }
+
+    /**
+     * @expectedException        \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @expectedExceptionMessage Post (42) not found
+     */
+    public function testGetPostCommentsActionNotFoundExceptionAction()
+    {
+        $paramFetcher = $this->createMock('FOS\RestBundle\Request\ParamFetcherInterface');
+        $this->createPostController()->getPostCommentsAction(42, $paramFetcher);
+    }
+
+    public function testPostPostAction()
+    {
+        $post = $this->createMock('Sonata\NewsBundle\Model\PostInterface');
+        $post->expects($this->once())->method('setContent');
+
+        $postManager = $this->createMock('Sonata\NewsBundle\Model\PostManagerInterface');
+        $postManager->expects($this->once())->method('save')->will($this->returnValue($post));
+
+        $formatterPool = $this->createMock('Sonata\FormatterBundle\Formatter\Pool');
+        $formatterPool->expects($this->once())->method('transform')->will($this->returnValue($post->getContent()));
+
+        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
+        $form->expects($this->once())->method('getData')->will($this->returnValue($post));
+
+        $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+
+        $view = $this->createPostController($postManager, null, null, $formFactory, $formatterPool)->postPostAction(new Request());
+
+        $this->assertInstanceOf('FOS\RestBundle\View\View', $view);
+    }
+
+    public function testPostPostInvalidAction()
+    {
+        $post = $this->createMock('Sonata\NewsBundle\Model\PostInterface');
+        $post->expects($this->never())->method('setContent');
+
+        $postManager = $this->createMock('Sonata\NewsBundle\Model\PostManagerInterface');
+        $postManager->expects($this->never())->method('save')->will($this->returnValue($post));
+
+        $formatterPool = $this->createMock('Sonata\FormatterBundle\Formatter\Pool');
+        $formatterPool->expects($this->never())->method('transform')->will($this->returnValue($post->getContent()));
+
+        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
+
+        $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+
+        $view = $this->createPostController($postManager, null, null, $formFactory, $formatterPool)->postPostAction(new Request());
+
+        $this->assertInstanceOf('Symfony\Component\Form\FormInterface', $view);
+    }
+
+    public function testPutPostAction()
+    {
+        $post = $this->createMock('Sonata\NewsBundle\Model\PostInterface');
+        $post->expects($this->once())->method('setContent');
+
+        $postManager = $this->createMock('Sonata\NewsBundle\Model\PostManagerInterface');
+        $postManager->expects($this->once())->method('find')->will($this->returnValue($post));
+        $postManager->expects($this->once())->method('save')->will($this->returnValue($post));
+
+        $formatterPool = $this->createMock('Sonata\FormatterBundle\Formatter\Pool');
+        $formatterPool->expects($this->once())->method('transform')->will($this->returnValue($post->getContent()));
+
+        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
+        $form->expects($this->once())->method('getData')->will($this->returnValue($post));
+
+        $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+
+        $view = $this->createPostController($postManager, null, null, $formFactory, $formatterPool)->putPostAction(1, new Request());
+
+        $this->assertInstanceOf('FOS\RestBundle\View\View', $view);
+    }
+
+    public function testPutPostInvalidAction()
+    {
+        $post = $this->createMock('Sonata\NewsBundle\Model\PostInterface');
+        $post->expects($this->never())->method('setContent');
+
+        $postManager = $this->createMock('Sonata\NewsBundle\Model\PostManagerInterface');
+        $postManager->expects($this->once())->method('find')->will($this->returnValue($post));
+        $postManager->expects($this->never())->method('save')->will($this->returnValue($post));
+
+        $formatterPool = $this->createMock('Sonata\FormatterBundle\Formatter\Pool');
+        $formatterPool->expects($this->never())->method('transform')->will($this->returnValue($post->getContent()));
+
+        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
+
+        $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+
+        $view = $this->createPostController($postManager, null, null, $formFactory, $formatterPool)->putPostAction(1, new Request());
+
+        $this->assertInstanceOf('Symfony\Component\Form\FormInterface', $view);
+    }
+
+    public function testDeletePostAction()
+    {
+        $post = $this->createMock('Sonata\NewsBundle\Model\PostInterface');
+
+        $postManager = $this->createMock('Sonata\NewsBundle\Model\PostManagerInterface');
+        $postManager->expects($this->once())->method('find')->will($this->returnValue($post));
+        $postManager->expects($this->once())->method('delete');
+
+        $view = $this->createPostController($postManager)->deletePostAction(1);
+
+        $this->assertEquals(array('deleted' => true), $view);
+    }
+
+    public function testDeletePostInvalidAction()
+    {
+        $this->expectException('Symfony\Component\HttpKernel\Exception\NotFoundHttpException');
+
+        $postManager = $this->createMock('Sonata\NewsBundle\Model\PostManagerInterface');
+        $postManager->expects($this->once())->method('find')->will($this->returnValue(null));
+        $postManager->expects($this->never())->method('delete');
+
+        $this->createPostController($postManager)->deletePostAction(1);
+    }
+
+    public function testPostPostCommentsAction()
+    {
+        $comment = $this->createMock('Sonata\NewsBundle\Model\CommentInterface');
+        $post = $this->createMock('Sonata\NewsBundle\Model\PostInterface');
+        $post->expects($this->once())->method('isCommentable')->will($this->returnValue(true));
+
+        $postManager = $this->createMock('Sonata\NewsBundle\Model\PostManagerInterface');
+        $postManager->expects($this->once())->method('find')->will($this->returnValue($post));
+
+        $commentManager = $this->createMock('Sonata\NewsBundle\Model\CommentManagerInterface');
+        $commentManager->expects($this->once())->method('save');
+        $commentManager->expects($this->once())->method('create')->will($this->returnValue($comment));
+
+        $mailer = $this->createMock('Sonata\NewsBundle\Mailer\MailerInterface');
+        $mailer->expects($this->once())->method('sendCommentNotification');
+
+        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+
+        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
+        $form->expects($this->once())->method('getData')->will($this->returnValue($comment));
+
+        $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+
+        $this->assertInstanceOf('FOS\RestBundle\View\View',
+            $this
+                ->createPostController($postManager, $commentManager, $mailer, $formFactory)
+                ->postPostCommentsAction(1, new Request())
+        );
+    }
+
+    public function testPostPostCommentsInvalidFormAction()
+    {
+        $comment = $this->createMock('Sonata\NewsBundle\Model\CommentInterface');
+
+        $post = $this->createMock('Sonata\NewsBundle\Model\PostInterface');
+        $post->expects($this->once())->method('isCommentable')->will($this->returnValue(true));
+
+        $postManager = $this->createMock('Sonata\NewsBundle\Model\PostManagerInterface');
+        $postManager->expects($this->once())->method('find')->will($this->returnValue($post));
+
+        $commentManager = $this->createMock('Sonata\NewsBundle\Model\CommentManagerInterface');
+        $commentManager->expects($this->once())->method('create')->will($this->returnValue($comment));
+
+        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
+
+        $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+
+        $this->assertInstanceOf('Symfony\Component\Form\Form',
+            $this
+                ->createPostController($postManager, $commentManager, null, $formFactory)
+                ->postPostCommentsAction(1, new Request()));
+    }
+
+    /**
+     * @expectedException        \Symfony\Component\HttpKernel\Exception\HttpException
+     * @expectedExceptionMessage Post (42) not commentable
+     */
+    public function testPostPostCommentsNotCommentableAction()
+    {
+        $post = $this->createMock('Sonata\NewsBundle\Model\PostInterface');
+        $post->expects($this->once())->method('isCommentable')->will($this->returnValue(false));
+        $postManager = $this->createMock('Sonata\NewsBundle\Model\PostManagerInterface');
+        $postManager->expects($this->once())->method('find')->will($this->returnValue($post));
+        $this->createPostController($postManager)->postPostCommentsAction(42, new Request());
+    }
+
+    public function testPutPostCommentAction()
+    {
+        $post = $this->createMock('Sonata\NewsBundle\Model\PostInterface');
+        $post->expects($this->once())->method('isCommentable')->will($this->returnValue(true));
+
+        $postManager = $this->createMock('Sonata\NewsBundle\Model\PostManagerInterface');
+        $postManager->expects($this->once())->method('find')->will($this->returnValue($post));
+
+        $comment = $this->createMock('Sonata\NewsBundle\Model\CommentInterface');
+        $commentManager = $this->createMock('Sonata\NewsBundle\Model\CommentManagerInterface');
+        $commentManager->expects($this->once())->method('find')->will($this->returnValue($comment));
+        $commentManager->expects($this->once())->method('save')->will($this->returnValue($comment));
+
+        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('isValid')->will($this->returnValue(true));
+
+        $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+
+        $view = $this->createPostController($postManager, $commentManager, null, $formFactory)->putPostCommentsAction(1, 1, new Request());
+
+        $this->assertInstanceOf('FOS\RestBundle\View\View', $view);
+    }
+
+    public function testPutPostCommentInvalidAction()
+    {
+        $post = $this->createMock('Sonata\NewsBundle\Model\PostInterface');
+        $post->expects($this->once())->method('isCommentable')->will($this->returnValue(true));
+
+        $postManager = $this->createMock('Sonata\NewsBundle\Model\PostManagerInterface');
+        $postManager->expects($this->once())->method('find')->will($this->returnValue($post));
+
+        $comment = $this->createMock('Sonata\NewsBundle\Model\CommentInterface');
+
+        $commentManager = $this->createMock('Sonata\NewsBundle\Model\CommentManagerInterface');
+        $commentManager->expects($this->once())->method('find')->will($this->returnValue($comment));
+        $commentManager->expects($this->never())->method('save')->will($this->returnValue($comment));
+
+        $form = $this->getMockBuilder('Symfony\Component\Form\Form')->disableOriginalConstructor()->getMock();
+        $form->expects($this->once())->method('bind');
+        $form->expects($this->once())->method('isValid')->will($this->returnValue(false));
+
+        $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
+        $formFactory->expects($this->once())->method('createNamed')->will($this->returnValue($form));
+
+        $view = $this->createPostController($postManager, $commentManager, null, $formFactory)->putPostCommentsAction(1, 1, new Request());
+
+        $this->assertInstanceOf('Symfony\Component\Form\FormInterface', $view);
+    }
+
+    /**
+     * @param null $postManager
+     * @param null $commentManager
+     * @param null $mailer
+     * @param null $formFactory
+     * @param null $formatterPool
+     *
+     * @return PostController
+     */
+    protected function createPostController($postManager = null, $commentManager = null, $mailer = null, $formFactory = null, $formatterPool = null)
+    {
+        if (null === $postManager) {
+            $postManager = $this->createMock('Sonata\NewsBundle\Model\PostManagerInterface');
+        }
+        if (null === $commentManager) {
+            $commentManager = $this->createMock('Sonata\NewsBundle\Model\CommentManagerInterface');
+        }
+        if (null === $mailer) {
+            $mailer = $this->createMock('Sonata\NewsBundle\Mailer\MailerInterface');
+        }
+        if (null === $formFactory) {
+            $formFactory = $this->createMock('Symfony\Component\Form\FormFactoryInterface');
+        }
+        if (null === $formatterPool) {
+            $formatterPool = $this->createMock('Sonata\FormatterBundle\Formatter\Pool');
+        }
+        return new PostController($postManager, $commentManager, $mailer, $formFactory, $formatterPool);
+    }
+}

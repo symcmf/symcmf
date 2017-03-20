@@ -17,6 +17,7 @@ trait IdTrait
      * @ORM\Id
      * @ORM\Column(name="id", type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Groups({"sonata_api_read", "sonata_api_write"})
      */
     private $id;
 

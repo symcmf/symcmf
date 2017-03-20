@@ -98,7 +98,7 @@ class MessageUser implements MessageUserInterface
      * @ORM\ManyToOne(targetEntity="MessageUser")
      * @ORM\Column(name="created", type="datetime")
      */
-    private $created;
+    protected $created;
 
     /**
      * Get created

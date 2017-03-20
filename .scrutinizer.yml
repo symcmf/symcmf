@@ -10,12 +10,11 @@ build:
 
   tests:
     before:
-      - echo "Generate build_bootstrap for testing"
-      - php vendor/sensio/distribution-bundle/Resources/bin/build_bootstrap.php
+      - php vendor/codeception/codeception/codecept build
 
     override:
       -
-        command: 'vendor/codeception/codeception/codecept run functional --coverage-xml'
+        command: 'vendor/codeception/codeception/codecept run --coverage-xml'
         coverage:
           file: 'tests/_output/coverage.xml'
           format: 'clover'
@@ -28,11 +27,10 @@ build:
             sites:
                 symfony_app:
                     web_root: 'web/'
-                    host: 'local.dev'
+                    host: 'homestead.app'
                     rules:
-                        - 'RewriteCond %{HTTP_REFERER} !^$'
-                        - 'RewriteCond %{HTTP_REFERER} !^http://(www.)?example.com/ [NC]'
-                        - 'RewriteRule .(gif|jpg|png)$ - [F]'
+                        - 'RewriteCond %{REQUEST_FILENAME} !-f'
+                        - 'RewriteRule ^(.*)$ app_dev.php/$1 [QSA,L]'
 checks:
   php: true
 filter:
