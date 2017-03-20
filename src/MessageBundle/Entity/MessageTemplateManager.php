@@ -22,6 +22,13 @@ class MessageTemplateManager extends BaseEntityManager implements MessageTemplat
             ->createQueryBuilder('m')
             ->select('m');
 
+        if (count($sort) == 0) {
+            $sort = ['subject' => 'ASC'];
+        }
+        foreach ($sort as $field => $direction) {
+            $query->orderBy(sprintf('m.%s', $field), strtoupper($direction));
+        }
+
         $pager = new Pager();
         $pager->setMaxPerPage($limit);
         $pager->setQuery(new ProxyQuery($query));

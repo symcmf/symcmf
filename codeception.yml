@@ -4,7 +4,6 @@ paths:
     log: tests/_output
     data: tests/_data
     support: tests/_support
-#    envs: tests/_envs
 settings:
     bootstrap: _bootstrap.php
     colors: true
@@ -30,11 +29,9 @@ coverage:
     enabled: true
     whitelist:
         include:
-            - src/*
-        exclude:
-            - src/*Bundle/Resources
-            - src/*Bundle/Tests
-            - src/*Bundle/Model/map
-            - src/*Bundle/Model/om
-            - src/*Bundle/Model/*/map
-            - src/*Bundle/Model/*/om
+            - src/MessageBundle/Controller/*
+            - src/MessageBundle/Entity/*
+            - src/MessageBundle/Services/*
+            - src/MessageBundle/SonataAdmin/*
+            - src/Application/Sonata/PageBundle/Controller/*
+            - src/Application/Sonata/NewsBundle/Controller/*

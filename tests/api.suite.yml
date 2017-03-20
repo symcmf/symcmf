@@ -2,10 +2,9 @@ class_name: ApiTester
 modules:
     enabled:
         - \Helper\Api
-        - PhpBrowser:
-            url: http://192.168.10.10/
         - REST:
-            url: http://192.168.10.10/api
             depends: PhpBrowser
+            url:  http://homestead.app/api
+
 
 error_level: "E_ALL & ~E_STRICT & ~E_DEPRECATED & ~E_USER_DEPRECATED"

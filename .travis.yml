@@ -14,9 +14,14 @@ services:
 dist: trusty
 sudo: required
 
+install:
+  # Install Apache web server and FastCGI module ...
+  - sudo apt-get install apache2 libapache2-mod-fastcgi > /dev/null
+
 before_script:
   - echo "USE mysql;\nUPDATE user SET password=PASSWORD('root') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
   - bash initial.sh > /dev/null
 
 script:
-  - php vendor/bin/codecept run functional
+  - php vendor/codeception/codeception/codecept build
+  - php vendor/codeception/codeception/codecept run unit,functional

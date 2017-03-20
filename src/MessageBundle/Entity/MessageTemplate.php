@@ -4,6 +4,7 @@ namespace MessageBundle\Entity;
 
 use AppBundle\Entity\Traits\IdTrait;
 use AppBundle\Entity\Traits\TimestampableTrait;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\Groups;
 use MessageBundle\Model\MessageTemplateInterface;
@@ -23,10 +24,15 @@ class MessageTemplate implements MessageTemplateInterface
 {
     use IdTrait, TimestampableTrait;
 
+    public function __construct()
+    {
+        $this->messageUser = new ArrayCollection();
+    }
+
     /**
      * @ORM\OneToMany(targetEntity="MessageUser", mappedBy="message", cascade={"remove"}, orphanRemoval=true)
      */
-    private $messageUser;
+    protected $messageUser;
 
     /**
      * @param MessageUserInterface $messageUser
@@ -49,7 +55,7 @@ class MessageTemplate implements MessageTemplateInterface
      */
     public function getMessageUser()
     {
-        return $this->messageUser->toArray();
+        return $this->messageUser ? $this->messageUser->toArray() : [];
     }
 
     /**
